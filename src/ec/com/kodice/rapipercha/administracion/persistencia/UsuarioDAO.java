@@ -6,48 +6,42 @@
 
 package ec.com.kodice.rapipercha.administracion.persistencia;
 
+import ec.com.kodice.connection.CustomConnection;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import ec.com.kodice.connection.CustomConnection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Esta clase contiene metodos de acceso a datos de una Empresa
+ * Esta clase permite el acceso a datos de un Usuario
  * @author Benjamin Cepeda
  * @version v1.0
- * @date 2020/12/03 
+ * @date 2020/12/06 
  */
-public class ProveedorDAO {
-    Connection conexion=null;
-    PreparedStatement sentencia = null;
-
+public class UsuarioDAO {
+    
     /**
-     * Permite crear un nuevo Proveedor
-     * @param proveedorVO POJO con los atributos de Proveedor
+     * Permite crear un nuevo Usuario
+     * @param usuarioVO POJO con los atributos de Usuario
      * @return Codigo del registro creado 
      * @throws Exception 
      */
-    public int crear(ProveedorVO proveedorVO) throws Exception{
+    public int crear(UsuarioVO usuarioVO) throws Exception{
+        Connection conexion=null;
+        PreparedStatement sentencia = null;
         int codigoGenerado=0;
         try{
             conexion = CustomConnection.getConnection();
-            String consulta="INSERT INTO TPROVEEDORES"
-                    + "(prov_ruc, prov_razon_social, prov_nombre_comercial, "
-                    + "prov_nombre_contacto, prov_apellido_contacto, "
-                    + "prov_telefono_contacto, prov_correo_contacto) "
-                    + "VALUES (?, ?, ?, ?, ?,?, ?)";
+            String consulta="INSERT INTO TUSUARIOS "
+                    + "(usu_nombre, usu_clave, usu_estado)"
+                    + "VALUES (?,?,?)";
             sentencia = conexion.prepareStatement(consulta,
                     PreparedStatement.RETURN_GENERATED_KEYS);
-            sentencia.setString(1, proveedorVO.getRuc());
-            sentencia.setString(2, proveedorVO.getRazonSocial());
-            sentencia.setString(3, proveedorVO.getNombreComercial());
-            sentencia.setString(4, proveedorVO.getNombreContacto());
-            sentencia.setString(5, proveedorVO.getApellidoContacto());
-            sentencia.setString(6, proveedorVO.getTelefonoContacto());
-            sentencia.setString(7, proveedorVO.getCorreoContacto());
+            sentencia.setString(1, usuarioVO.getNombre());
+            sentencia.setString(2, usuarioVO.getClave());
+            sentencia.setString(3, usuarioVO.getEstado());
             sentencia.executeUpdate();
             ResultSet resultado = sentencia.getGeneratedKeys();
             while(resultado.next()){
@@ -69,36 +63,31 @@ public class ProveedorDAO {
         }
         return (codigoGenerado);
     }
-
+    
     /**
-     * Permite leer un Proveedor en base de su codigo
+     * Permite leer un Usuario en base de su codigo
      * @param codigo Codigo del registro a ser leído
-     * @return POJO con los atributos de Proveedor
+     * @return POJO con los atributos de Usuario
      * @throws Exception 
      */
-    public ProveedorVO buscar(int codigo) 
-            throws Exception{
-        ProveedorVO proveedorVO = null;
+    public UsuarioVO buscar(int codigo) throws Exception{
+        Connection conexion=null;
+        PreparedStatement sentencia = null;
+        UsuarioVO usuarioVO = null;
         try{
             conexion = CustomConnection.getConnection();
-            String consulta="SELECT prov_codigo, prov_ruc, prov_razon_social, "
-                    + "prov_nombre_comercial, prov_nombre_contacto, "
-                    + "prov_apellido_contacto, prov_telefono_contacto, "
-                    + "prov_correo_contacto "
-                    + "FROM TPROVEEDORES WHERE prov_codigo = ?";
+            String consulta="SELECT usu_codigo, usu_nombre, usu_clave, "
+                    + "usu_estado "
+                    + "FROM TUSUSARIOS  WHERE usu_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, codigo);
             ResultSet resultado = sentencia.executeQuery();
             while(resultado.next()){
-               proveedorVO = new ProveedorVO(codigo, 
-                       resultado.getString("prov_ruc"),
-                       resultado.getString("prov_razon_social"), 
-                       resultado.getString("prov_nombre_comercial"), 
-                       resultado.getString("prov_nombre_contacto"), 
-                       resultado.getString("prov_apellido_contacto"), 
-                       resultado.getString("prov_telefono_contacto"), 
-                       resultado.getString("prov_correo_contacto"));
-            }            
+               usuarioVO = new UsuarioVO(codigo, 
+                       resultado.getString("usu_nombre"),
+                       resultado.getString("usu_clave"),
+                       resultado.getString("usu_estado"));
+            }      
         } 
         catch(Exception e){
             if (sentencia!=null) sentencia.close();
@@ -112,41 +101,37 @@ public class ProveedorDAO {
                 if (conexion!=null) conexion.close();
             } catch (SQLException e){throw new Exception("[" +
                     this.getClass().getName()+"] "+ e.getMessage());}
-        }
-        return (proveedorVO);
+        }        
+        return usuarioVO;
     }
-    
-    /**
-     * Devuelve el  listado  de Proveedores
-     * @return Lista de Proveedores
+
+   /**
+     * Devuelve el  listado  de Usuarios
+     * @return Lista de usuarios
      * @throws Exception 
      */
-    public List<ProveedorVO> buscarTodos() 
-            throws Exception{
-        List<ProveedorVO> listaElementos=null;        
-        ProveedorVO proveedorVO = null;
+    public List<UsuarioVO> buscarTodos() throws Exception{
+        Connection conexion=null;
+        PreparedStatement sentencia = null;
+        List<UsuarioVO> listaElementos=null;
+        UsuarioVO usuarioVO = null;
         try{
             conexion = CustomConnection.getConnection();
-            String consulta="SELECT prov_codigo, prov_ruc, prov_razon_social, "
-                    + "prov_nombre_comercial, prov_nombre_contacto, "
-                    + "prov_apellido_contacto, prov_telefono_contacto, "
-                    + "prov_correo_contacto "
-                    + "FROM TPROVEEDORES ";
+            String consulta="SELECT usu_codigo, usu_nombre "
+                    +"usu_clave, usu_estado"
+                    + "FROM TPERFILES ";
             sentencia = conexion.prepareStatement(consulta);
             ResultSet resultado = sentencia.executeQuery();
             while(resultado.next()){
-                if (listaElementos== null) listaElementos = new ArrayList<ProveedorVO>();                
-                proveedorVO = new ProveedorVO(
-                       resultado.getInt("prov_codigo"),
-                       resultado.getString("prov_ruc"),
-                       resultado.getString("prov_razon_social"), 
-                       resultado.getString("prov_nombre_comercial"), 
-                       resultado.getString("prov_nombre_contacto"), 
-                       resultado.getString("prov_apellido_contacto"), 
-                       resultado.getString("prov_telefono_contacto"), 
-                       resultado.getString("prov_correo_contacto"));
-               listaElementos.add(proveedorVO);
-            }            
+                if (listaElementos== null) listaElementos = 
+                        new ArrayList<UsuarioVO>();
+               usuarioVO = new UsuarioVO(
+                       resultado.getInt("usu_codigo"),
+                       resultado.getString("usu_nombre"),
+                       resultado.getString("usu_clave"),
+                       resultado.getString("usu_estado"));
+               listaElementos.add(usuarioVO);
+            }      
         } 
         catch(Exception e){
             if (sentencia!=null) sentencia.close();
@@ -154,45 +139,38 @@ public class ProveedorDAO {
             throw new Exception("["+this.getClass().getName()+"] "
                     + e.getMessage());
         } 
+        
         finally{
             try {
                 if (sentencia!=null) sentencia.close();
                 if (conexion!=null) conexion.close();
             } catch (SQLException e){throw new Exception("[" +
                     this.getClass().getName()+"] "+ e.getMessage());}
-        }
-        return (listaElementos);
+        }        return (listaElementos);
     }
-
+    
     /**
-     * Permite actualizar un registro de Proveedor
-     * @param perfilVO POJO con los atributos de Proveedor
+     * Permite actualizar una registro de Perfil
+     * @param perfilVO POJO con los atributos de Perfil
      * @return Numero de registros actualizados 
      * @throws Exception 
      */
-    public int actualizar(ProveedorVO proveedorVO) throws Exception{
+    public int actualizar(UsuarioVO usuarioVO) throws Exception{
+        Connection conexion=null;
+        PreparedStatement sentencia = null;
         conexion=null;
         int filasAfectadas=0;
         try{
             conexion = CustomConnection.getConnection();
-            String consulta="UPDATE TPROVEEDORES "
-                    + "SET prov_ruc = ? "
-                    + "SET prov_razon_social = ? "
-                    + "SET prov_nombre_comercial = ? "
-                    + "SET prov_nombre_contacto = ? "
-                    + "SET prov_apellido_contacto = ? "
-                    + "SET prov_telefono_contacto = ? "
-                    + "SET prov_correo_contacto = ? "
-                    + "WHERE prov_codigo = ?";          
+            String consulta = "SET  "
+                    + "usu_clave = ? "
+                    + "usu_estado = ? "
+                    + "UPDATE TUSUARIOS "
+                    + "WHERE usu_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
-            sentencia.setString(1, proveedorVO.getRuc());
-            sentencia.setString(2, proveedorVO.getRazonSocial());
-            sentencia.setString(3, proveedorVO.getNombreComercial());
-            sentencia.setString(4, proveedorVO.getNombreContacto());
-            sentencia.setString(5, proveedorVO.getApellidoContacto());
-            sentencia.setString(6, proveedorVO.getTelefonoContacto());
-            sentencia.setString(7, proveedorVO.getCorreoContacto());
-            sentencia.setInt(8, proveedorVO.getCodigo());
+            sentencia.setString(1, usuarioVO.getClave());
+            sentencia.setString(2, usuarioVO.getEstado());
+            sentencia.setInt(3, usuarioVO.getCodigo());
             filasAfectadas = sentencia.executeUpdate();
         }
         catch(Exception e){
@@ -211,17 +189,19 @@ public class ProveedorDAO {
     }
     
     /**
-     * Permte eliminar una instaancia de Perfil
-     * @param codigo Codigo del Perfil a eliminar
+     * Permte eliminar un registro de Usuario
+     * @param codigo Codigo del Usuario a eliminar
      * @return Numero de registros eliminados
      * @throws Exception 
      */
     public int eliminar(int codigo) throws Exception{
+        Connection conexion=null;
+        PreparedStatement sentencia = null;
         int filasAfectadas=0;
         try{
             conexion = CustomConnection.getConnection();
-            String consulta="DELETE FROM TPROVEEDORES "
-                    + "WHERE prov_codigo = ?";
+            String consulta="DELETE FROM TUSUARIOS "
+                    + "WHERE usu_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, codigo);
             filasAfectadas = sentencia.executeUpdate();
@@ -244,4 +224,5 @@ public class ProveedorDAO {
 
     }
     
+
 }

@@ -21,7 +21,6 @@ public class Principal {
     public static void main(String[] args) {
         //TODO 
         FrmLogin frmLogin = new FrmLogin();
-        frmLogin.setLocationRelativeTo(null);
         frmLogin.setVisible(true);
    }
 }

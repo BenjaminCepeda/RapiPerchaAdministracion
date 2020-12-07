@@ -6,8 +6,10 @@
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
 /**
- *
+ * Esta clase contiene atributos y métodos del formulario de Inicio
  * @author Benjamin Cepeda
+ * @version v1.0
+ * @date 2020/12/03 
  */
 public class FrmInicio extends javax.swing.JFrame {
 
@@ -16,6 +18,7 @@ public class FrmInicio extends javax.swing.JFrame {
      */
     public FrmInicio() {
         initComponents();
+        this.setLocationRelativeTo(null);        
     }
 
     /**
@@ -29,11 +32,15 @@ public class FrmInicio extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        barPrincipal = new javax.swing.JMenuBar();
+        mnuAdministracion = new javax.swing.JMenu();
+        mniPerfiles = new javax.swing.JMenuItem();
+        mniProveedores = new javax.swing.JMenuItem();
+        mniUsuarios = new javax.swing.JMenuItem();
+        mnuTomaFisica = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 700));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/kodice/rapipercha/imagenes/logo-rapipercha.png"))); // NOI18N
 
@@ -54,13 +61,38 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addGap(271, 271, 271))
         );
 
-        jMenu2.setText("Administración");
-        jMenuBar1.add(jMenu2);
+        mnuAdministracion.setText("Administración");
 
-        jMenu3.setText("Toma física");
-        jMenuBar1.add(jMenu3);
+        mniPerfiles.setText("Perfiles");
+        mniPerfiles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPerfilesActionPerformed(evt);
+            }
+        });
+        mnuAdministracion.add(mniPerfiles);
 
-        setJMenuBar(jMenuBar1);
+        mniProveedores.setText("Proveedores");
+        mniProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniProveedoresActionPerformed(evt);
+            }
+        });
+        mnuAdministracion.add(mniProveedores);
+
+        mniUsuarios.setText("Usuarios");
+        mniUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniUsuariosActionPerformed(evt);
+            }
+        });
+        mnuAdministracion.add(mniUsuarios);
+
+        barPrincipal.add(mnuAdministracion);
+
+        mnuTomaFisica.setText("Toma física");
+        barPrincipal.add(mnuTomaFisica);
+
+        setJMenuBar(barPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,6 +111,22 @@ public class FrmInicio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mniProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniProveedoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniProveedoresActionPerformed
+
+    private void mniPerfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPerfilesActionPerformed
+        FrmPerfilAdministracion frmPerfilAdministracion = new FrmPerfilAdministracion();
+        frmPerfilAdministracion.setVisible(true);
+    }//GEN-LAST:event_mniPerfilesActionPerformed
+
+    private void mniUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUsuariosActionPerformed
+        // TODO add your handling code here:
+        FrmUsuarioAdministracion frmUsuarioAdministracion = new FrmUsuarioAdministracion();
+        frmUsuarioAdministracion.setVisible(true);
+            
+    }//GEN-LAST:event_mniUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,10 +164,13 @@ public class FrmInicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar barPrincipal;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem mniPerfiles;
+    private javax.swing.JMenuItem mniProveedores;
+    private javax.swing.JMenuItem mniUsuarios;
+    private javax.swing.JMenu mnuAdministracion;
+    private javax.swing.JMenu mnuTomaFisica;
     // End of variables declaration//GEN-END:variables
 }
