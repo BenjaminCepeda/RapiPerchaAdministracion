@@ -27,7 +27,7 @@ public class PerfilBO {
     public int  crear(PerfilVO perfilVO) throws Exception{
         int codigoGenerado=0;
         try {
-            perfilDAO.crear(perfilVO);
+            codigoGenerado = perfilDAO.crear(perfilVO);
         }
         catch(Exception e){
             throw new Exception("["+this.getClass().getName()+"] "
@@ -86,10 +86,10 @@ public class PerfilBO {
         return(filasAfectadas);
     }   
     
-    public DefaultTableModel buscarModeloDatos() throws Exception {
+    public DefaultTableModel generaModeloDatosTabla(Object[] titulosCabecera) throws Exception {
         DefaultTableModel dtmListaElementos = new DefaultTableModel();
         List<PerfilVO> listaElementos = null;
-        dtmListaElementos.setColumnIdentifiers(new Object[]{"CODIGO", "NOMBRE"});
+        dtmListaElementos.setColumnIdentifiers(titulosCabecera);
         try {
             listaElementos = perfilDAO.buscarTodos();
             if (listaElementos != null) {

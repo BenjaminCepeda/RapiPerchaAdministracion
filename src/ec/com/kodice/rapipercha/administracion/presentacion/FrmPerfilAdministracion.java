@@ -26,7 +26,7 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
     private void cargarModelo(){
         PerfilBO perfilBO = new PerfilBO();
         try {
-            tblPerfiles.setModel(perfilBO.buscarModeloDatos());
+            tblPerfiles.setModel(perfilBO.generaModeloDatosTabla(new Object[]{"CODIGO", "NOMBRE"}));
         }
         catch ( Exception e) {
             System.out.println(e.getMessage());
@@ -259,7 +259,8 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         FrmPerfilNuevo frmPerfilNuevo = new FrmPerfilNuevo();
-        frmPerfilNuevo.setVisible(true);        
+        frmPerfilNuevo.setVisible(true);  
+
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed

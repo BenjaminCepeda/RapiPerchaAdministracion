@@ -28,7 +28,7 @@ public class UsuarioBO {
     public int  crear(UsuarioVO usuarioVO) throws Exception{
         int codigoGenerado=0;
         try {
-            usuarioDAO.crear(usuarioVO);
+            codigoGenerado = usuarioDAO.crear(usuarioVO);
         }
         catch(Exception e){
             throw new Exception("["+this.getClass().getName()+"] "
@@ -85,10 +85,10 @@ public class UsuarioBO {
         }        
         return(filasAfectadas);
     }    
-    public DefaultTableModel buscarModeloDatos() throws Exception {
+    public DefaultTableModel generaModeloDatosTabla(Object[] titulosCabecera) throws Exception {
         DefaultTableModel dtmListaElementos = new DefaultTableModel();
         List<UsuarioVO> listaElementos = null;
-        dtmListaElementos.setColumnIdentifiers(new Object[]{"CODIGO", "NOMBRE"});
+        dtmListaElementos.setColumnIdentifiers(titulosCabecera);
         try {
             listaElementos = usuarioDAO.buscarTodos();
             if (listaElementos != null) {
@@ -96,7 +96,6 @@ public class UsuarioBO {
                     dtmListaElementos.addRow(new Object[]{usuarioVO.getCodigo(),
                         usuarioVO.getNombre()});
                 }
-
             }
         } catch (Exception e) {
             throw new Exception("[" + this.getClass().getName() + "] "

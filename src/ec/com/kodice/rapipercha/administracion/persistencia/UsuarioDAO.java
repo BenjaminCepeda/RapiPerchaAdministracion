@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ec.com.kodice.rapipercha.administracion.persistencia;
 
 import ec.com.kodice.connection.CustomConnection;
@@ -16,25 +15,27 @@ import java.util.List;
 
 /**
  * Esta clase permite el acceso a datos de un Usuario
+ *
  * @author Benjamin Cepeda
  * @version v1.0
- * @date 2020/12/06 
+ * @date 2020/12/06
  */
 public class UsuarioDAO {
-    
+
     /**
      * Permite crear un nuevo Usuario
+     *
      * @param usuarioVO POJO con los atributos de Usuario
-     * @return Codigo del registro creado 
-     * @throws Exception 
+     * @return Codigo del registro creado
+     * @throws Exception
      */
-    public int crear(UsuarioVO usuarioVO) throws Exception{
-        Connection conexion=null;
+    public int crear(UsuarioVO usuarioVO) throws Exception {
+        Connection conexion = null;
         PreparedStatement sentencia = null;
-        int codigoGenerado=0;
-        try{
+        int codigoGenerado = 0;
+        try {
             conexion = CustomConnection.getConnection();
-            String consulta="INSERT INTO TUSUARIOS "
+            String consulta = "INSERT INTO TUSUARIOS "
                     + "(usu_nombre, usu_clave, usu_estado)"
                     + "VALUES (?,?,?)";
             sentencia = conexion.prepareStatement(consulta,
@@ -44,123 +45,122 @@ public class UsuarioDAO {
             sentencia.setString(3, usuarioVO.getEstado());
             sentencia.executeUpdate();
             ResultSet resultado = sentencia.getGeneratedKeys();
-            while(resultado.next()){
-               codigoGenerado = resultado.getInt(1);
-            }            
-        } 
-        catch(Exception e){
-            if (sentencia!=null) sentencia.close();
-            if (conexion!=null) conexion.close();
-            throw new Exception("["+this.getClass().getName()+"] "
+            while (resultado.next()) {
+                codigoGenerado = resultado.getInt(1);
+            }
+        } catch (Exception e) {
+            CustomConnection.close();
+            throw new Exception("[" + this.getClass().getName() + "] "
                     + e.getMessage());
-        }
-        finally{
+        } finally {
             try {
-                if (sentencia!=null) sentencia.close();
-                if (conexion!=null) conexion.close();
-            } catch (SQLException e){throw new Exception("[" +
-                    this.getClass().getName()+"] "+ e.getMessage());}
+                CustomConnection.close();
+            } catch (SQLException e) {
+                throw new Exception("["
+                        + this.getClass().getName() + "] " + e.getMessage());
+            }
         }
         return (codigoGenerado);
     }
-    
+
     /**
      * Permite leer un Usuario en base de su codigo
+     *
      * @param codigo Codigo del registro a ser leído
      * @return POJO con los atributos de Usuario
-     * @throws Exception 
+     * @throws Exception
      */
-    public UsuarioVO buscar(int codigo) throws Exception{
-        Connection conexion=null;
+    public UsuarioVO buscar(int codigo) throws Exception {
+        Connection conexion = null;
         PreparedStatement sentencia = null;
         UsuarioVO usuarioVO = null;
-        try{
+        try {
             conexion = CustomConnection.getConnection();
-            String consulta="SELECT usu_codigo, usu_nombre, usu_clave, "
+            String consulta = "SELECT usu_codigo, usu_nombre, usu_clave, "
                     + "usu_estado "
                     + "FROM TUSUSARIOS  WHERE usu_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, codigo);
             ResultSet resultado = sentencia.executeQuery();
-            while(resultado.next()){
-               usuarioVO = new UsuarioVO(codigo, 
-                       resultado.getString("usu_nombre"),
-                       resultado.getString("usu_clave"),
-                       resultado.getString("usu_estado"));
-            }      
-        } 
-        catch(Exception e){
-            if (sentencia!=null) sentencia.close();
-            if (conexion!=null) conexion.close();
-            throw new Exception("["+this.getClass().getName()+"] "
+            while (resultado.next()) {
+                usuarioVO = new UsuarioVO(codigo,
+                        resultado.getString("usu_nombre"),
+                        resultado.getString("usu_clave"),
+                        resultado.getString("usu_estado"));
+            }
+        } catch (Exception e) {
+            CustomConnection.close();
+            throw new Exception("[" + this.getClass().getName() + "] "
                     + e.getMessage());
-        } 
-        finally{
+        } finally {
             try {
-                if (sentencia!=null) sentencia.close();
-                if (conexion!=null) conexion.close();
-            } catch (SQLException e){throw new Exception("[" +
-                    this.getClass().getName()+"] "+ e.getMessage());}
-        }        
+                CustomConnection.close();
+            } catch (SQLException e) {
+                throw new Exception("["
+                        + this.getClass().getName() + "] " + e.getMessage());
+            }
+        }
         return usuarioVO;
     }
 
-   /**
-     * Devuelve el  listado  de Usuarios
+    /**
+     * Devuelve el listado de Usuarios
+     *
      * @return Lista de usuarios
-     * @throws Exception 
+     * @throws Exception
      */
-    public List<UsuarioVO> buscarTodos() throws Exception{
-        Connection conexion=null;
+    public List<UsuarioVO> buscarTodos() throws Exception {
+        Connection conexion = null;
         PreparedStatement sentencia = null;
-        List<UsuarioVO> listaElementos=null;
+        List<UsuarioVO> listaElementos = null;
         UsuarioVO usuarioVO = null;
-        try{
+        try {
             conexion = CustomConnection.getConnection();
-            String consulta="SELECT usu_codigo, usu_nombre "
-                    +"usu_clave, usu_estado"
+            String consulta = "SELECT usu_codigo, usu_nombre "
+                    + "usu_clave, usu_estado"
                     + "FROM TPERFILES ";
             sentencia = conexion.prepareStatement(consulta);
             ResultSet resultado = sentencia.executeQuery();
-            while(resultado.next()){
-                if (listaElementos== null) listaElementos = 
-                        new ArrayList<UsuarioVO>();
-               usuarioVO = new UsuarioVO(
-                       resultado.getInt("usu_codigo"),
-                       resultado.getString("usu_nombre"),
-                       resultado.getString("usu_clave"),
-                       resultado.getString("usu_estado"));
-               listaElementos.add(usuarioVO);
-            }      
-        } 
-        catch(Exception e){
-            if (sentencia!=null) sentencia.close();
-            if (conexion!=null) conexion.close();
-            throw new Exception("["+this.getClass().getName()+"] "
+            while (resultado.next()) {
+                if (listaElementos == null) {
+                    listaElementos
+                            = new ArrayList<UsuarioVO>();
+                }
+                usuarioVO = new UsuarioVO(
+                        resultado.getInt("usu_codigo"),
+                        resultado.getString("usu_nombre"),
+                        resultado.getString("usu_clave"),
+                        resultado.getString("usu_estado"));
+                listaElementos.add(usuarioVO);
+            }
+        } catch (Exception e) {
+            CustomConnection.close();
+            throw new Exception("[" + this.getClass().getName() + "] "
                     + e.getMessage());
-        } 
-        
-        finally{
+        } finally {
             try {
-                if (sentencia!=null) sentencia.close();
-                if (conexion!=null) conexion.close();
-            } catch (SQLException e){throw new Exception("[" +
-                    this.getClass().getName()+"] "+ e.getMessage());}
-        }        return (listaElementos);
+                CustomConnection.close();
+            } catch (SQLException e) {
+                throw new Exception("["
+                        + this.getClass().getName() + "] " + e.getMessage());
+            }
+        }
+        return (listaElementos);
     }
-    
+
     /**
      * Permite actualizar una registro de Perfil
+     *
      * @param perfilVO POJO con los atributos de Perfil
-     * @return Numero de registros actualizados 
-     * @throws Exception 
+     * @return Numero de registros actualizados
+     * @throws Exception
      */
-    public int actualizar(UsuarioVO usuarioVO) throws Exception{
-        Connection conexion=null;
+    public int actualizar(UsuarioVO usuarioVO) throws Exception {
+        Connection conexion = null;
         PreparedStatement sentencia = null;
-        conexion=null;
-        int filasAfectadas=0;
-        try{
+        conexion = null;
+        int filasAfectadas = 0;
+        try {
             conexion = CustomConnection.getConnection();
             String consulta = "SET  "
                     + "usu_clave = ? "
@@ -172,57 +172,54 @@ public class UsuarioDAO {
             sentencia.setString(2, usuarioVO.getEstado());
             sentencia.setInt(3, usuarioVO.getCodigo());
             filasAfectadas = sentencia.executeUpdate();
-        }
-        catch(Exception e){
-            if (sentencia!=null) sentencia.close();
-            if (conexion!=null) conexion.close();
-            throw new Exception("["+this.getClass().getName()+"] "
+        } catch (Exception e) {
+            CustomConnection.close();
+            throw new Exception("[" + this.getClass().getName() + "] "
                     + e.getMessage());
-        }
-        finally{
+        } finally {
             try {
-                if (sentencia!=null) sentencia.close();
-                if (conexion!=null) conexion.close();
-            } catch (SQLException e){throw new Exception("[" +
-                    this.getClass().getName()+"] "+ e.getMessage());}
-        }        return (filasAfectadas);
+                CustomConnection.close();
+            } catch (SQLException e) {
+                throw new Exception("["
+                        + this.getClass().getName() + "] " + e.getMessage());
+            }
+        }
+        return (filasAfectadas);
     }
-    
+
     /**
      * Permte eliminar un registro de Usuario
+     *
      * @param codigo Codigo del Usuario a eliminar
      * @return Numero de registros eliminados
-     * @throws Exception 
+     * @throws Exception
      */
-    public int eliminar(int codigo) throws Exception{
-        Connection conexion=null;
+    public int eliminar(int codigo) throws Exception {
+        Connection conexion = null;
         PreparedStatement sentencia = null;
-        int filasAfectadas=0;
-        try{
+        int filasAfectadas = 0;
+        try {
             conexion = CustomConnection.getConnection();
-            String consulta="DELETE FROM TUSUARIOS "
+            String consulta = "DELETE FROM TUSUARIOS "
                     + "WHERE usu_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, codigo);
             filasAfectadas = sentencia.executeUpdate();
             conexion.close();
-        }
-        catch(Exception e){
-            if (sentencia!=null) sentencia.close();
-            if (conexion!=null) conexion.close();
-            throw new Exception("["+this.getClass().getName()+"] "
+        } catch (Exception e) {
+            CustomConnection.close();
+            throw new Exception("[" + this.getClass().getName() + "] "
                     + e.getMessage());
-        }
-        finally{
+        } finally {
             try {
-                if (sentencia!=null) sentencia.close();
-                if (conexion!=null) conexion.close();
-            } catch (SQLException e){throw new Exception("[" +
-                    this.getClass().getName()+"] "+ e.getMessage());}
+                CustomConnection.close();
+            } catch (SQLException e) {
+                throw new Exception("["
+                        + this.getClass().getName() + "] " + e.getMessage());
+            }
         }
         return (filasAfectadas);
 
     }
-    
 
 }

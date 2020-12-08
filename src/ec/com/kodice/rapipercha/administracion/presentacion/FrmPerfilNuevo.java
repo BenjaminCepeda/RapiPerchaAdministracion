@@ -8,6 +8,7 @@ package ec.com.kodice.rapipercha.administracion.presentacion;
 
 import ec.com.kodice.rapipercha.administracion.negocio.PerfilBO;
 import ec.com.kodice.rapipercha.administracion.persistencia.PerfilVO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,6 +40,8 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
     private void cargarDatos(){
         PerfilVO perfilVO = null;
         PerfilBO perfilBO = null;
+        String nombrePerfil;
+        Object item;
         try {
             if (codigoActual!=0){
                 perfilBO = new PerfilBO();
@@ -51,7 +54,11 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
         finally{
             if (perfilVO != null){
                 txtCodigo.setText(String.valueOf(perfilVO.getCodigo()));
-                txtNombre.setText(perfilVO.getNombre());                
+                for (int i = 0; i<cmbNombre.getItemCount(); i++){
+                    nombrePerfil = cmbNombre.getItemAt(i);
+                    if ( nombrePerfil == perfilVO.getNombre())
+                        cmbNombre.setSelectedIndex(i);                    
+                }
             }
             perfilVO = null;
             perfilBO = null;
@@ -75,7 +82,7 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
         lblCodigo = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        cmbNombre = new javax.swing.JComboBox<>();
         pnlPie = new javax.swing.JPanel();
         btnGrabar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -128,6 +135,8 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
 
         lblNombre.setText("Nombre:");
 
+        cmbNombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Coordinador", "Toma Fisica", " " }));
+
         javax.swing.GroupLayout pnlDetalleLayout = new javax.swing.GroupLayout(pnlDetalle);
         pnlDetalle.setLayout(pnlDetalleLayout);
         pnlDetalleLayout.setHorizontalGroup(
@@ -138,7 +147,7 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
                     .addGroup(pnlDetalleLayout.createSequentialGroup()
                         .addComponent(lblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlDetalleLayout.createSequentialGroup()
                         .addComponent(lblCodigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -155,8 +164,8 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(cmbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pnlPie.setMaximumSize(new java.awt.Dimension(32767, 250));
@@ -254,22 +263,32 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         PerfilVO perfilVO = null;
         PerfilBO perfilBO = null;
+        int respuestaOperacion = 0;
         boolean camposValidos;
-        camposValidos = !(txtNombre.getText().isEmpty()|txtNombre.getText().trim().equals(""));
-        if (camposValidos){
+        String nombrePerfil ="";
+//        camposValidos = !(txtNombre.getText().isEmpty()|txtNombre.getText().trim().equals(""));                
+        if (cmbNombre.getSelectedIndex() >= 0){
             perfilBO = new PerfilBO();
-            perfilVO = new PerfilVO(0, txtNombre.getText());            
+            nombrePerfil = cmbNombre.getItemAt(cmbNombre.getSelectedIndex());
+            perfilVO = new PerfilVO(codigoActual, nombrePerfil);            
             try{
-                txtCodigo.setText(String.valueOf(perfilBO.crear(perfilVO)));
+                if (codigoActual==0){
+                    respuestaOperacion = perfilBO.crear(perfilVO);
+                    txtCodigo.setText(String.valueOf(respuestaOperacion));
+                }else
+                    respuestaOperacion = perfilBO.actualizar(perfilVO);
+                if (respuestaOperacion>0)
+                    JOptionPane.showMessageDialog(null, "Registro guardado con éxito");
             }
             catch(Exception e){
                 // TODO Llamar a procedimiento de manejo de errores
-                System.out.println("ec.com.kodice.rapipercha.administracion.presentacion.FrmPerfilNuevo.btnGrabarActionPerformed()"+e.getMessage());
+                 System.out.println("ec.com.kodice.rapipercha.administracion.presentacion.FrmPerfilNuevo.btnGrabarActionPerformed()"+e.getMessage());
             }
             finally{
                 perfilVO = null;
                 perfilBO = null;
-                
+                this.setVisible(false);
+                this.dispose();
             }
         }
     }//GEN-LAST:event_btnGrabarActionPerformed
@@ -318,6 +337,7 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGrabar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cmbNombre;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblLogoKodice;
@@ -328,7 +348,6 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
     private javax.swing.JPanel pnlDetalle;
     private javax.swing.JPanel pnlPie;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
 }

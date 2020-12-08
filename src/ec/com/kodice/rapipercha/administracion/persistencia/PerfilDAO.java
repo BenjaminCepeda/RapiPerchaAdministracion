@@ -47,18 +47,16 @@ public class PerfilDAO {
             }            
         } 
         catch(Exception e){
-            if (sentencia!=null) sentencia.close();
-            if (conexion!=null) conexion.close();
+            CustomConnection.close();
             throw new Exception("["+this.getClass().getName()+"] "
                     + e.getMessage());
-        }
+        }    
         finally{
             try {
-                if (sentencia!=null) sentencia.close();
-                if (conexion!=null) conexion.close();
+                CustomConnection.close();
             } catch (SQLException e){throw new Exception("[" +
                     this.getClass().getName()+"] "+ e.getMessage());}
-        }
+        }        
         return (codigoGenerado);
     }
     
@@ -85,18 +83,17 @@ public class PerfilDAO {
             }      
         } 
         catch(Exception e){
-            if (sentencia!=null) sentencia.close();
-            if (conexion!=null) conexion.close();
+            CustomConnection.close();
             throw new Exception("["+this.getClass().getName()+"] "
                     + e.getMessage());
-        } 
+        }    
         finally{
             try {
-                if (sentencia!=null) sentencia.close();
-                if (conexion!=null) conexion.close();
+                CustomConnection.close();
             } catch (SQLException e){throw new Exception("[" +
                     this.getClass().getName()+"] "+ e.getMessage());}
-        }        return perfilVO;
+        }        
+        return perfilVO;
     }
 
    /**
@@ -124,19 +121,17 @@ public class PerfilDAO {
             }      
         } 
         catch(Exception e){
-            if (sentencia!=null) sentencia.close();
-            if (conexion!=null) conexion.close();
+            CustomConnection.close();
             throw new Exception("["+this.getClass().getName()+"] "
                     + e.getMessage());
-        } 
-        
+        }    
         finally{
             try {
-                if (sentencia!=null) sentencia.close();
-                if (conexion!=null) conexion.close();
+                CustomConnection.close();
             } catch (SQLException e){throw new Exception("[" +
                     this.getClass().getName()+"] "+ e.getMessage());}
-        }        return (listaElementos);
+        }        
+        return (listaElementos);
     }
     
     /**
@@ -152,8 +147,8 @@ public class PerfilDAO {
         int filasAfectadas=0;
         try{
             conexion = CustomConnection.getConnection();
-            String consulta = "SET per_nombre = ? "
-                    + "UPDATE TPERFILES "
+            String consulta = "UPDATE TPERFILES "
+                    + "SET per_nombre = ? "
                     + "WHERE per_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setString(1, perfilVO.getNombre());
@@ -161,18 +156,17 @@ public class PerfilDAO {
             filasAfectadas = sentencia.executeUpdate();
         }
         catch(Exception e){
-            if (sentencia!=null) sentencia.close();
-            if (conexion!=null) conexion.close();
+            CustomConnection.close();
             throw new Exception("["+this.getClass().getName()+"] "
                     + e.getMessage());
-        }
+        }    
         finally{
             try {
-                if (sentencia!=null) sentencia.close();
-                if (conexion!=null) conexion.close();
+                CustomConnection.close();
             } catch (SQLException e){throw new Exception("[" +
                     this.getClass().getName()+"] "+ e.getMessage());}
-        }        return (filasAfectadas);
+        }        
+        return (filasAfectadas);
     }
     
     /**
@@ -192,21 +186,18 @@ public class PerfilDAO {
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, codigo);
             filasAfectadas = sentencia.executeUpdate();
-            conexion.close();
         }
         catch(Exception e){
-            if (sentencia!=null) sentencia.close();
-            if (conexion!=null) conexion.close();
+            CustomConnection.close();
             throw new Exception("["+this.getClass().getName()+"] "
                     + e.getMessage());
-        }
+        }    
         finally{
             try {
-                if (sentencia!=null) sentencia.close();
-                if (conexion!=null) conexion.close();
+                CustomConnection.close();
             } catch (SQLException e){throw new Exception("[" +
                     this.getClass().getName()+"] "+ e.getMessage());}
-        }
+        }        
         return (filasAfectadas);
 
     }
