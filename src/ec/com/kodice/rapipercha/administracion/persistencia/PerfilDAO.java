@@ -48,14 +48,16 @@ public class PerfilDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e){throw new Exception("[" +
-                    this.getClass().getName()+"] "+ e.getMessage());}
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
+            }
         }        
         return (codigoGenerado);
     }

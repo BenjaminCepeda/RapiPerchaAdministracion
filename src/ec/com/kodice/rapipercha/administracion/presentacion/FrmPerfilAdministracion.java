@@ -7,6 +7,7 @@
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
 import ec.com.kodice.rapipercha.administracion.negocio.PerfilBO;
+import ec.com.kodice.rapipercha.util.UtilPresentacion;
 
 /**
  *
@@ -30,6 +31,7 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
         }
         catch ( Exception e) {
             System.out.println(e.getMessage());
+            UtilPresentacion.mostrarMensajeError(this, e.getMessage());
         }
         finally{
             perfilBO = null;            
