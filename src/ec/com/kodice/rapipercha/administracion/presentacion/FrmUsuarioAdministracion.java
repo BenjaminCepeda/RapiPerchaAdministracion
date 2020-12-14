@@ -6,11 +6,12 @@
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
 import ec.com.kodice.rapipercha.administracion.negocio.UsuarioBO;
+import ec.com.kodice.rapipercha.util.UtilPresentacion;
 
 /**
  *
  * Esta clase contiene atributos y métodos del formulario
- * FrmPerfilAdministracion
+ * FrmUSuarioAdministracion
  *
  * @author Benjamin Cepeda
  * @version v1.0
@@ -19,7 +20,7 @@ import ec.com.kodice.rapipercha.administracion.negocio.UsuarioBO;
 public class FrmUsuarioAdministracion extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmPerfilAdministracion
+     * Creates new form FrmUsuarioAdministracion
      */
     public FrmUsuarioAdministracion() {
         initComponents();
@@ -33,7 +34,7 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
             tblPerfiles.setModel(perfilBO.generaModeloDatosTabla(
                     new Object[]{"CODIGO", "NOMBRE", "PERFIL"}));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            UtilPresentacion.mostrarMensajeError(this, e.getMessage());
         } finally {
             perfilBO = null;
         }
@@ -261,8 +262,8 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        FrmPerfilNuevo frmPerfilNuevo = new FrmPerfilNuevo();
-        frmPerfilNuevo.setVisible(true);
+        FrmUsuarioNuevo frmUsuarioNuevo = new FrmUsuarioNuevo();
+        frmUsuarioNuevo.setVisible(true);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
@@ -284,9 +285,9 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
                     row, column).toString();
         }
         if (!(codigoElegido.isEmpty() | codigoElegido.isBlank())) {
-            FrmPerfilNuevo frmPerfilNuevo = new FrmPerfilNuevo(
+            FrmUsuarioNuevo frmUsuarioNuevo = new FrmUsuarioNuevo(
                     Integer.valueOf(codigoElegido));
-            frmPerfilNuevo.setVisible(true);
+            frmUsuarioNuevo.setVisible(true);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 

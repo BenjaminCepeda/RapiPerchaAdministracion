@@ -54,18 +54,20 @@ public class ProveedorDAO {
             while (resultado.next()) {
                 codigoGenerado = resultado.getInt(1);
             }
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
             CustomConnection.close();
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
-        } finally {
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e) {
-                throw new Exception("["
-                        + this.getClass().getName() + "] " + e.getMessage());
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
             }
-        }
+        }        
         return (codigoGenerado);
     }
 
@@ -100,18 +102,20 @@ public class ProveedorDAO {
                         resultado.getString("prov_telefono_contacto"),
                         resultado.getString("prov_correo_contacto"));
             }
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
             CustomConnection.close();
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
-        } finally {
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e) {
-                throw new Exception("["
-                        + this.getClass().getName() + "] " + e.getMessage());
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
             }
-        }
+        }        
         return (proveedorVO);
     }
 
@@ -150,18 +154,20 @@ public class ProveedorDAO {
                         resultado.getString("prov_correo_contacto"));
                 listaElementos.add(proveedorVO);
             }
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
             CustomConnection.close();
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
-        } finally {
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e) {
-                throw new Exception("["
-                        + this.getClass().getName() + "] " + e.getMessage());
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
             }
-        }
+        }        
         return (listaElementos);
     }
 
@@ -197,18 +203,20 @@ public class ProveedorDAO {
             sentencia.setString(7, proveedorVO.getCorreoContacto());
             sentencia.setInt(8, proveedorVO.getCodigo());
             filasAfectadas = sentencia.executeUpdate();
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
             CustomConnection.close();
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
-        } finally {
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e) {
-                throw new Exception("["
-                        + this.getClass().getName() + "] " + e.getMessage());
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
             }
-        }
+        }        
         return (filasAfectadas);
     }
 
@@ -231,18 +239,20 @@ public class ProveedorDAO {
             sentencia.setInt(1, codigo);
             filasAfectadas = sentencia.executeUpdate();
             conexion.close();
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
             CustomConnection.close();
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
-        } finally {
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e) {
-                throw new Exception("["
-                        + this.getClass().getName() + "] " + e.getMessage());
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
             }
-        }
+        }        
         return (filasAfectadas);
 
     }

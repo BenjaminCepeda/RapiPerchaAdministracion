@@ -17,7 +17,9 @@ public class UsuarioVO {
     private String nombre;
     private String clave;
     private String estado;
+    private PerfilVO perfil;
 
+    
     public int getCodigo() {
         return codigo;
     }
@@ -48,6 +50,13 @@ public class UsuarioVO {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+    public PerfilVO getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(PerfilVO perfilVO) {
+        this.perfil = perfilVO;
     }
 
     public UsuarioVO(int codigo, String nombre, String clave, String estado) {

@@ -36,30 +36,33 @@ public class UsuarioDAO {
         try {
             conexion = CustomConnection.getConnection();
             String consulta = "INSERT INTO TUSUARIOS "
-                    + "(usu_nombre, usu_clave, usu_estado)"
+                    + "(per_codigo, usu_nombre, usu_clave, usu_estado)"
                     + "VALUES (?,?,?)";
             sentencia = conexion.prepareStatement(consulta,
-                    PreparedStatement.RETURN_GENERATED_KEYS);
-            sentencia.setString(1, usuarioVO.getNombre());
-            sentencia.setString(2, usuarioVO.getClave());
-            sentencia.setString(3, usuarioVO.getEstado());
+                    PreparedStatement.RETURN_GENERATED_KEYS);            
+            sentencia.setInt(1, usuarioVO.getPerfil().getCodigo());
+            sentencia.setString(2, usuarioVO.getNombre());
+            sentencia.setString(3, usuarioVO.getClave());
+            sentencia.setString(4, usuarioVO.getEstado());
             sentencia.executeUpdate();
             ResultSet resultado = sentencia.getGeneratedKeys();
             while (resultado.next()) {
                 codigoGenerado = resultado.getInt(1);
             }
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
             CustomConnection.close();
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
-        } finally {
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e) {
-                throw new Exception("["
-                        + this.getClass().getName() + "] " + e.getMessage());
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
             }
-        }
+        }        
         return (codigoGenerado);
     }
 
@@ -74,32 +77,40 @@ public class UsuarioDAO {
         Connection conexion = null;
         PreparedStatement sentencia = null;
         UsuarioVO usuarioVO = null;
+        PerfilVO perfilVO = null;
+        PerfilDAO perfilDAO = new PerfilDAO();
+                
         try {
             conexion = CustomConnection.getConnection();
-            String consulta = "SELECT usu_codigo, usu_nombre, usu_clave, "
-                    + "usu_estado "
+            String consulta = "SELECT per_codigo, usu_codigo, "
+                    + "usu_nombre, usu_clave, usu_estado "
                     + "FROM TUSUSARIOS  WHERE usu_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, codigo);
             ResultSet resultado = sentencia.executeQuery();
             while (resultado.next()) {
-                usuarioVO = new UsuarioVO(codigo,
+                usuarioVO = new UsuarioVO(
+                        resultado.getInt("codigo"),
                         resultado.getString("usu_nombre"),
                         resultado.getString("usu_clave"),
                         resultado.getString("usu_estado"));
+                perfilVO = perfilDAO.buscar(resultado.getInt("per_codigo"));
+                usuarioVO.setPerfil(perfilVO);
             }
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
             CustomConnection.close();
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
-        } finally {
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e) {
-                throw new Exception("["
-                        + this.getClass().getName() + "] " + e.getMessage());
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
             }
-        }
+        }        
         return usuarioVO;
     }
 
@@ -114,11 +125,13 @@ public class UsuarioDAO {
         PreparedStatement sentencia = null;
         List<UsuarioVO> listaElementos = null;
         UsuarioVO usuarioVO = null;
+        PerfilVO perfilVO = null;
+        PerfilDAO perfilDAO= new PerfilDAO();
         try {
             conexion = CustomConnection.getConnection();
-            String consulta = "SELECT usu_codigo, usu_nombre "
-                    + "usu_clave, usu_estado"
-                    + "FROM TPERFILES ";
+            String consulta = "SELECT usu_codigo, per_codigo, usu_nombre "
+                    + "usu_clave, usu_estado "
+                    + "FROM TUSUARIOS ";
             sentencia = conexion.prepareStatement(consulta);
             ResultSet resultado = sentencia.executeQuery();
             while (resultado.next()) {
@@ -131,27 +144,31 @@ public class UsuarioDAO {
                         resultado.getString("usu_nombre"),
                         resultado.getString("usu_clave"),
                         resultado.getString("usu_estado"));
+                perfilVO = perfilDAO.buscar(resultado.getInt("per_codigo"));
+                usuarioVO.setPerfil(perfilVO);
                 listaElementos.add(usuarioVO);
             }
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
             CustomConnection.close();
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
-        } finally {
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e) {
-                throw new Exception("["
-                        + this.getClass().getName() + "] " + e.getMessage());
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
             }
-        }
+        }        
         return (listaElementos);
     }
 
     /**
-     * Permite actualizar una registro de Perfil
+     * Permite actualizar una registro de Usuario
      *
-     * @param perfilVO POJO con los atributos de Perfil
+     * @param usuarioVO POJO con los atributos de Usuario
      * @return Numero de registros actualizados
      * @throws Exception
      */
@@ -162,28 +179,31 @@ public class UsuarioDAO {
         int filasAfectadas = 0;
         try {
             conexion = CustomConnection.getConnection();
-            String consulta = "SET  "
+            String consulta = "UPDATE TUSUARIOS "
+                    + "SET  per_codigo = ? "
                     + "usu_clave = ? "
                     + "usu_estado = ? "
-                    + "UPDATE TUSUARIOS "
                     + "WHERE usu_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
-            sentencia.setString(1, usuarioVO.getClave());
-            sentencia.setString(2, usuarioVO.getEstado());
-            sentencia.setInt(3, usuarioVO.getCodigo());
+            sentencia.setInt(1, usuarioVO.getPerfil().getCodigo());
+            sentencia.setString(2, usuarioVO.getClave());
+            sentencia.setString(3, usuarioVO.getEstado());
+            sentencia.setInt(4, usuarioVO.getCodigo());
             filasAfectadas = sentencia.executeUpdate();
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
             CustomConnection.close();
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
-        } finally {
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e) {
-                throw new Exception("["
-                        + this.getClass().getName() + "] " + e.getMessage());
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
             }
-        }
+        }        
         return (filasAfectadas);
     }
 
@@ -206,20 +226,60 @@ public class UsuarioDAO {
             sentencia.setInt(1, codigo);
             filasAfectadas = sentencia.executeUpdate();
             conexion.close();
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
             CustomConnection.close();
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
-        } finally {
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
             try {
                 CustomConnection.close();
-            } catch (SQLException e) {
-                throw new Exception("["
-                        + this.getClass().getName() + "] " + e.getMessage());
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
             }
-        }
+        }        
         return (filasAfectadas);
 
+    }
+
+    /**
+     * Permite actualizar la clave de un Usuario
+     *
+     * @param usuarioVO POJO con los atributos de Usuario
+     * @return Numero de registros actualizados
+     * @throws Exception
+     */
+    public int cambiarClave(int codigo, String nuevaClave) throws Exception {
+        Connection conexion = null;
+        PreparedStatement sentencia = null;
+        conexion = null;
+        int filasAfectadas = 0;
+        try {
+            conexion = CustomConnection.getConnection();
+            String consulta = "UPDATE TUSUARIOS " +
+                    "SET  usu_clave = ? "
+                    + "WHERE usu_codigo = ?";
+            sentencia = conexion.prepareStatement(consulta);
+            sentencia.setString(1, nuevaClave);
+            sentencia.setInt(2, codigo);
+            filasAfectadas = sentencia.executeUpdate();
+        } 
+        catch(Exception e){
+            CustomConnection.close();
+            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
+            try {
+                CustomConnection.close();
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "[" 
+                        + this.getClass().getName() + "] ");
+            }
+        }        
+        return (filasAfectadas);
     }
 
 }

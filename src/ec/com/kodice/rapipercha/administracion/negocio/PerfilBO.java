@@ -9,6 +9,7 @@ package ec.com.kodice.rapipercha.administracion.negocio;
 import ec.com.kodice.rapipercha.administracion.persistencia.PerfilDAO;
 import ec.com.kodice.rapipercha.administracion.persistencia.PerfilVO;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,8 +31,8 @@ public class PerfilBO {
             codigoGenerado = perfilDAO.crear(perfilVO);
         }
         catch(Exception e){
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
+            throw new Exception(e.getMessage() + 
+                    "["+this.getClass().getName()+"]");
         }
         return(codigoGenerado);
     }
@@ -43,9 +44,9 @@ public class PerfilBO {
             
         }
         catch(Exception e){
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
-        }        
+            throw new Exception(e.getMessage() + 
+                    "["+this.getClass().getName()+"]");
+        }
         return(perfilVO);
     }
     
@@ -56,9 +57,9 @@ public class PerfilBO {
             
         }
         catch(Exception e){
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
-        }        
+            throw new Exception(e.getMessage() + 
+                    "["+this.getClass().getName()+"]");
+        }
         return(listaElementos);
     }
 
@@ -68,9 +69,9 @@ public class PerfilBO {
             filasAfectadas = perfilDAO.actualizar(perfilVO);
         }
         catch(Exception e){
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
-        }        
+            throw new Exception(e.getMessage() + 
+                    "["+this.getClass().getName()+"]");
+        }
         return(filasAfectadas);
     }    
     
@@ -80,9 +81,9 @@ public class PerfilBO {
                 filasAfectadas = perfilDAO.eliminar(codigo);                
         }
         catch(Exception e){
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
-        }        
+            throw new Exception(e.getMessage() + 
+                    "["+this.getClass().getName()+"]");
+        }
         return(filasAfectadas);
     }   
     
@@ -99,11 +100,30 @@ public class PerfilBO {
                 }
 
             }
-        } catch (Exception e) {
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
+        } 
+        catch(Exception e){
+            throw new Exception(e.getMessage() + 
+                    "["+this.getClass().getName()+"]");
         }
         return (dtmListaElementos);
+    }
+    public DefaultComboBoxModel generaModeloDatosCombo() throws Exception {
+        DefaultComboBoxModel cmbListaElementos = new DefaultComboBoxModel();
+        List<PerfilVO> listaElementos = null;
+        try {
+            listaElementos = perfilDAO.buscarTodos();
+            if (listaElementos != null) {
+                //cmbListaElementos = new DefaultComboBoxModel(listaElementos.toArray());
+                for (PerfilVO perfilVO : listaElementos) {
+                    cmbListaElementos.addElement(perfilVO);
+                }
+            }
+        } 
+        catch(Exception e){
+            throw new Exception(e.getMessage() + 
+                    "["+this.getClass().getName()+"]");
+        }
+        return (cmbListaElementos);
     }
 
 }

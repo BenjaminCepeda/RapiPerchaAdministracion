@@ -37,5 +37,8 @@ public class PerfilVO {
         this.codigo = codigo;
         this.nombre = nombre;
     }
+
+    public PerfilVO() {
+    }
     
 }

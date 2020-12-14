@@ -3,89 +3,87 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ec.com.kodice.rapipercha.administracion.negocio;
 
-import ec.com.kodice.rapipercha.administracion.persistencia.PerfilVO;
 import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioDAO;
 import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  * Esta clase contiene la capa de negocio de Perfil
+ *
  * @author Benjamin Cepeda
  * @version v1.0
- * @date 2020/12/06 
+ * @date 2020/12/06
  */
 public class UsuarioBO {
-    UsuarioDAO usuarioDAO =null;
+
+    UsuarioDAO usuarioDAO = null;
 
     public UsuarioBO() {
         usuarioDAO = new UsuarioDAO();
     }
-    
-    public int  crear(UsuarioVO usuarioVO) throws Exception{
-        int codigoGenerado=0;
+
+    public int crear(UsuarioVO usuarioVO) throws Exception {
+        int codigoGenerado = 0;
         try {
             codigoGenerado = usuarioDAO.crear(usuarioVO);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage()
+                    + "[" + this.getClass().getName() + "]");
         }
-        catch(Exception e){
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
-        }
-        return(codigoGenerado);
-    }
-    
-    public UsuarioVO buscar(int codigo) throws Exception{
-        UsuarioVO usuarioVO=null;
-        try {
-            usuarioVO = usuarioDAO.buscar(codigo);
-            
-        }
-        catch(Exception e){
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
-        }        
-        return(usuarioVO);
-    }
-    
-    public List<UsuarioVO> buscarTodos() throws Exception{
-        List<UsuarioVO> listaElementos=null;
-        try {
-            listaElementos = usuarioDAO.buscarTodos();
-            
-        }
-        catch(Exception e){
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
-        }        
-        return(listaElementos);
+        return (codigoGenerado);
     }
 
-    public int actualizar(UsuarioVO usuarioVO) throws Exception{
-        int filasAfectadas=0;
-        try{
+    public UsuarioVO buscar(int codigo) throws Exception {
+        UsuarioVO usuarioVO = null;
+        try {
+            usuarioVO = usuarioDAO.buscar(codigo);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage()
+                    + "[" + this.getClass().getName() + "]");
+        }
+        return (usuarioVO);
+    }
+
+    public List<UsuarioVO> buscarTodos() throws Exception {
+        List<UsuarioVO> listaElementos = null;
+        try {
+            listaElementos = usuarioDAO.buscarTodos();
+
+        } catch (Exception e) {
+            throw new Exception(e.getMessage()
+                    + "[" + this.getClass().getName() + "]");
+        }
+        return (listaElementos);
+    }
+
+    public int actualizar(UsuarioVO usuarioVO) throws Exception {
+        int filasAfectadas = 0;
+        try {
             filasAfectadas = usuarioDAO.actualizar(usuarioVO);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage()
+                    + "[" + this.getClass().getName() + "]");
         }
-        catch(Exception e){
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
-        }        
-        return(filasAfectadas);
-    }    
-    public int eliminar(int codigo) throws Exception{
-        int filasAfectadas=0;
-        try{
-                filasAfectadas = usuarioDAO.eliminar(codigo);                
+        return (filasAfectadas);
+    }
+
+    public int eliminar(int codigo) throws Exception {
+        int filasAfectadas = 0;
+        try {
+            filasAfectadas = usuarioDAO.eliminar(codigo);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage()
+                    + "[" + this.getClass().getName() + "]");
         }
-        catch(Exception e){
-            throw new Exception("["+this.getClass().getName()+"] "
-                    + e.getMessage());
-        }        
-        return(filasAfectadas);
-    }    
-    public DefaultTableModel generaModeloDatosTabla(Object[] titulosCabecera) throws Exception {
+        return (filasAfectadas);
+    }
+
+    public DefaultTableModel generaModeloDatosTabla(Object[] titulosCabecera) 
+            throws Exception {
         DefaultTableModel dtmListaElementos = new DefaultTableModel();
         List<UsuarioVO> listaElementos = null;
         dtmListaElementos.setColumnIdentifiers(titulosCabecera);
@@ -98,10 +96,17 @@ public class UsuarioBO {
                 }
             }
         } catch (Exception e) {
-            throw new Exception("[" + this.getClass().getName() + "] "
-                    + e.getMessage());
+            throw new Exception(e.getMessage()
+                    + "[" + this.getClass().getName() + "]");
         }
         return (dtmListaElementos);
+    }
+
+    public DefaultComboBoxModel generaModeloDatosEstados() {
+        DefaultComboBoxModel dcmListaElementos = new DefaultComboBoxModel();    
+        dcmListaElementos.addElement("Activo");
+        dcmListaElementos.addElement("Desactivado");
+        return (dcmListaElementos);
     }
 
 }

@@ -7,7 +7,9 @@
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
 import ec.com.kodice.rapipercha.administracion.negocio.PerfilBO;
+import ec.com.kodice.rapipercha.administracion.negocio.UsuarioBO;
 import ec.com.kodice.rapipercha.administracion.persistencia.PerfilVO;
+import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
 import ec.com.kodice.rapipercha.util.UtilPresentacion;
 import javax.swing.JOptionPane;
 
@@ -18,7 +20,7 @@ import javax.swing.JOptionPane;
  * @version v1.0
  * @date 2020/12/06
  */
-public class FrmPerfilNuevo extends javax.swing.JFrame {
+public class FrmUsuarioNuevo extends javax.swing.JFrame {
     private int codigoActual = 0;
 
     public void setCodigoActual(int codigoActual) {
@@ -26,43 +28,46 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
     }
 
     /** Creates new form FrmPerfilAdministracion */
-    public FrmPerfilNuevo(int codigoActual) {
+    public FrmUsuarioNuevo(int codigoActual) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.codigoActual = codigoActual;
         cargarDatos();
     }
     
-    public FrmPerfilNuevo() {
+    public FrmUsuarioNuevo() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.codigoActual = 0;
+        cargarDatos();
     }
     
     private void cargarDatos(){
-        PerfilVO perfilVO = null;
-        PerfilBO perfilBO = null;
+        UsuarioVO usuarioVO = null;
+        UsuarioBO usuarioBO = new UsuarioBO();
+        PerfilBO perfilBO = new PerfilBO();
         String nombrePerfil;
-        Object item;
+        cmbEstado.setModel(usuarioBO.generaModeloDatosEstados());
         try {
+            cmbPerfil.setModel(perfilBO.generaModeloDatosCombo());
             if (codigoActual!=0){
-                perfilBO = new PerfilBO();
-                perfilVO=perfilBO.buscar(codigoActual);
+                usuarioVO=usuarioBO.buscar(codigoActual);
             }
         }
         catch ( Exception e) {
             UtilPresentacion.mostrarMensajeError(this, e.getMessage());
         }
         finally{
-            if (perfilVO != null){
-                txtCodigo.setText(String.valueOf(perfilVO.getCodigo()));
-                for (int i = 0; i<cmbNombre.getItemCount(); i++){
-                    nombrePerfil = cmbNombre.getItemAt(i);
-                    if ( nombrePerfil == perfilVO.getNombre())
-                        cmbNombre.setSelectedIndex(i);                    
+            if (usuarioVO != null){
+                txtCodigo.setText(String.valueOf(usuarioVO.getCodigo()));
+                for (int i = 0; i<cmbPerfil.getItemCount(); i++){
+                    nombrePerfil = cmbPerfil.getItemAt(i);
+                    if ( nombrePerfil == usuarioVO.getNombre())
+                        cmbPerfil.setSelectedIndex(i);                    
                 }
             }
-            perfilVO = null;
-            perfilBO = null;
+            usuarioVO = null;
+            usuarioBO = null;
         }
     }
     
@@ -82,8 +87,16 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
         pnlDetalle = new javax.swing.JPanel();
         lblCodigo = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
+        lblPerfil = new javax.swing.JLabel();
+        cmbPerfil = new javax.swing.JComboBox<>();
         lblNombre = new javax.swing.JLabel();
-        cmbNombre = new javax.swing.JComboBox<>();
+        txtNombre = new javax.swing.JTextField();
+        lblNombre1 = new javax.swing.JLabel();
+        pswClave = new javax.swing.JPasswordField();
+        lblConfirmacion = new javax.swing.JLabel();
+        pswConfirmacion = new javax.swing.JPasswordField();
+        lblEstado = new javax.swing.JLabel();
+        cmbEstado = new javax.swing.JComboBox<>();
         pnlPie = new javax.swing.JPanel();
         btnGrabar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -134,25 +147,47 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
 
         txtCodigo.setEditable(false);
 
+        lblPerfil.setText("Perfil:");
+
+        cmbPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Coordinador", "Toma Fisica", " " }));
+
         lblNombre.setText("Nombre:");
 
-        cmbNombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Coordinador", "Toma Fisica", " " }));
+        lblNombre1.setText("Clave:");
+
+        lblConfirmacion.setText("Confirme clave:");
+
+        lblEstado.setText("Estado:");
+
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Desactivado" }));
 
         javax.swing.GroupLayout pnlDetalleLayout = new javax.swing.GroupLayout(pnlDetalle);
         pnlDetalle.setLayout(pnlDetalleLayout);
         pnlDetalleLayout.setHorizontalGroup(
             pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDetalleLayout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(65, 65, 65)
                 .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlDetalleLayout.createSequentialGroup()
-                        .addComponent(lblNombre)
+                        .addComponent(lblPerfil)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlDetalleLayout.createSequentialGroup()
                         .addComponent(lblCodigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlDetalleLayout.createSequentialGroup()
+                        .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblEstado)
+                            .addComponent(lblNombre1)
+                            .addComponent(lblNombre)
+                            .addComponent(lblConfirmacion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombre)
+                            .addComponent(pswClave)
+                            .addComponent(pswConfirmacion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         pnlDetalleLayout.setVerticalGroup(
@@ -164,9 +199,25 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPerfil)
+                    .addComponent(cmbPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
-                    .addComponent(cmbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombre1)
+                    .addComponent(pswClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pswConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblConfirmacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEstado)
+                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pnlPie.setMaximumSize(new java.awt.Dimension(32767, 250));
@@ -223,7 +274,7 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
                     .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSalir)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -241,8 +292,7 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlPie, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlPie, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -254,42 +304,65 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
+        UsuarioVO usuarioVO = null;
+        UsuarioBO usuarioBO = null;
         PerfilVO perfilVO = null;
         PerfilBO perfilBO = null;
         int respuestaOperacion = 0;
         boolean camposValidos;
-        String nombrePerfil ="";
-//        camposValidos = !(txtNombre.getText().isEmpty()|txtNombre.getText().trim().equals(""));                
-        if (cmbNombre.getSelectedIndex() >= 0){
-            perfilBO = new PerfilBO();
-            nombrePerfil = cmbNombre.getItemAt(cmbNombre.getSelectedIndex());
-            perfilVO = new PerfilVO(codigoActual, nombrePerfil);            
-            try{
-                if (codigoActual==0){
-                    respuestaOperacion = perfilBO.crear(perfilVO);
-                    txtCodigo.setText(String.valueOf(respuestaOperacion));
-                }else
-                    respuestaOperacion = perfilBO.actualizar(perfilVO);
-                if (respuestaOperacion>0)
-                    JOptionPane.showMessageDialog(null, "Registro guardado con éxito");
+        String nombreEstado ="";
+        camposValidos = 
+            (!txtNombre.getText().isEmpty() && 
+                !txtNombre.getText().trim().equals("") && 
+                !pswClave.getText().isEmpty() && 
+                !pswClave.getText().trim().equals("") &&
+                !pswConfirmacion.getText().isEmpty() && 
+                !pswConfirmacion.getText().trim().equals(""));                
+        if (camposValidos){
+            camposValidos = (pswClave.getText().trim().equals(pswConfirmacion.getText().trim()));
+            if (camposValidos){
+                usuarioBO = new UsuarioBO();
+                nombreEstado = cmbEstado.getItemAt(cmbEstado.getSelectedIndex());
+                usuarioVO = new UsuarioVO(codigoActual, txtNombre.getText(),
+                        pswClave.getText(),nombreEstado);                            
+                try{
+                    perfilVO =  (PerfilVO)cmbPerfil.getSelectedItem();
+                    usuarioVO.setPerfil(perfilVO);
+                    if (codigoActual==0){
+                        respuestaOperacion = usuarioBO.crear(usuarioVO);
+                        txtCodigo.setText(String.valueOf(respuestaOperacion));
+                    }else
+                        respuestaOperacion = usuarioBO.actualizar(usuarioVO);
+                    if (respuestaOperacion>0)
+                        JOptionPane.showMessageDialog(null, "Registro guardado con éxito");
+                }
+                catch(Exception e){
+                    UtilPresentacion.mostrarMensajeError(this, e.getMessage());
+                }
+                finally{
+                    usuarioVO = null;
+                    usuarioBO = null;
+                    perfilVO = null;
+                    perfilBO = null;
+                    this.setVisible(false);
+                    this.dispose();
+                }
             }
-            catch(Exception e){
-                UtilPresentacion.mostrarMensajeError(this, e.getMessage());
+            else{
+                UtilPresentacion.mostrarMensajeValidacionIncorrecta(this, 
+                    "No coincide la confirmación de clave ");                
             }
-            finally{
-                perfilVO = null;
-                perfilBO = null;
-                this.setVisible(false);
-                this.dispose();
-            }
+        }else {
+            UtilPresentacion.mostrarMensajeValidacionIncorrecta(this, 
+                "Ingrese los datos requeridos en el formulario");
         }
     }//GEN-LAST:event_btnGrabarActionPerformed
 
@@ -315,21 +388,23 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPerfilNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmUsuarioNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPerfilNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmUsuarioNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPerfilNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmUsuarioNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPerfilNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmUsuarioNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmPerfilNuevo().setVisible(true);
+                new FrmUsuarioNuevo().setVisible(true);
             }
         });
     }
@@ -337,17 +412,25 @@ public class FrmPerfilNuevo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGrabar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cmbNombre;
+    private javax.swing.JComboBox<String> cmbEstado;
+    private javax.swing.JComboBox<String> cmbPerfil;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblConfirmacion;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblLogoKodice;
     private javax.swing.JLabel lblLogoRapipercha;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNombre1;
+    private javax.swing.JLabel lblPerfil;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlDetalle;
     private javax.swing.JPanel pnlPie;
+    private javax.swing.JPasswordField pswClave;
+    private javax.swing.JPasswordField pswConfirmacion;
     private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
 }

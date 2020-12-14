@@ -30,7 +30,6 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
             tblPerfiles.setModel(perfilBO.generaModeloDatosTabla(new Object[]{"CODIGO", "NOMBRE"}));
         }
         catch ( Exception e) {
-            System.out.println(e.getMessage());
             UtilPresentacion.mostrarMensajeError(this, e.getMessage());
         }
         finally{
