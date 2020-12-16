@@ -5,6 +5,10 @@
  */
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
+import ec.com.kodice.rapipercha.administracion.negocio.UsuarioBO;
+import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
+import ec.com.kodice.rapipercha.util.UtilPresentacion;
+
 /**
  * Esta clase contiene atributos y métodos del formulario de Login
  * @author Benjamin Cepeda
@@ -196,11 +200,41 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        this.setVisible(false);
-        this.dispose();
-        FrmInicio frmInicio = new FrmInicio();
-        frmInicio.setVisible(true);
-
+        String usuarioIngresado;
+        String claveIngresada;
+        int codigoUsuario=0;
+        UsuarioVO usuarioVO = null;
+        UsuarioBO usuarioBO = new UsuarioBO();
+        usuarioIngresado = txtUsuario.getText();
+        claveIngresada = new String(pwdClave.getPassword());
+        if (!(usuarioIngresado.isEmpty() || usuarioIngresado.trim().equals("") ||
+                claveIngresada.isEmpty() || claveIngresada.trim().equals(""))){            
+            try {
+                codigoUsuario = usuarioBO.validaCredenciales(usuarioIngresado,
+                        claveIngresada);
+                if (codigoUsuario>0)
+                    usuarioVO = usuarioBO.buscar(codigoUsuario);
+            }
+            catch ( Exception e) {
+                 UtilPresentacion.mostrarMensajeError(this, e.getMessage());
+             }
+             finally{
+                if (codigoUsuario>0 && usuarioVO != null){
+                    FrmInicio frmInicio = new FrmInicio(usuarioVO);
+                    frmInicio.setVisible(true);
+                    this.setVisible(false);
+                    this.dispose();
+                }else{
+                    UtilPresentacion.mostrarMensajeValidacionIncorrecta(this, 
+                        "Datos de usuario/clave incorrectos.");                
+                }
+            }
+        }else{
+            UtilPresentacion.mostrarMensajeValidacionIncorrecta(this, 
+                    "Datos de usuario/clave inválidos.");
+        }
+        usuarioVO = null;
+        usuarioBO = null;
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

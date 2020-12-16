@@ -50,7 +50,7 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlContenedor = new javax.swing.JPanel();
         pnlCabecera = new javax.swing.JPanel();
         lblLogoRapipercha = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
@@ -65,14 +65,17 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
         lblLogoKodice = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setAlignmentX(0.0F);
-        jPanel1.setAlignmentY(0.0F);
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
+        pnlContenedor.setAlignmentX(0.0F);
+        pnlContenedor.setAlignmentY(0.0F);
+        pnlContenedor.setPreferredSize(new java.awt.Dimension(800, 600));
 
         pnlCabecera.setBackground(new java.awt.Color(64, 124, 202));
         pnlCabecera.setAlignmentX(0.0F);
         pnlCabecera.setAlignmentY(0.0F);
+        pnlCabecera.setMaximumSize(new java.awt.Dimension(32767, 90));
+        pnlCabecera.setMinimumSize(new java.awt.Dimension(0, 90));
 
         lblLogoRapipercha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/kodice/rapipercha/imagenes/logo-rapipercha.png"))); // NOI18N
 
@@ -95,7 +98,7 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
             .addGroup(pnlCabeceraLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLogoRapipercha)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabeceraLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTitulo)
@@ -129,7 +132,7 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
         pnlDetalle.setLayout(pnlDetalleLayout);
         pnlDetalleLayout.setHorizontalGroup(
             pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
         );
         pnlDetalleLayout.setVerticalGroup(
             pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,8 +141,9 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlPie.setMaximumSize(new java.awt.Dimension(32767, 250));
-        pnlPie.setPreferredSize(new java.awt.Dimension(780, 150));
+        pnlPie.setMaximumSize(new java.awt.Dimension(32767, 90));
+        pnlPie.setMinimumSize(new java.awt.Dimension(0, 90));
+        pnlPie.setPreferredSize(new java.awt.Dimension(780, 90));
 
         btnNuevo.setBackground(new java.awt.Color(64, 124, 202));
         btnNuevo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -223,39 +227,36 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
                         .addComponent(btnEditar)
                         .addComponent(btnBorrar)
                         .addComponent(btnSalir)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnlContenedorLayout = new javax.swing.GroupLayout(pnlContenedor);
+        pnlContenedor.setLayout(pnlContenedorLayout);
+        pnlContenedorLayout.setHorizontalGroup(
+            pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlPie, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(pnlCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPie, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlContenedorLayout.setVerticalGroup(
+            pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlContenedorLayout.createSequentialGroup()
                 .addComponent(pnlCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlPie, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlPie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(141, Short.MAX_VALUE))
+            .addComponent(pnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
         );
 
         pack();
@@ -332,12 +333,12 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLogoKodice;
     private javax.swing.JLabel lblLogoRapipercha;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlCabecera;
+    private javax.swing.JPanel pnlContenedor;
     private javax.swing.JPanel pnlDetalle;
     private javax.swing.JPanel pnlPie;
     private javax.swing.JTable tblPerfiles;

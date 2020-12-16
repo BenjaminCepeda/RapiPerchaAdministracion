@@ -32,7 +32,7 @@ public class PerfilBO {
         }
         catch(Exception e){
             throw new Exception(e.getMessage() + 
-                    "["+this.getClass().getName()+"]");
+                    "\n["+this.getClass().getName()+"]");
         }
         return(codigoGenerado);
     }
@@ -45,7 +45,7 @@ public class PerfilBO {
         }
         catch(Exception e){
             throw new Exception(e.getMessage() + 
-                    "["+this.getClass().getName()+"]");
+                    "\n["+this.getClass().getName()+"]");
         }
         return(perfilVO);
     }
@@ -58,7 +58,7 @@ public class PerfilBO {
         }
         catch(Exception e){
             throw new Exception(e.getMessage() + 
-                    "["+this.getClass().getName()+"]");
+                    "\n["+this.getClass().getName()+"]");
         }
         return(listaElementos);
     }
@@ -70,7 +70,7 @@ public class PerfilBO {
         }
         catch(Exception e){
             throw new Exception(e.getMessage() + 
-                    "["+this.getClass().getName()+"]");
+                    "\n["+this.getClass().getName()+"]");
         }
         return(filasAfectadas);
     }    
@@ -82,7 +82,7 @@ public class PerfilBO {
         }
         catch(Exception e){
             throw new Exception(e.getMessage() + 
-                    "["+this.getClass().getName()+"]");
+                    "\n["+this.getClass().getName()+"]");
         }
         return(filasAfectadas);
     }   
@@ -103,7 +103,7 @@ public class PerfilBO {
         } 
         catch(Exception e){
             throw new Exception(e.getMessage() + 
-                    "["+this.getClass().getName()+"]");
+                    "\n["+this.getClass().getName()+"]");
         }
         return (dtmListaElementos);
     }
@@ -121,7 +121,7 @@ public class PerfilBO {
         } 
         catch(Exception e){
             throw new Exception(e.getMessage() + 
-                    "["+this.getClass().getName()+"]");
+                    "\n["+this.getClass().getName()+"]");
         }
         return (cmbListaElementos);
     }

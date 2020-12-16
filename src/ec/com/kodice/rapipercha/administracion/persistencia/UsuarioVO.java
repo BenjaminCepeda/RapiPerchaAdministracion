@@ -59,6 +59,9 @@ public class UsuarioVO {
         this.perfil = perfilVO;
     }
 
+    public UsuarioVO() {
+    }
+
     public UsuarioVO(int codigo, String nombre, String clave, String estado) {
         this.codigo = codigo;
         this.nombre = nombre;

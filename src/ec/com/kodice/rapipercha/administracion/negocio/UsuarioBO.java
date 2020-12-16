@@ -32,7 +32,7 @@ public class UsuarioBO {
             codigoGenerado = usuarioDAO.crear(usuarioVO);
         } catch (Exception e) {
             throw new Exception(e.getMessage()
-                    + "[" + this.getClass().getName() + "]");
+                    + "\n[" + this.getClass().getName() + "]");
         }
         return (codigoGenerado);
     }
@@ -43,7 +43,7 @@ public class UsuarioBO {
             usuarioVO = usuarioDAO.buscar(codigo);
         } catch (Exception e) {
             throw new Exception(e.getMessage()
-                    + "[" + this.getClass().getName() + "]");
+                    + "\n[" + this.getClass().getName() + "]");
         }
         return (usuarioVO);
     }
@@ -55,7 +55,7 @@ public class UsuarioBO {
 
         } catch (Exception e) {
             throw new Exception(e.getMessage()
-                    + "[" + this.getClass().getName() + "]");
+                    + "\n[" + this.getClass().getName() + "]");
         }
         return (listaElementos);
     }
@@ -66,7 +66,7 @@ public class UsuarioBO {
             filasAfectadas = usuarioDAO.actualizar(usuarioVO);
         } catch (Exception e) {
             throw new Exception(e.getMessage()
-                    + "[" + this.getClass().getName() + "]");
+                    + "\n[" + this.getClass().getName() + "]");
         }
         return (filasAfectadas);
     }
@@ -77,7 +77,7 @@ public class UsuarioBO {
             filasAfectadas = usuarioDAO.eliminar(codigo);
         } catch (Exception e) {
             throw new Exception(e.getMessage()
-                    + "[" + this.getClass().getName() + "]");
+                    + "\n[" + this.getClass().getName() + "]");
         }
         return (filasAfectadas);
     }
@@ -97,7 +97,7 @@ public class UsuarioBO {
             }
         } catch (Exception e) {
             throw new Exception(e.getMessage()
-                    + "[" + this.getClass().getName() + "]");
+                    + "\n[" + this.getClass().getName() + "]");
         }
         return (dtmListaElementos);
     }
@@ -109,4 +109,14 @@ public class UsuarioBO {
         return (dcmListaElementos);
     }
 
+    public int validaCredenciales(String nombreUsuario, String clave) throws Exception {
+        int codigoUsuario;
+        try {
+            codigoUsuario = usuarioDAO.validaCredenciales(nombreUsuario, clave);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage()
+                    + "\n[" + this.getClass().getName() + "]");
+        }
+        return(codigoUsuario);
+    }
 }

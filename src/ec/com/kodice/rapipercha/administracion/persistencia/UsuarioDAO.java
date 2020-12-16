@@ -52,14 +52,14 @@ public class UsuarioDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        
@@ -82,15 +82,15 @@ public class UsuarioDAO {
                 
         try {
             conexion = CustomConnection.getConnection();
-            String consulta = "SELECT per_codigo, usu_codigo, "
+            String consulta = "SELECT usu_codigo, per_codigo,  "
                     + "usu_nombre, usu_clave, usu_estado "
-                    + "FROM TUSUSARIOS  WHERE usu_codigo = ?";
+                    + "FROM TUSUARIOS  WHERE usu_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, codigo);
             ResultSet resultado = sentencia.executeQuery();
-            while (resultado.next()) {
+            if (resultado.next()) {
                 usuarioVO = new UsuarioVO(
-                        resultado.getInt("codigo"),
+                        resultado.getInt("usu_codigo"),
                         resultado.getString("usu_nombre"),
                         resultado.getString("usu_clave"),
                         resultado.getString("usu_estado"));
@@ -100,14 +100,14 @@ public class UsuarioDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        
@@ -129,7 +129,7 @@ public class UsuarioDAO {
         PerfilDAO perfilDAO= new PerfilDAO();
         try {
             conexion = CustomConnection.getConnection();
-            String consulta = "SELECT usu_codigo, per_codigo, usu_nombre "
+            String consulta = "SELECT usu_codigo, per_codigo, usu_nombre, "
                     + "usu_clave, usu_estado "
                     + "FROM TUSUARIOS ";
             sentencia = conexion.prepareStatement(consulta);
@@ -151,14 +151,14 @@ public class UsuarioDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        
@@ -181,26 +181,26 @@ public class UsuarioDAO {
             conexion = CustomConnection.getConnection();
             String consulta = "UPDATE TUSUARIOS "
                     + "SET  per_codigo = ? "
-                    + "usu_clave = ? "
+                    + "usu_nombre = ? "
                     + "usu_estado = ? "
                     + "WHERE usu_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, usuarioVO.getPerfil().getCodigo());
-            sentencia.setString(2, usuarioVO.getClave());
+            sentencia.setString(2, usuarioVO.getNombre());
             sentencia.setString(3, usuarioVO.getEstado());
             sentencia.setInt(4, usuarioVO.getCodigo());
             filasAfectadas = sentencia.executeUpdate();
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        
@@ -229,14 +229,14 @@ public class UsuarioDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        
@@ -268,18 +268,58 @@ public class UsuarioDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        
         return (filasAfectadas);
+    }
+
+    /**
+     * Permite actualizar la clave de un Usuario
+     *
+     * @param usuarioVO POJO con los atributos de Usuario
+     * @return Numero de registros actualizados
+     * @throws Exception
+     */
+    public int validaCredenciales(String nombreUsuario, String clave) throws Exception {
+        Connection conexion = null;
+        PreparedStatement sentencia = null;
+        conexion = null;
+        int codigoUsuario = 0;
+        try {
+            conexion = CustomConnection.getConnection();
+            String consulta = "SELECT usu_codigo  FROM TUSUARIOS " 
+                    + "WHERE usu_nombre = ? AND usu_clave = ?";
+            sentencia = conexion.prepareStatement(consulta);
+            sentencia.setString(1, nombreUsuario);
+            sentencia.setString(2, clave);
+            ResultSet resultado = sentencia.executeQuery();
+            while (resultado.next()) {
+                codigoUsuario = resultado.getInt("usu_codigo");
+            }
+        } 
+        catch(Exception e){
+            CustomConnection.close();
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
+            try {
+                CustomConnection.close();
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "\n[" 
+                        + this.getClass().getName() + "] ");
+            }
+        }        
+        return (codigoUsuario);
     }
 
 }

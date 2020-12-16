@@ -48,15 +48,15 @@ public class PerfilDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
-                    + "]\n");
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
+                    + "]");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
-                        + this.getClass().getName() + "]\n");
+                throw new Exception(e.getMessage() + "\n[" 
+                        + this.getClass().getName() + "]");
             }
         }        
         return (codigoGenerado);
@@ -86,15 +86,15 @@ public class PerfilDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
-                    + "]\n");
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
+                    + "]");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
-                        + this.getClass().getName() + "]\n");
+                throw new Exception(e.getMessage() + "\n[" 
+                        + this.getClass().getName() + "]");
             }
         }        
         return perfilVO;
@@ -126,15 +126,15 @@ public class PerfilDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
-                    + "]\n");
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
+                    + "]");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
-                        + this.getClass().getName() + "]\n");
+                throw new Exception(e.getMessage() + "\n[" 
+                        + this.getClass().getName() + "]");
             }
         }        
         return (listaElementos);
@@ -163,15 +163,15 @@ public class PerfilDAO {
         }
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
-                    + "]\n");
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
+                    + "]");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
-                        + this.getClass().getName() + "]\n");
+                throw new Exception(e.getMessage() + "\n[" 
+                        + this.getClass().getName() + "]");
             }
         }        
         return (filasAfectadas);
@@ -197,15 +197,15 @@ public class PerfilDAO {
         }
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
-                    + "]\n");
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
+                    + "]");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
-                        + this.getClass().getName() + "]\n");
+                throw new Exception(e.getMessage() + "\n[" 
+                        + this.getClass().getName() + "]");
             }
         }        
         return (filasAfectadas);

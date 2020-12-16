@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @version v1.0
  * @date 2020/12/06
  */
-public class FrmUsuarioNuevo extends javax.swing.JFrame {
+public class FrmUsuarioNuevo extends javax.swing.JDialog {
     private int codigoActual = 0;
 
     public void setCodigoActual(int codigoActual) {
@@ -102,7 +102,8 @@ public class FrmUsuarioNuevo extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         lblLogoKodice = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setAlignmentY(0.0F);
@@ -116,7 +117,8 @@ public class FrmUsuarioNuevo extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("ADMINISTRACIÓN DE PERFILES");
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("USUARIO");
 
         javax.swing.GroupLayout pnlCabeceraLayout = new javax.swing.GroupLayout(pnlCabecera);
         pnlCabecera.setLayout(pnlCabeceraLayout);
@@ -124,7 +126,7 @@ public class FrmUsuarioNuevo extends javax.swing.JFrame {
             pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCabeceraLayout.createSequentialGroup()
                 .addComponent(lblLogoRapipercha)
-                .addGap(129, 129, 129)
+                .addGap(202, 202, 202)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -137,7 +139,7 @@ public class FrmUsuarioNuevo extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabeceraLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTitulo)
-                .addGap(31, 31, 31))
+                .addGap(30, 30, 30))
         );
 
         pnlDetalle.setAlignmentX(0.0F);
@@ -149,8 +151,6 @@ public class FrmUsuarioNuevo extends javax.swing.JFrame {
 
         lblPerfil.setText("Perfil:");
 
-        cmbPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Coordinador", "Toma Fisica", " " }));
-
         lblNombre.setText("Nombre:");
 
         lblNombre1.setText("Clave:");
@@ -158,8 +158,6 @@ public class FrmUsuarioNuevo extends javax.swing.JFrame {
         lblConfirmacion.setText("Confirme clave:");
 
         lblEstado.setText("Estado:");
-
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Desactivado" }));
 
         javax.swing.GroupLayout pnlDetalleLayout = new javax.swing.GroupLayout(pnlDetalle);
         pnlDetalle.setLayout(pnlDetalleLayout);

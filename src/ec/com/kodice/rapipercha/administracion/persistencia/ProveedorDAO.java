@@ -57,14 +57,14 @@ public class ProveedorDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        
@@ -105,14 +105,14 @@ public class ProveedorDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        
@@ -157,14 +157,14 @@ public class ProveedorDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        
@@ -206,14 +206,14 @@ public class ProveedorDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        
@@ -242,14 +242,14 @@ public class ProveedorDAO {
         } 
         catch(Exception e){
             CustomConnection.close();
-            throw new Exception(e.getMessage() + "[" + this.getClass().getName()
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
                 CustomConnection.close();
             } catch (SQLException e){
-                throw new Exception(e.getMessage() + "[" 
+                throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
             }
         }        

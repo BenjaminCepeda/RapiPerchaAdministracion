@@ -59,6 +59,9 @@ public class ProveedorVO extends EmpresaVO {
         this.correoContacto = correoContacto;
     }
 
+    public ProveedorVO() {
+    }
+
     public ProveedorVO(int codigo, String ruc, String razonSocial,
             String nombreComercial, String nombreContacto, 
             String apellidoContacto, String telefonoContacto, 

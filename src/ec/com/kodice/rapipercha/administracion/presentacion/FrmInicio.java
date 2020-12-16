@@ -5,6 +5,8 @@
  */
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
+import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
+
 /**
  * Esta clase contiene atributos y métodos del formulario de Inicio
  * @author Benjamin Cepeda
@@ -12,12 +14,18 @@ package ec.com.kodice.rapipercha.administracion.presentacion;
  * @date 2020/12/03 
  */
 public class FrmInicio extends javax.swing.JFrame {
+    private UsuarioVO usuarioLogueado;
 
     /**
      * Creates new form FrmInicio
      */
     public FrmInicio() {
         initComponents();
+        this.setLocationRelativeTo(null);        
+    }
+    public FrmInicio(UsuarioVO usuarioLogueado) {
+        initComponents();
+        this.usuarioLogueado = usuarioLogueado;
         this.setLocationRelativeTo(null);        
     }
 
