@@ -56,13 +56,13 @@ public class ProveedorDAO {
             }
         } 
         catch(Exception e){
-            CustomConnection.close();
+            conexion.close();
             throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
-                CustomConnection.close();
+                conexion.close();
             } catch (SQLException e){
                 throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
@@ -104,13 +104,13 @@ public class ProveedorDAO {
             }
         } 
         catch(Exception e){
-            CustomConnection.close();
+            conexion.close();
             throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
-                CustomConnection.close();
+                conexion.close();
             } catch (SQLException e){
                 throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
@@ -156,13 +156,13 @@ public class ProveedorDAO {
             }
         } 
         catch(Exception e){
-            CustomConnection.close();
+            conexion.close();
             throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
-                CustomConnection.close();
+                conexion.close();
             } catch (SQLException e){
                 throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
@@ -205,13 +205,13 @@ public class ProveedorDAO {
             filasAfectadas = sentencia.executeUpdate();
         } 
         catch(Exception e){
-            CustomConnection.close();
+            conexion.close();
             throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
-                CustomConnection.close();
+                conexion.close();
             } catch (SQLException e){
                 throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");
@@ -241,13 +241,13 @@ public class ProveedorDAO {
             conexion.close();
         } 
         catch(Exception e){
-            CustomConnection.close();
+            conexion.close();
             throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "] ");
         }    
         finally{
             try {
-                CustomConnection.close();
+                conexion.close();
             } catch (SQLException e){
                 throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "] ");

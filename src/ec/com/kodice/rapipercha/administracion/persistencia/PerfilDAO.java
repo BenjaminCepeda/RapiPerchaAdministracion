@@ -47,13 +47,13 @@ public class PerfilDAO {
             }            
         } 
         catch(Exception e){
-            CustomConnection.close();
+            conexion.close();
             throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "]");
         }    
         finally{
             try {
-                CustomConnection.close();
+                conexion.close();
             } catch (SQLException e){
                 throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "]");
@@ -85,13 +85,13 @@ public class PerfilDAO {
             }      
         } 
         catch(Exception e){
-            CustomConnection.close();
+            conexion.close();
             throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "]");
         }    
         finally{
             try {
-                CustomConnection.close();
+                conexion.close();
             } catch (SQLException e){
                 throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "]");
@@ -125,13 +125,13 @@ public class PerfilDAO {
             }      
         } 
         catch(Exception e){
-            CustomConnection.close();
+            conexion.close();
             throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "]");
         }    
         finally{
             try {
-                CustomConnection.close();
+                conexion.close();
             } catch (SQLException e){
                 throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "]");
@@ -162,13 +162,13 @@ public class PerfilDAO {
             filasAfectadas = sentencia.executeUpdate();
         }
         catch(Exception e){
-            CustomConnection.close();
+            conexion.close();
             throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "]");
         }    
         finally{
             try {
-                CustomConnection.close();
+                conexion.close();
             } catch (SQLException e){
                 throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "]");
@@ -196,13 +196,13 @@ public class PerfilDAO {
             filasAfectadas = sentencia.executeUpdate();
         }
         catch(Exception e){
-            CustomConnection.close();
+            conexion.close();
             throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
                     + "]");
         }    
         finally{
             try {
-                CustomConnection.close();
+                conexion.close();
             } catch (SQLException e){
                 throw new Exception(e.getMessage() + "\n[" 
                         + this.getClass().getName() + "]");

@@ -92,7 +92,7 @@ public class UsuarioBO {
             if (listaElementos != null) {
                 for (UsuarioVO usuarioVO : listaElementos) {
                     dtmListaElementos.addRow(new Object[]{usuarioVO.getCodigo(),
-                        usuarioVO.getNombre()});
+                      usuarioVO.getNombre(),usuarioVO.getPerfil().getNombre()});
                 }
             }
         } catch (Exception e) {

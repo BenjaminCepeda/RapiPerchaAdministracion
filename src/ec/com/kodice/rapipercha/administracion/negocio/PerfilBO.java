@@ -9,6 +9,7 @@ package ec.com.kodice.rapipercha.administracion.negocio;
 import ec.com.kodice.rapipercha.administracion.persistencia.PerfilDAO;
 import ec.com.kodice.rapipercha.administracion.persistencia.PerfilVO;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -108,15 +109,16 @@ public class PerfilBO {
         return (dtmListaElementos);
     }
     public DefaultComboBoxModel generaModeloDatosCombo() throws Exception {
-        DefaultComboBoxModel cmbListaElementos = new DefaultComboBoxModel();
+        DefaultComboBoxModel  cmbListaElementos = null;
         List<PerfilVO> listaElementos = null;
         try {
             listaElementos = perfilDAO.buscarTodos();
             if (listaElementos != null) {
-                //cmbListaElementos = new DefaultComboBoxModel(listaElementos.toArray());
-                for (PerfilVO perfilVO : listaElementos) {
+                cmbListaElementos = new DefaultComboBoxModel(listaElementos.toArray());
+              /**  for (PerfilVO perfilVO : listaElementos) {
                     cmbListaElementos.addElement(perfilVO);
                 }
+              */
             }
         } 
         catch(Exception e){

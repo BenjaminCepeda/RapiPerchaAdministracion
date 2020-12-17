@@ -41,4 +41,8 @@ public class PerfilVO {
     public PerfilVO() {
     }
     
+    @Override
+    public String toString(){
+        return(this.nombre);
+    }
 }
