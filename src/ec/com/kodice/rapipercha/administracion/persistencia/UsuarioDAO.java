@@ -37,7 +37,7 @@ public class UsuarioDAO {
             conexion = CustomConnection.getConnection();
             String consulta = "INSERT INTO TUSUARIOS "
                     + "(per_codigo, usu_nombre, usu_clave, usu_estado)"
-                    + "VALUES (?,?,?)";
+                    + "VALUES (?,?,?,?)";
             sentencia = conexion.prepareStatement(consulta,
                     PreparedStatement.RETURN_GENERATED_KEYS);            
             sentencia.setInt(1, usuarioVO.getPerfil().getCodigo());
@@ -180,15 +180,17 @@ public class UsuarioDAO {
         try {
             conexion = CustomConnection.getConnection();
             String consulta = "UPDATE TUSUARIOS "
-                    + "SET  per_codigo = ? "
-                    + "usu_nombre = ? "
+                    + "SET  per_codigo = ?, "
+                    + "usu_nombre = ?, "
+                    + "usu_clave = ?, "
                     + "usu_estado = ? "
                     + "WHERE usu_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, usuarioVO.getPerfil().getCodigo());
             sentencia.setString(2, usuarioVO.getNombre());
-            sentencia.setString(3, usuarioVO.getEstado());
-            sentencia.setInt(4, usuarioVO.getCodigo());
+            sentencia.setString(3, usuarioVO.getClave());
+            sentencia.setString(4, usuarioVO.getEstado());
+            sentencia.setInt(5, usuarioVO.getCodigo());
             filasAfectadas = sentencia.executeUpdate();
         } 
         catch(Exception e){

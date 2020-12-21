@@ -59,12 +59,12 @@ public class FrmUsuarioNuevo extends javax.swing.JDialog {
         }
         finally{
             if (usuarioVO != null){
-                txtCodigo.setText(String.valueOf(usuarioVO.getCodigo()));
-                for (int i = 0; i<cmbPerfil.getItemCount(); i++){
-                    nombrePerfil = cmbPerfil.getItemAt(i);
-                    if ( nombrePerfil == usuarioVO.getNombre())
-                        cmbPerfil.setSelectedIndex(i);                    
-                }
+                        cmbPerfil.getModel().setSelectedItem(usuarioVO.getPerfil());
+                        txtCodigo.setText(String.valueOf(usuarioVO.getCodigo()));
+                        txtNombre.setText(usuarioVO.getNombre());
+                        pswClave.setText(usuarioVO.getClave());
+                        pswConfirmacion.setText(usuarioVO.getClave());
+                        cmbEstado.setSelectedItem(usuarioVO.getEstado());
             }
             usuarioVO = null;
             usuarioBO = null;
@@ -103,6 +103,7 @@ public class FrmUsuarioNuevo extends javax.swing.JDialog {
         lblLogoKodice = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModal(true);
         setResizable(false);
 
         jPanel1.setAlignmentX(0.0F);
@@ -112,6 +113,9 @@ public class FrmUsuarioNuevo extends javax.swing.JDialog {
         pnlCabecera.setBackground(new java.awt.Color(64, 124, 202));
         pnlCabecera.setAlignmentX(0.0F);
         pnlCabecera.setAlignmentY(0.0F);
+        pnlCabecera.setMaximumSize(new java.awt.Dimension(32767, 90));
+        pnlCabecera.setMinimumSize(new java.awt.Dimension(0, 90));
+        pnlCabecera.setPreferredSize(new java.awt.Dimension(518, 90));
 
         lblLogoRapipercha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/kodice/rapipercha/imagenes/logo-rapipercha.png"))); // NOI18N
 
@@ -135,7 +139,7 @@ public class FrmUsuarioNuevo extends javax.swing.JDialog {
             .addGroup(pnlCabeceraLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLogoRapipercha)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabeceraLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTitulo)
@@ -145,26 +149,45 @@ public class FrmUsuarioNuevo extends javax.swing.JDialog {
         pnlDetalle.setAlignmentX(0.0F);
         pnlDetalle.setAlignmentY(0.0F);
 
+        lblCodigo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblCodigo.setText("Código:");
 
-        txtCodigo.setEditable(false);
+        txtCodigo.setEnabled(false);
+        txtCodigo.setMinimumSize(new java.awt.Dimension(7, 22));
+        txtCodigo.setPreferredSize(new java.awt.Dimension(7, 22));
 
+        lblPerfil.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPerfil.setText("Perfil:");
 
+        cmbPerfil.setMinimumSize(new java.awt.Dimension(30, 25));
+
+        lblNombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblNombre.setText("Nombre:");
 
+        txtNombre.setMinimumSize(new java.awt.Dimension(7, 22));
+        txtNombre.setPreferredSize(new java.awt.Dimension(7, 22));
+
+        lblNombre1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblNombre1.setText("Clave:");
 
+        pswClave.setMinimumSize(new java.awt.Dimension(7, 22));
+        pswClave.setPreferredSize(new java.awt.Dimension(7, 22));
+
+        lblConfirmacion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblConfirmacion.setText("Confirme clave:");
 
+        pswConfirmacion.setMinimumSize(new java.awt.Dimension(7, 22));
+        pswConfirmacion.setPreferredSize(new java.awt.Dimension(7, 22));
+
+        lblEstado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblEstado.setText("Estado:");
 
         javax.swing.GroupLayout pnlDetalleLayout = new javax.swing.GroupLayout(pnlDetalle);
         pnlDetalle.setLayout(pnlDetalleLayout);
         pnlDetalleLayout.setHorizontalGroup(
             pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDetalleLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDetalleLayout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlDetalleLayout.createSequentialGroup()
                         .addComponent(lblPerfil)
@@ -182,44 +205,48 @@ public class FrmUsuarioNuevo extends javax.swing.JDialog {
                             .addComponent(lblConfirmacion))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre)
-                            .addComponent(pswClave)
-                            .addComponent(pswConfirmacion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pswClave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pswConfirmacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
         pnlDetalleLayout.setVerticalGroup(
             pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDetalleLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addContainerGap()
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblCodigo)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblPerfil)
-                    .addComponent(cmbPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblNombre)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblNombre1)
-                    .addComponent(pswClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pswClave, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pswConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblConfirmacion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEstado)
-                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblConfirmacion)
+                    .addComponent(pswConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlDetalleLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(lblEstado))
+                    .addGroup(pnlDetalleLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbEstado)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        pnlPie.setMaximumSize(new java.awt.Dimension(32767, 250));
-        pnlPie.setPreferredSize(new java.awt.Dimension(780, 150));
+        pnlPie.setMaximumSize(new java.awt.Dimension(32767, 90));
+        pnlPie.setMinimumSize(new java.awt.Dimension(0, 90));
+        pnlPie.setPreferredSize(new java.awt.Dimension(780, 90));
 
         btnGrabar.setBackground(new java.awt.Color(64, 124, 202));
         btnGrabar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -256,12 +283,13 @@ public class FrmUsuarioNuevo extends javax.swing.JDialog {
         pnlPieLayout.setHorizontalGroup(
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPieLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblLogoKodice)
-                .addGap(42, 42, 42))
+                .addGap(48, 48, 48))
         );
         pnlPieLayout.setVerticalGroup(
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,14 +300,14 @@ public class FrmUsuarioNuevo extends javax.swing.JDialog {
                     .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSalir)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addComponent(pnlDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlPie, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
@@ -290,7 +318,8 @@ public class FrmUsuarioNuevo extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlPie, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlPie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -302,8 +331,8 @@ public class FrmUsuarioNuevo extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         pack();

@@ -90,6 +90,7 @@ public class FrmPerfilNuevo extends javax.swing.JDialog {
         lblLogoKodice = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModal(true);
         setResizable(false);
 
         jPanel1.setAlignmentX(0.0F);
@@ -133,13 +134,18 @@ public class FrmPerfilNuevo extends javax.swing.JDialog {
         pnlDetalle.setAlignmentX(0.0F);
         pnlDetalle.setAlignmentY(0.0F);
 
+        lblCodigo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblCodigo.setText("Código:");
 
         txtCodigo.setEditable(false);
+        txtCodigo.setMinimumSize(new java.awt.Dimension(7, 22));
+        txtCodigo.setPreferredSize(new java.awt.Dimension(7, 22));
 
+        lblNombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblNombre.setText("Nombre:");
 
         cmbNombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Coordinador", "Toma Fisica", " " }));
+        cmbNombre.setPreferredSize(new java.awt.Dimension(92, 22));
 
         javax.swing.GroupLayout pnlDetalleLayout = new javax.swing.GroupLayout(pnlDetalle);
         pnlDetalle.setLayout(pnlDetalleLayout);
@@ -156,7 +162,7 @@ public class FrmPerfilNuevo extends javax.swing.JDialog {
                         .addComponent(lblCodigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         pnlDetalleLayout.setVerticalGroup(
             pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,6 +216,7 @@ public class FrmPerfilNuevo extends javax.swing.JDialog {
         pnlPieLayout.setHorizontalGroup(
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPieLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(btnGrabar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)

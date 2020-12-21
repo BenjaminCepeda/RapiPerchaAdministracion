@@ -65,6 +65,7 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
         lblLogoKodice = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(0, 600));
         setResizable(false);
 
         pnlContenedor.setAlignmentX(0.0F);
@@ -107,6 +108,7 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
 
         pnlDetalle.setAlignmentX(0.0F);
         pnlDetalle.setAlignmentY(0.0F);
+        pnlDetalle.setPreferredSize(new java.awt.Dimension(805, 435));
 
         tblPerfiles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,9 +138,7 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
         );
         pnlDetalleLayout.setVerticalGroup(
             pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDetalleLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
         );
 
         pnlPie.setMaximumSize(new java.awt.Dimension(32767, 90));
@@ -205,6 +205,7 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
         pnlPieLayout.setHorizontalGroup(
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPieLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,8 +219,8 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
         );
         pnlPieLayout.setVerticalGroup(
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPieLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPieLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLogoKodice, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -227,7 +228,7 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
                         .addComponent(btnEditar)
                         .addComponent(btnBorrar)
                         .addComponent(btnSalir)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlContenedorLayout = new javax.swing.GroupLayout(pnlContenedor);
@@ -244,8 +245,9 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
                 .addComponent(pnlCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlPie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlPie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -256,7 +258,7 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+            .addComponent(pnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
         );
 
         pack();
@@ -265,6 +267,8 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         FrmUsuarioNuevo frmUsuarioNuevo = new FrmUsuarioNuevo();
         frmUsuarioNuevo.setVisible(true);
+        cargarModelo();
+
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
@@ -277,18 +281,17 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
         String codigoElegido = "";
-        int column = 0;
-        int row = tblPerfiles.getSelectedRow();
-        if (row >= 0) {
+        int fila = tblPerfiles.getSelectedRow();
+        if (fila >= 0) {
             codigoElegido = tblPerfiles.getModel().getValueAt(
-                    row, column).toString();
+                    fila, 0).toString();
         }
         if (!(codigoElegido.isEmpty() | codigoElegido.isBlank())) {
             FrmUsuarioNuevo frmUsuarioNuevo = new FrmUsuarioNuevo(
                     Integer.valueOf(codigoElegido));
             frmUsuarioNuevo.setVisible(true);
+            cargarModelo();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
