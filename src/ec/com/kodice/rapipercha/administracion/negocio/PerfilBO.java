@@ -127,5 +127,12 @@ public class PerfilBO {
         }
         return (cmbListaElementos);
     }
-
+ 
+    public DefaultComboBoxModel generaModeloDatosTipoPerfil() {
+        DefaultComboBoxModel dcmListaElementos = new DefaultComboBoxModel();    
+        dcmListaElementos.addElement("Administrador");
+        dcmListaElementos.addElement("Coordinador");
+        dcmListaElementos.addElement("Toma fisica");
+        return (dcmListaElementos);
+    }
 }

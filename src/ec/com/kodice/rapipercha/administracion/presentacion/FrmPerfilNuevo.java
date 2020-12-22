@@ -26,12 +26,18 @@ public class FrmPerfilNuevo extends javax.swing.JDialog {
     }
 
     /** Creates new form FrmPerfilAdministracion */
-    public FrmPerfilNuevo(int codigoActual) {
+    public FrmPerfilNuevo(int codigoActual, boolean soloLectura) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.codigoActual = codigoActual;
+        if (soloLectura)
+            seteaControles(soloLectura);        
         cargarDatos();
     }
+    
+    private void seteaControles(boolean soloLectura){
+        btnGrabar.setEnabled(!soloLectura);
+    }    
     
     public FrmPerfilNuevo() {
         initComponents();
@@ -40,12 +46,11 @@ public class FrmPerfilNuevo extends javax.swing.JDialog {
     
     private void cargarDatos(){
         PerfilVO perfilVO = null;
-        PerfilBO perfilBO = null;
+        PerfilBO perfilBO = new PerfilBO();
         String nombrePerfil;
-        Object item;
+        cmbNombre.setModel(perfilBO.generaModeloDatosTipoPerfil());        
         try {
             if (codigoActual!=0){
-                perfilBO = new PerfilBO();
                 perfilVO=perfilBO.buscar(codigoActual);
             }
         }
@@ -55,11 +60,7 @@ public class FrmPerfilNuevo extends javax.swing.JDialog {
         finally{
             if (perfilVO != null){
                 txtCodigo.setText(String.valueOf(perfilVO.getCodigo()));
-                for (int i = 0; i<cmbNombre.getItemCount(); i++){
-                    nombrePerfil = cmbNombre.getItemAt(i);
-                    if ( nombrePerfil == perfilVO.getNombre())
-                        cmbNombre.setSelectedIndex(i);                    
-                }
+                cmbNombre.setSelectedItem(perfilVO.getNombre());                                    
             }
             perfilVO = null;
             perfilBO = null;

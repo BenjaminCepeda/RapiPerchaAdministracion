@@ -8,6 +8,8 @@ package ec.com.kodice.rapipercha.administracion.presentacion;
 
 import ec.com.kodice.rapipercha.administracion.negocio.PerfilBO;
 import ec.com.kodice.rapipercha.util.UtilPresentacion;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -33,7 +35,10 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
             UtilPresentacion.mostrarMensajeError(this, e.getMessage());
         }
         finally{
-            perfilBO = null;            
+            perfilBO = null;   
+            btnConsultar.setEnabled(false);
+            btnEditar.setEnabled(false);
+            btnBorrar.setEnabled(false);            
         }
             
     }
@@ -55,6 +60,7 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
         tblPerfiles = new javax.swing.JTable();
         pnlPie = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -124,6 +130,11 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
         });
         tblPerfiles.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblPerfiles.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblPerfiles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblPerfilesMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPerfiles);
 
         pnlPie.setMaximumSize(new java.awt.Dimension(32767, 90));
@@ -138,9 +149,31 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
         btnNuevo.setToolTipText("");
         btnNuevo.setAlignmentY(0.0F);
         btnNuevo.setBorderPainted(false);
+        btnNuevo.setIconTextGap(1);
+        btnNuevo.setMaximumSize(new java.awt.Dimension(118, 55));
+        btnNuevo.setMinimumSize(new java.awt.Dimension(118, 55));
+        btnNuevo.setPreferredSize(new java.awt.Dimension(118, 55));
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
+            }
+        });
+
+        btnConsultar.setBackground(new java.awt.Color(64, 124, 202));
+        btnConsultar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnConsultar.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/kodice/rapipercha/imagenes/Zoom.png"))); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.setToolTipText("");
+        btnConsultar.setAlignmentY(0.0F);
+        btnConsultar.setBorderPainted(false);
+        btnConsultar.setIconTextGap(1);
+        btnConsultar.setMaximumSize(new java.awt.Dimension(135, 55));
+        btnConsultar.setMinimumSize(new java.awt.Dimension(135, 55));
+        btnConsultar.setPreferredSize(new java.awt.Dimension(135, 55));
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
             }
         });
 
@@ -151,6 +184,10 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
         btnEditar.setText("Editar");
         btnEditar.setAlignmentY(0.0F);
         btnEditar.setBorderPainted(false);
+        btnEditar.setIconTextGap(1);
+        btnEditar.setMaximumSize(new java.awt.Dimension(118, 55));
+        btnEditar.setMinimumSize(new java.awt.Dimension(118, 55));
+        btnEditar.setPreferredSize(new java.awt.Dimension(118, 55));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -164,6 +201,10 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
         btnBorrar.setText("Borrar");
         btnBorrar.setAlignmentY(0.0F);
         btnBorrar.setBorderPainted(false);
+        btnBorrar.setIconTextGap(1);
+        btnBorrar.setMaximumSize(new java.awt.Dimension(118, 55));
+        btnBorrar.setMinimumSize(new java.awt.Dimension(118, 55));
+        btnBorrar.setPreferredSize(new java.awt.Dimension(118, 55));
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);
@@ -177,6 +218,10 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
         btnSalir.setText("Salir");
         btnSalir.setAlignmentY(0.0F);
         btnSalir.setBorderPainted(false);
+        btnSalir.setIconTextGap(1);
+        btnSalir.setMaximumSize(new java.awt.Dimension(118, 55));
+        btnSalir.setMinimumSize(new java.awt.Dimension(118, 55));
+        btnSalir.setPreferredSize(new java.awt.Dimension(118, 55));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -184,6 +229,9 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
         });
 
         lblLogoKodice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/kodice/rapipercha/imagenes/logo-kodice.png"))); // NOI18N
+        lblLogoKodice.setMaximumSize(new java.awt.Dimension(125, 55));
+        lblLogoKodice.setMinimumSize(new java.awt.Dimension(125, 55));
+        lblLogoKodice.setPreferredSize(new java.awt.Dimension(125, 55));
 
         javax.swing.GroupLayout pnlPieLayout = new javax.swing.GroupLayout(pnlPie);
         pnlPie.setLayout(pnlPieLayout);
@@ -191,29 +239,32 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPieLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                .addComponent(lblLogoKodice)
-                .addGap(42, 42, 42))
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblLogoKodice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         pnlPieLayout.setVerticalGroup(
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPieLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLogoKodice, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLogoKodice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNuevo)
-                        .addComponent(btnEditar)
-                        .addComponent(btnBorrar)
-                        .addComponent(btnSalir)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlDetalleLayout = new javax.swing.GroupLayout(pnlDetalle);
@@ -265,11 +316,37 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         FrmPerfilNuevo frmPerfilNuevo = new FrmPerfilNuevo();
         frmPerfilNuevo.setVisible(true);  
-
+        cargarModelo();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
+        String codigoElegido = "";
+        String descripcionElegido = "";
+        boolean confirmacionBorrado = false;
+        int fila = tblPerfiles.getSelectedRow();
+        if (fila >= 0) {
+            codigoElegido = tblPerfiles.getModel().getValueAt(
+                    fila, 0).toString();
+            descripcionElegido = tblPerfiles.getModel().getValueAt(
+                    fila, 1).toString();
+        }
+        if (!(codigoElegido.isEmpty() | codigoElegido.isBlank())) {
+            confirmacionBorrado = (UtilPresentacion.mostrarMensajeConfirmacion(
+                    this, "Desea eliminar el registro:\n" + codigoElegido + " - "
+                    + descripcionElegido) == JOptionPane.YES_OPTION);
+            if (confirmacionBorrado) {
+                PerfilBO perfilBO = new PerfilBO();
+                try {
+                    perfilBO.eliminar(Integer.valueOf(codigoElegido));
+                } catch (Exception e) {
+                    UtilPresentacion.mostrarMensajeError(this, e.getMessage());
+                } finally {
+                    perfilBO = null;
+                }
+            }
+            cargarModelo();
+        }
+
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -278,17 +355,54 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-        String codigoElegido ="";
-        int column = 0;
-        int row = tblPerfiles.getSelectedRow();
-        if (row >= 0)
-            codigoElegido = tblPerfiles.getModel().getValueAt(row, column).toString();
-        if (!(codigoElegido.isEmpty() | codigoElegido.isBlank())){
-            FrmPerfilNuevo frmPerfilNuevo = new FrmPerfilNuevo(Integer.valueOf(codigoElegido));
-            frmPerfilNuevo.setVisible(true);        
-        }        
+        String codigoElegido = "";
+        int fila = tblPerfiles.getSelectedRow();
+        if (fila >= 0) {
+            codigoElegido = tblPerfiles.getModel().getValueAt(
+                    fila, 0).toString();
+        }
+        if (!(codigoElegido.isEmpty() | codigoElegido.isBlank())) {
+            FrmPerfilNuevo frmPerfilNuevo = new FrmPerfilNuevo(
+                    Integer.valueOf(codigoElegido), false);
+            frmPerfilNuevo.setVisible(true);
+            cargarModelo();
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        String codigoElegido = "";
+        int fila = tblPerfiles.getSelectedRow();
+        if (fila >= 0) {
+            codigoElegido = tblPerfiles.getModel().getValueAt(
+                fila, 0).toString();
+        }
+        if (!(codigoElegido.isEmpty() | codigoElegido.isBlank())) {
+            FrmPerfilNuevo frmPerfilNuevo = new FrmPerfilNuevo(
+                Integer.valueOf(codigoElegido), true);
+            frmPerfilNuevo.setVisible(true);
+            cargarModelo();
+        }
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void tblPerfilesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPerfilesMousePressed
+        JTable source = (JTable) evt.getSource();
+        String codigoElegido = "";
+        int fila = source.rowAtPoint(evt.getPoint());
+        //int column = source.columnAtPoint(evt.getPoint());
+        if (fila >= 0) {
+            codigoElegido = tblPerfiles.getModel().getValueAt(
+                    fila, 0).toString();
+            btnConsultar.setEnabled(true);
+            btnEditar.setEnabled(true);
+            btnBorrar.setEnabled(true);
+            if (evt.getClickCount() == 2 && !codigoElegido.isEmpty() && !codigoElegido.isBlank()) {
+                FrmPerfilNuevo frmPerfilNuevo = new FrmPerfilNuevo(
+                        Integer.valueOf(codigoElegido),true);
+                frmPerfilNuevo.setVisible(true);
+                cargarModelo();
+            }
+        }
+    }//GEN-LAST:event_tblPerfilesMousePressed
 
     /**
      * @param args the command line arguments
@@ -327,6 +441,7 @@ public class FrmPerfilAdministracion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;

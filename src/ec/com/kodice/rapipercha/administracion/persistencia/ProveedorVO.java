@@ -67,14 +67,17 @@ public class ProveedorVO extends EmpresaVO {
             String apellidoContacto, String telefonoContacto, 
             String correoContacto) {
         this.codigo = codigo;
-        setRuc(ruc);
-        setRazonSocial(razonSocial);
-        setNombreComercial(nombreComercial);
+        this.ruc = ruc;
+        this.razonSocial = razonSocial;
+        this.nombreComercial = nombreComercial;
         this.nombreContacto = nombreContacto;
         this.apellidoContacto = apellidoContacto;
-        this.telefonoContacto = correoContacto;
+        this.telefonoContacto = telefonoContacto;
         this.correoContacto = correoContacto;
     }
     
-
+    @Override
+    public String toString(){
+        return(this.razonSocial + " (" + nombreComercial+")");
+    }    
 }

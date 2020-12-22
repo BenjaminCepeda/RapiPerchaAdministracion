@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Esta clase contiene metodos de acceso a datos de una Empresa
+ * Esta clase contiene metodos de acceso a datos de un Provedor
  *
  * @author Benjamin Cepeda
  * @version v1.0
@@ -39,7 +39,7 @@ public class ProveedorDAO {
                     + "(prov_ruc, prov_razon_social, prov_nombre_comercial, "
                     + "prov_nombre_contacto, prov_apellido_contacto, "
                     + "prov_telefono_contacto, prov_correo_contacto) "
-                    + "VALUES (?, ?, ?, ?, ?,?, ?)";
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
             sentencia = conexion.prepareStatement(consulta,
                     PreparedStatement.RETURN_GENERATED_KEYS);
             sentencia.setString(1, proveedorVO.getRuc());
@@ -174,7 +174,7 @@ public class ProveedorDAO {
     /**
      * Permite actualizar un registro de Proveedor
      *
-     * @param perfilVO POJO con los atributos de Proveedor
+     * @param proveedorVO POJO con los atributos de Proveedor
      * @return Numero de registros actualizados
      * @throws Exception
      */
@@ -185,13 +185,13 @@ public class ProveedorDAO {
         try {
             conexion = CustomConnection.getConnection();
             String consulta = "UPDATE TPROVEEDORES "
-                    + "SET prov_ruc = ? "
-                    + "SET prov_razon_social = ? "
-                    + "SET prov_nombre_comercial = ? "
-                    + "SET prov_nombre_contacto = ? "
-                    + "SET prov_apellido_contacto = ? "
-                    + "SET prov_telefono_contacto = ? "
-                    + "SET prov_correo_contacto = ? "
+                    + "SET prov_ruc = ?, "
+                    + "prov_razon_social = ?, "
+                    + "prov_nombre_comercial = ?, "
+                    + "prov_nombre_contacto = ?, "
+                    + "prov_apellido_contacto = ?, "
+                    + "prov_telefono_contacto = ?, "
+                    + "prov_correo_contacto = ? "
                     + "WHERE prov_codigo = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setString(1, proveedorVO.getRuc());
@@ -221,9 +221,9 @@ public class ProveedorDAO {
     }
 
     /**
-     * Permte eliminar una instaancia de Perfil
+     * Permte eliminar una instancia de Proveedor
      *
-     * @param codigo Codigo del Perfil a eliminar
+     * @param codigo Codigo del Proveedor a eliminar
      * @return Numero de registros eliminados
      * @throws Exception
      */

@@ -13,9 +13,9 @@ package ec.com.kodice.rapipercha.administracion.persistencia;
  * @date 2020/12/03 
  */
 public class EmpresaVO {
-    private String ruc;
-    private String razonSocial;
-    private String nombreComercial;
+    protected String ruc;
+    protected String razonSocial;
+    protected String nombreComercial;
 
     public String getRuc() {
         return ruc;
