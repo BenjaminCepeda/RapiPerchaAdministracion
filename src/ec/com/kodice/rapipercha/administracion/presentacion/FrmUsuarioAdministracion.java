@@ -7,6 +7,8 @@ package ec.com.kodice.rapipercha.administracion.presentacion;
 
 import ec.com.kodice.rapipercha.administracion.negocio.UsuarioBO;
 import ec.com.kodice.rapipercha.util.UtilPresentacion;
+import java.time.Clock;
+import javax.swing.JTable;
 
 /**
  *
@@ -37,6 +39,8 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
             UtilPresentacion.mostrarMensajeError(this, e.getMessage());
         } finally {
             perfilBO = null;
+            btnEditar.setEnabled(false);
+            btnBorrar.setEnabled(false);
         }
 
     }
@@ -126,8 +130,14 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblPerfiles.setRowSelectionAllowed(true);
         tblPerfiles.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblPerfiles.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblPerfiles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblPerfilesMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPerfiles);
 
         javax.swing.GroupLayout pnlDetalleLayout = new javax.swing.GroupLayout(pnlDetalle);
@@ -294,6 +304,25 @@ public class FrmUsuarioAdministracion extends javax.swing.JFrame {
             cargarModelo();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void tblPerfilesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPerfilesMousePressed
+        JTable source = (JTable)evt.getSource();
+        String codigoElegido = "";
+        int fila = source.rowAtPoint( evt.getPoint() );
+        int column = source.columnAtPoint( evt.getPoint() );
+        if (fila >= 0) {
+            codigoElegido = tblPerfiles.getModel().getValueAt(
+                    fila, 0).toString();
+            btnEditar.setEnabled(true);
+            btnBorrar.setEnabled(true);            
+            if (evt.getClickCount()==2 && !codigoElegido.isEmpty() && !codigoElegido.isBlank() ) {
+                FrmUsuarioNuevo frmUsuarioNuevo = new FrmUsuarioNuevo(
+                    Integer.valueOf(codigoElegido));
+                frmUsuarioNuevo.setVisible(true);
+                cargarModelo();
+            }
+        }
+    }//GEN-LAST:event_tblPerfilesMousePressed
 
     /**
      * @param args the command line arguments

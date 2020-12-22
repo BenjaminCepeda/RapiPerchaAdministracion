@@ -26,6 +26,8 @@ public class FrmInicio extends javax.swing.JFrame {
     public FrmInicio(UsuarioVO usuarioLogueado) {
         initComponents();
         this.usuarioLogueado = usuarioLogueado;
+        lblNombreUsuario.setText(usuarioLogueado.getNombre());
+        lblPerfil.setText(usuarioLogueado.getPerfil().getNombre());
         this.setLocationRelativeTo(null);        
     }
 
@@ -40,6 +42,15 @@ public class FrmInicio extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        pnlPie = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lblNombreUsuario = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lblPerfil = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        lblPerfil1 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         barPrincipal = new javax.swing.JMenuBar();
         mnuAdministracion = new javax.swing.JMenu();
         mniPerfiles = new javax.swing.JMenuItem();
@@ -48,7 +59,10 @@ public class FrmInicio extends javax.swing.JFrame {
         mnuTomaFisica = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(900, 700));
+        setMinimumSize(new java.awt.Dimension(900, 700));
         setPreferredSize(new java.awt.Dimension(900, 700));
+        setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/com/kodice/rapipercha/imagenes/logo-rapipercha.png"))); // NOI18N
 
@@ -57,16 +71,79 @@ public class FrmInicio extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(387, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(379, 379, 379))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(421, 421, 421))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(315, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(271, 271, 271))
+                .addContainerGap(257, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(191, 191, 191))
+        );
+
+        pnlPie.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlPie.setMaximumSize(new java.awt.Dimension(32767, 25));
+        pnlPie.setMinimumSize(new java.awt.Dimension(100, 25));
+        pnlPie.setPreferredSize(new java.awt.Dimension(924, 25));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("Usuario:");
+        jLabel2.setAlignmentY(0.0F);
+
+        lblNombreUsuario.setText("Usuario Logueado");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Perfil:");
+        jLabel3.setAlignmentY(0.0F);
+
+        lblPerfil.setText("Perfil del Usuario");
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("Powered by:");
+        jLabel4.setAlignmentY(0.0F);
+
+        lblPerfil1.setText("Kodice S.A. - Universidad Tecnológica Israel @2020");
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout pnlPieLayout = new javax.swing.GroupLayout(pnlPie);
+        pnlPie.setLayout(pnlPieLayout);
+        pnlPieLayout.setHorizontalGroup(
+            pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPieLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPerfil1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
+        pnlPieLayout.setVerticalGroup(
+            pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(lblNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1)
+                .addComponent(lblPerfil1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator2))
         );
 
         mnuAdministracion.setText("Administración");
@@ -107,14 +184,17 @@ public class FrmInicio extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlPie, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlPie, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -174,11 +254,20 @@ public class FrmInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barPrincipal;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblNombreUsuario;
+    private javax.swing.JLabel lblPerfil;
+    private javax.swing.JLabel lblPerfil1;
     private javax.swing.JMenuItem mniPerfiles;
     private javax.swing.JMenuItem mniProveedores;
     private javax.swing.JMenuItem mniUsuarios;
     private javax.swing.JMenu mnuAdministracion;
     private javax.swing.JMenu mnuTomaFisica;
+    private javax.swing.JPanel pnlPie;
     // End of variables declaration//GEN-END:variables
 }
