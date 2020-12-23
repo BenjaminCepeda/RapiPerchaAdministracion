@@ -43,14 +43,16 @@ public class FrmInicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         pnlPie = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblTituloNombreUsuario = new javax.swing.JLabel();
         lblNombreUsuario = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lblPerfil = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        lblPerfil1 = new javax.swing.JLabel();
+        lblTituloPerfil = new javax.swing.JLabel();
+        lblPerfil = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        lblPoweredBy = new javax.swing.JLabel();
+        lblKodice = new javax.swing.JLabel();
+        lblTituloEmpresa = new javax.swing.JLabel();
+        lblEmpresa = new javax.swing.JLabel();
         barPrincipal = new javax.swing.JMenuBar();
         mnuAdministracion = new javax.swing.JMenu();
         mniPerfiles = new javax.swing.JMenuItem();
@@ -88,27 +90,33 @@ public class FrmInicio extends javax.swing.JFrame {
         pnlPie.setMinimumSize(new java.awt.Dimension(100, 25));
         pnlPie.setPreferredSize(new java.awt.Dimension(924, 25));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("Usuario:");
-        jLabel2.setAlignmentY(0.0F);
+        lblTituloNombreUsuario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTituloNombreUsuario.setText("Usuario:");
+        lblTituloNombreUsuario.setAlignmentY(0.0F);
 
         lblNombreUsuario.setText("Usuario Logueado");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setText("Perfil:");
-        jLabel3.setAlignmentY(0.0F);
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        lblTituloPerfil.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTituloPerfil.setText("Perfil:");
+        lblTituloPerfil.setAlignmentY(0.0F);
 
         lblPerfil.setText("Perfil del Usuario");
 
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setText("Powered by:");
-        jLabel4.setAlignmentY(0.0F);
-
-        lblPerfil1.setText("Kodice S.A. - Universidad Tecnológica Israel @2020");
-
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        lblPoweredBy.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblPoweredBy.setText("Powered by:");
+        lblPoweredBy.setAlignmentY(0.0F);
+
+        lblKodice.setText("Kodice S.A. - UIsrael @2020");
+
+        lblTituloEmpresa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTituloEmpresa.setText("Empresa:");
+        lblTituloEmpresa.setAlignmentY(0.0F);
+
+        lblEmpresa.setText("Nombre Empresa");
 
         javax.swing.GroupLayout pnlPieLayout = new javax.swing.GroupLayout(pnlPie);
         pnlPie.setLayout(pnlPieLayout);
@@ -116,34 +124,41 @@ public class FrmInicio extends javax.swing.JFrame {
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPieLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(lblTituloNombreUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(lblTituloPerfil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(lblTituloEmpresa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPerfil1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addComponent(lblEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
+                .addComponent(lblPoweredBy)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblKodice)
+                .addContainerGap())
         );
         pnlPieLayout.setVerticalGroup(
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(lblNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTituloNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTituloPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1)
-                .addComponent(lblPerfil1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblKodice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblPoweredBy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTituloEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jSeparator2)
         );
 
         mnuAdministracion.setText("Administración");
@@ -254,15 +269,17 @@ public class FrmInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barPrincipal;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblEmpresa;
+    private javax.swing.JLabel lblKodice;
     private javax.swing.JLabel lblNombreUsuario;
     private javax.swing.JLabel lblPerfil;
-    private javax.swing.JLabel lblPerfil1;
+    private javax.swing.JLabel lblPoweredBy;
+    private javax.swing.JLabel lblTituloEmpresa;
+    private javax.swing.JLabel lblTituloNombreUsuario;
+    private javax.swing.JLabel lblTituloPerfil;
     private javax.swing.JMenuItem mniPerfiles;
     private javax.swing.JMenuItem mniProveedores;
     private javax.swing.JMenuItem mniUsuarios;

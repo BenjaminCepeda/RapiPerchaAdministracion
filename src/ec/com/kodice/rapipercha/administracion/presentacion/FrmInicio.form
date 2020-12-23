@@ -151,42 +151,50 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTituloNombreUsuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblNombreUsuario" min="-2" pref="115" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator1" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="lblNombreUsuario" min="-2" pref="109" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSeparator1" min="-2" pref="15" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblPerfil" min="-2" pref="107" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="lblTituloPerfil" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lblPerfil" min="-2" pref="93" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="14" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTituloEmpresa" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblPerfil1" min="-2" pref="340" max="-2" attributes="0"/>
-                  <EmptySpace pref="194" max="32767" attributes="0"/>
+                  <Component id="lblEmpresa" min="-2" pref="93" max="-2" attributes="0"/>
+                  <EmptySpace pref="261" max="32767" attributes="0"/>
+                  <Component id="lblPoweredBy" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblKodice" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblNombreUsuario" alignment="3" max="32767" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
+                  <Component id="lblTituloNombreUsuario" alignment="3" max="32767" attributes="0"/>
                   <Component id="lblPerfil" alignment="3" max="32767" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" max="32767" attributes="0"/>
+                  <Component id="lblTituloPerfil" alignment="3" max="32767" attributes="0"/>
                   <Component id="jSeparator1" max="32767" attributes="0"/>
-                  <Component id="lblPerfil1" alignment="3" max="32767" attributes="0"/>
-                  <Component id="jLabel4" alignment="3" max="32767" attributes="0"/>
+                  <Component id="lblKodice" alignment="3" max="32767" attributes="0"/>
+                  <Component id="lblPoweredBy" alignment="3" max="32767" attributes="0"/>
+                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Component id="lblEmpresa" alignment="3" max="32767" attributes="0"/>
+                      <Component id="lblTituloEmpresa" alignment="3" max="32767" attributes="0"/>
+                  </Group>
               </Group>
+              <Component id="jSeparator2" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="lblTituloNombreUsuario">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="11" style="1"/>
@@ -200,7 +208,12 @@
             <Property name="text" type="java.lang.String" value="Usuario Logueado"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JSeparator" name="jSeparator1">
+          <Properties>
+            <Property name="orientation" type="int" value="1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTituloPerfil">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="11" style="1"/>
@@ -214,12 +227,12 @@
             <Property name="text" type="java.lang.String" value="Perfil del Usuario"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator1">
+        <Component class="javax.swing.JSeparator" name="jSeparator2">
           <Properties>
             <Property name="orientation" type="int" value="1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="lblPoweredBy">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="11" style="1"/>
@@ -228,14 +241,23 @@
             <Property name="alignmentY" type="float" value="0.0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblPerfil1">
+        <Component class="javax.swing.JLabel" name="lblKodice">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Kodice S.A. - Universidad Tecnol&#xf3;gica Israel @2020"/>
+            <Property name="text" type="java.lang.String" value="Kodice S.A. - UIsrael @2020"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator2">
+        <Component class="javax.swing.JLabel" name="lblTituloEmpresa">
           <Properties>
-            <Property name="orientation" type="int" value="1"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Empresa:"/>
+            <Property name="alignmentY" type="float" value="0.0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblEmpresa">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nombre Empresa"/>
           </Properties>
         </Component>
       </SubComponents>

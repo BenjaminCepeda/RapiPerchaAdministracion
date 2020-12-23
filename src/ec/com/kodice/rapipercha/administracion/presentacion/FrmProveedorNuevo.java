@@ -399,7 +399,7 @@ public class FrmProveedorNuevo extends javax.swing.JDialog {
         if (camposValidos){
                 proveedorBO = new ProveedorBO();
                 proveedorVO = new ProveedorVO(codigoActual, txtRuc.getText(),
-                    txtNombreComercial.getText(), txtRazonSocial.getText(),
+                    txtRazonSocial.getText(), txtNombreComercial.getText(), 
                     txtNombreContacto.getText(), txtApellidoContacto.getText(),
                     txtTelefonoContacto.getText(), txtCorreoContacto.getText()
                 );                            

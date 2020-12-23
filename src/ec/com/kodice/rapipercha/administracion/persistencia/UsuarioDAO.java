@@ -298,11 +298,15 @@ public class UsuarioDAO {
         int codigoUsuario = 0;
         try {
             conexion = CustomConnection.getConnection();
-            String consulta = "SELECT usu_codigo  FROM TUSUARIOS " 
-                    + "WHERE usu_nombre = ? AND usu_clave = ?";
+            String consulta = "SELECT U.usu_codigo  FROM TUSUARIOS U "                     
+                    + "LEFT OUTER JOIN TEMPLEADOS E ON "
+                    + "U.usu_codigo = E.usu_codigo "
+                    + "WHERE (IFNULL(E.emp_correo,'')= ? or usu_nombre = ?) "
+                    + "AND usu_clave = ?";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setString(1, nombreUsuario);
-            sentencia.setString(2, clave);
+            sentencia.setString(2, nombreUsuario);
+            sentencia.setString(3, clave);
             ResultSet resultado = sentencia.executeQuery();
             while (resultado.next()) {
                 codigoUsuario = resultado.getInt("usu_codigo");
