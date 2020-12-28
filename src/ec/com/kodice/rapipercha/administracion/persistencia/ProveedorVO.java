@@ -14,11 +14,8 @@ package ec.com.kodice.rapipercha.administracion.persistencia;
  */
 public class ProveedorVO extends EmpresaVO {
     private int codigo;
-    private String nombreContacto;
-    private String apellidoContacto;
-    private String telefonoContacto;
-    private String correoContacto;
-
+    private PersonaVO contacto = new PersonaVO();
+    
     public int getCodigo() {
         return codigo;
     }
@@ -27,37 +24,14 @@ public class ProveedorVO extends EmpresaVO {
         this.codigo = codigo;
     }
 
-    public String getNombreContacto() {
-        return nombreContacto;
+    public PersonaVO getContacto() {
+        return contacto;
     }
 
-    public void setNombreContacto(String nombreContacto) {
-        this.nombreContacto = nombreContacto;
+    public void setContacto(PersonaVO contacto) {
+        this.contacto = contacto;
     }
 
-    public String getApellidoContacto() {
-        return apellidoContacto;
-    }
-
-    public void setApellidoContacto(String apellidoContacto) {
-        this.apellidoContacto = apellidoContacto;
-    }
-
-    public String getTelefonoContacto() {
-        return telefonoContacto;
-    }
-
-    public void setTelefonoContacto(String telefonoContacto) {
-        this.telefonoContacto = telefonoContacto;
-    }
-
-    public String getCorreoContacto() {
-        return correoContacto;
-    }
-
-    public void setCorreoContacto(String correoContacto) {
-        this.correoContacto = correoContacto;
-    }
 
     public ProveedorVO() {
     }
@@ -70,10 +44,10 @@ public class ProveedorVO extends EmpresaVO {
         this.ruc = ruc;
         this.razonSocial = razonSocial;
         this.nombreComercial = nombreComercial;
-        this.nombreContacto = nombreContacto;
-        this.apellidoContacto = apellidoContacto;
-        this.telefonoContacto = telefonoContacto;
-        this.correoContacto = correoContacto;
+        this.contacto.setNombres( nombreContacto);
+        this.contacto.setApellidos( apellidoContacto);
+        this.contacto.setTelefono(telefonoContacto);
+        this.contacto.setCorreo(correoContacto);
     }
     
     @Override

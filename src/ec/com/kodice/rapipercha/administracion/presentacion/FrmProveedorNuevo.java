@@ -5,13 +5,8 @@
  */
 
 package ec.com.kodice.rapipercha.administracion.presentacion;
-
-import ec.com.kodice.rapipercha.administracion.negocio.PerfilBO;
 import ec.com.kodice.rapipercha.administracion.negocio.ProveedorBO;
-import ec.com.kodice.rapipercha.administracion.negocio.UsuarioBO;
-import ec.com.kodice.rapipercha.administracion.persistencia.PerfilVO;
 import ec.com.kodice.rapipercha.administracion.persistencia.ProveedorVO;
-import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
 import ec.com.kodice.rapipercha.util.UtilPresentacion;
 import javax.swing.JOptionPane;
 
@@ -51,7 +46,6 @@ public class FrmProveedorNuevo extends javax.swing.JDialog {
     private void cargarDatos(){
         ProveedorVO proveedorVO = null;
         ProveedorBO proveedorBO = new ProveedorBO();
-        String nombrePerfil;
         try {
             if (codigoActual!=0){
                 proveedorVO=proveedorBO.buscar(codigoActual);
@@ -66,10 +60,10 @@ public class FrmProveedorNuevo extends javax.swing.JDialog {
                         txtRuc.setText(proveedorVO.getRuc());
                         txtRazonSocial.setText(proveedorVO.getRazonSocial());
                         txtNombreComercial.setText(proveedorVO.getNombreComercial());
-                        txtNombreContacto.setText(proveedorVO.getNombreContacto());
-                        txtApellidoContacto.setText(proveedorVO.getApellidoContacto());
-                        txtTelefonoContacto.setText(proveedorVO.getTelefonoContacto());
-                        txtCorreoContacto.setText(proveedorVO.getCorreoContacto());
+                        txtNombreContacto.setText(proveedorVO.getContacto().getNombres());
+                        txtApellidoContacto.setText(proveedorVO.getContacto().getApellidos());
+                        txtTelefonoContacto.setText(proveedorVO.getContacto().getTelefono());
+                        txtCorreoContacto.setText(proveedorVO.getContacto().getCorreo());
             }
             proveedorVO = null;
             proveedorBO = null;
