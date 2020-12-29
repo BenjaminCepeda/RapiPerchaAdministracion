@@ -15,7 +15,7 @@ package ec.com.kodice.rapipercha.administracion.persistencia;
 public class EmpleadoVO extends PersonaVO{
     private int codigo;
     private int proveedorCodigo;
-    private UsuarioVO usuario;
+    private UsuarioVO usuario = new UsuarioVO();
 
     public int getCodigo() {
         return codigo;

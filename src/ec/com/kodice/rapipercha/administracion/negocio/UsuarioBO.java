@@ -110,13 +110,13 @@ public class UsuarioBO {
     }
 
     public int validaCredenciales(String nombreUsuario, String clave) throws Exception {
-        int codigoUsuario;
+        int codigoEmpleado;
         try {
-            codigoUsuario = usuarioDAO.validaCredenciales(nombreUsuario, clave);
+            codigoEmpleado = usuarioDAO.validaCredenciales(nombreUsuario, clave);
         } catch (Exception e) {
             throw new Exception(e.getMessage()
                     + "\n[" + this.getClass().getName() + "]");
         }
-        return(codigoUsuario);
+        return(codigoEmpleado);
     }
 }

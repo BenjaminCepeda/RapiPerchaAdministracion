@@ -295,11 +295,11 @@ public class UsuarioDAO {
         Connection conexion = null;
         PreparedStatement sentencia = null;
         conexion = null;
-        int codigoUsuario = 0;
+        int codigoEmpleado = 0;
         try {
             conexion = CustomConnection.getConnection();
-            String consulta = "SELECT U.usu_codigo  FROM TUSUARIOS U "                     
-                    + "LEFT OUTER JOIN TEMPLEADOS E ON "
+            String consulta = "SELECT E.emp_codigo  FROM TUSUARIOS U "                     
+                    + "INNER JOIN TEMPLEADOS E ON "
                     + "U.usu_codigo = E.usu_codigo "
                     + "WHERE (IFNULL(E.emp_correo,'')= ? or usu_nombre = ?) "
                     + "AND usu_clave = ?";
@@ -309,7 +309,7 @@ public class UsuarioDAO {
             sentencia.setString(3, clave);
             ResultSet resultado = sentencia.executeQuery();
             while (resultado.next()) {
-                codigoUsuario = resultado.getInt("usu_codigo");
+                codigoEmpleado = resultado.getInt("emp_codigo");
             }
         } 
         catch(Exception e){
@@ -325,7 +325,7 @@ public class UsuarioDAO {
                         + this.getClass().getName() + "] ");
             }
         }        
-        return (codigoUsuario);
+        return (codigoEmpleado);
     }
 
 }

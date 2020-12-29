@@ -5,7 +5,10 @@
  */
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
-import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
+import ec.com.kodice.rapipercha.administracion.negocio.ProveedorBO;
+import ec.com.kodice.rapipercha.administracion.persistencia.EmpleadoVO;
+import ec.com.kodice.rapipercha.administracion.persistencia.ProveedorVO;
+import ec.com.kodice.rapipercha.util.UtilPresentacion;
 
 /**
  * Esta clase contiene atributos y métodos del formulario de Inicio
@@ -14,7 +17,8 @@ import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
  * @date 2020/12/03 
  */
 public class FrmInicio extends javax.swing.JFrame {
-    private UsuarioVO usuarioLogueado;
+    private EmpleadoVO empleadoLogueado= null;
+    private ProveedorVO proveedorEmpleadoLogueado = null;
 
     /**
      * Creates new form FrmInicio
@@ -23,12 +27,23 @@ public class FrmInicio extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);        
     }
-    public FrmInicio(UsuarioVO usuarioLogueado) {
+    public FrmInicio(EmpleadoVO empleadoLogueado) {
         initComponents();
-        this.usuarioLogueado = usuarioLogueado;
-        lblNombreUsuario.setText(usuarioLogueado.getNombre());
-        lblPerfil.setText(usuarioLogueado.getPerfil().getNombre());
-        this.setLocationRelativeTo(null);        
+        ProveedorBO proveedorBO = new ProveedorBO();
+        this.empleadoLogueado = empleadoLogueado;
+        lblNombreUsuario.setText(empleadoLogueado.getUsuario().getNombre());
+        lblPerfil.setText(empleadoLogueado.getUsuario().getPerfil().getNombre());
+        try {
+            this.proveedorEmpleadoLogueado = proveedorBO.buscar(empleadoLogueado.getProveedorCodigo());
+        }
+        catch ( Exception e) {
+            UtilPresentacion.mostrarMensajeError(this, e.getMessage());
+        }
+        finally{      
+            proveedorBO = null;
+            lblEmpresa.setText(proveedorEmpleadoLogueado.getNombreComercial());
+            this.setLocationRelativeTo(null);        
+        }
     }
 
     /**
@@ -107,9 +122,11 @@ public class FrmInicio extends javax.swing.JFrame {
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         lblPoweredBy.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblPoweredBy.setForeground(new java.awt.Color(51, 51, 255));
         lblPoweredBy.setText("Powered by:");
         lblPoweredBy.setAlignmentY(0.0F);
 
+        lblKodice.setForeground(new java.awt.Color(0, 0, 255));
         lblKodice.setText("Kodice S.A. - UIsrael @2020");
 
         lblTituloEmpresa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -126,38 +143,39 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblTituloNombreUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTituloPerfil)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTituloEmpresa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
                 .addComponent(lblPoweredBy)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblKodice)
-                .addContainerGap())
+                .addGap(128, 128, 128))
         );
         pnlPieLayout.setVerticalGroup(
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(lblEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTituloEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(lblNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTituloNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTituloPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1)
-                .addComponent(lblKodice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblPoweredBy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTituloEmpresa)
+                    .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblKodice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblPoweredBy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jSeparator2)
         );
 

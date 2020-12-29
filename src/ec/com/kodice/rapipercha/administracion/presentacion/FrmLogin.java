@@ -5,8 +5,9 @@
  */
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
+import ec.com.kodice.rapipercha.administracion.negocio.EmpleadoBO;
 import ec.com.kodice.rapipercha.administracion.negocio.UsuarioBO;
-import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
+import ec.com.kodice.rapipercha.administracion.persistencia.EmpleadoVO;
 import ec.com.kodice.rapipercha.util.UtilPresentacion;
 
 /**
@@ -50,7 +51,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Usuario:");
+        jLabel1.setText("Usuario/Correo:");
 
         jLabel2.setText("Clave:");
 
@@ -59,7 +60,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
@@ -204,25 +205,26 @@ public class FrmLogin extends javax.swing.JFrame {
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         String usuarioIngresado;
         String claveIngresada;
-        int codigoUsuario=0;
-        UsuarioVO usuarioVO = null;
+        int codigoEmpleado=0;
+        EmpleadoVO empleadoVO = null;
         UsuarioBO usuarioBO = new UsuarioBO();
+        EmpleadoBO empleadoBO = new EmpleadoBO();
         usuarioIngresado = txtUsuario.getText();
         claveIngresada = new String(pwdClave.getPassword());
         if (!(usuarioIngresado.isEmpty() || usuarioIngresado.trim().equals("") ||
                 claveIngresada.isEmpty() || claveIngresada.trim().equals(""))){            
             try {
-                codigoUsuario = usuarioBO.validaCredenciales(usuarioIngresado,
+                codigoEmpleado = usuarioBO.validaCredenciales(usuarioIngresado,
                         claveIngresada);
-                if (codigoUsuario>0)
-                    usuarioVO = usuarioBO.buscar(codigoUsuario);
+                if (codigoEmpleado>0)
+                    empleadoVO = empleadoBO.buscar(codigoEmpleado);
             }
             catch ( Exception e) {
                  UtilPresentacion.mostrarMensajeError(this, e.getMessage());
              }
              finally{
-                if (codigoUsuario>0 && usuarioVO != null){
-                    FrmInicio frmInicio = new FrmInicio(usuarioVO);
+                if (codigoEmpleado>0 && empleadoVO != null){
+                    FrmInicio frmInicio = new FrmInicio(empleadoVO);
                     frmInicio.setVisible(true);
                     this.setVisible(false);
                     this.dispose();
@@ -235,8 +237,8 @@ public class FrmLogin extends javax.swing.JFrame {
             UtilPresentacion.mostrarMensajeValidacionIncorrecta(this, 
                     "Datos de usuario/clave inválidos.");
         }
-        usuarioVO = null;
-        usuarioBO = null;
+        empleadoVO = null;
+        empleadoBO = null;
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
