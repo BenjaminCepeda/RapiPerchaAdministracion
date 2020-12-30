@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,8 +7,10 @@
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
 import ec.com.kodice.rapipercha.administracion.negocio.EmpleadoBO;
+import ec.com.kodice.rapipercha.administracion.negocio.ProveedorBO;
 import ec.com.kodice.rapipercha.administracion.negocio.UsuarioBO;
 import ec.com.kodice.rapipercha.administracion.persistencia.EmpleadoVO;
+import ec.com.kodice.rapipercha.administracion.persistencia.ProveedorVO;
 import ec.com.kodice.rapipercha.util.UtilPresentacion;
 
 /**
@@ -17,13 +20,15 @@ import ec.com.kodice.rapipercha.util.UtilPresentacion;
  * @date 2020/12/03 
  */
 public class FrmLogin extends javax.swing.JFrame {
+        public ProveedorVO proveedorEmpleadoLogueado = null;
+        public EmpleadoVO empleadoLogueado = null;
 
     /**
      * Creates new form frmLogin
      */
     public FrmLogin() {
-        initComponents();
         this.setLocationRelativeTo(null);
+        initComponents();
     }
 
     /**
@@ -206,7 +211,7 @@ public class FrmLogin extends javax.swing.JFrame {
         String usuarioIngresado;
         String claveIngresada;
         int codigoEmpleado=0;
-        EmpleadoVO empleadoVO = null;
+        ProveedorBO proveedorBO = new ProveedorBO();
         UsuarioBO usuarioBO = new UsuarioBO();
         EmpleadoBO empleadoBO = new EmpleadoBO();
         usuarioIngresado = txtUsuario.getText();
@@ -216,15 +221,18 @@ public class FrmLogin extends javax.swing.JFrame {
             try {
                 codigoEmpleado = usuarioBO.validaCredenciales(usuarioIngresado,
                         claveIngresada);
-                if (codigoEmpleado>0)
-                    empleadoVO = empleadoBO.buscar(codigoEmpleado);
+                if (codigoEmpleado>0){
+                    empleadoLogueado = empleadoBO.buscar(codigoEmpleado);
+                    proveedorEmpleadoLogueado = proveedorBO.buscar(empleadoLogueado.getProveedorCodigo());                    
+                }
             }
             catch ( Exception e) {
                  UtilPresentacion.mostrarMensajeError(this, e.getMessage());
              }
              finally{
-                if (codigoEmpleado>0 && empleadoVO != null){
-                    FrmInicio frmInicio = new FrmInicio(empleadoVO);
+                if (codigoEmpleado>0 && empleadoLogueado != null){
+                    FrmInicio frmInicio = new FrmInicio(empleadoLogueado,
+                        proveedorEmpleadoLogueado);
                     frmInicio.setVisible(true);
                     this.setVisible(false);
                     this.dispose();
@@ -237,7 +245,7 @@ public class FrmLogin extends javax.swing.JFrame {
             UtilPresentacion.mostrarMensajeValidacionIncorrecta(this, 
                     "Datos de usuario/clave inválidos.");
         }
-        empleadoVO = null;
+        empleadoLogueado = null;
         empleadoBO = null;
     }//GEN-LAST:event_btnOkActionPerformed
 

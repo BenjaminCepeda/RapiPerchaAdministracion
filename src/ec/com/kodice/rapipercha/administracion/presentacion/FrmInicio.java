@@ -5,10 +5,8 @@
  */
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
-import ec.com.kodice.rapipercha.administracion.negocio.ProveedorBO;
 import ec.com.kodice.rapipercha.administracion.persistencia.EmpleadoVO;
 import ec.com.kodice.rapipercha.administracion.persistencia.ProveedorVO;
-import ec.com.kodice.rapipercha.util.UtilPresentacion;
 
 /**
  * Esta clase contiene atributos y métodos del formulario de Inicio
@@ -19,6 +17,7 @@ import ec.com.kodice.rapipercha.util.UtilPresentacion;
 public class FrmInicio extends javax.swing.JFrame {
     private EmpleadoVO empleadoLogueado= null;
     private ProveedorVO proveedorEmpleadoLogueado = null;
+    
 
     /**
      * Creates new form FrmInicio
@@ -27,23 +26,15 @@ public class FrmInicio extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);        
     }
-    public FrmInicio(EmpleadoVO empleadoLogueado) {
+    public FrmInicio(EmpleadoVO empleadoLogueado, 
+            ProveedorVO proveedorEmpleadoLoguedo) {
         initComponents();
-        ProveedorBO proveedorBO = new ProveedorBO();
         this.empleadoLogueado = empleadoLogueado;
+        this.proveedorEmpleadoLogueado = proveedorEmpleadoLoguedo;
         lblNombreUsuario.setText(empleadoLogueado.getUsuario().getNombre());
         lblPerfil.setText(empleadoLogueado.getUsuario().getPerfil().getNombre());
-        try {
-            this.proveedorEmpleadoLogueado = proveedorBO.buscar(empleadoLogueado.getProveedorCodigo());
-        }
-        catch ( Exception e) {
-            UtilPresentacion.mostrarMensajeError(this, e.getMessage());
-        }
-        finally{      
-            proveedorBO = null;
-            lblEmpresa.setText(proveedorEmpleadoLogueado.getNombreComercial());
-            this.setLocationRelativeTo(null);        
-        }
+        lblEmpresa.setText(proveedorEmpleadoLogueado.getNombreComercial());
+        this.setLocationRelativeTo(null);        
     }
 
     /**
@@ -165,17 +156,17 @@ public class FrmInicio extends javax.swing.JFrame {
         pnlPieLayout.setVerticalGroup(
             pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(lblKodice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblPoweredBy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(lblEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTituloEmpresa))
+            .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(lblNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTituloNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTituloPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1)
-                .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTituloEmpresa)
-                    .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblKodice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPoweredBy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jSeparator1))
             .addComponent(jSeparator2)
         );
 
