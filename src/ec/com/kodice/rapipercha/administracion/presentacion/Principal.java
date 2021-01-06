@@ -19,7 +19,6 @@ public class Principal {
      * @param args Argumento de linea de comando
      */
     public static void main(String[] args) {
-        //TODO 
         FrmLogin frmLogin = new FrmLogin();
         frmLogin.setVisible(true);
    }

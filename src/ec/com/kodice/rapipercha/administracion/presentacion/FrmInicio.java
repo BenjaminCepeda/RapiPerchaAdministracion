@@ -7,6 +7,7 @@ package ec.com.kodice.rapipercha.administracion.presentacion;
 
 import ec.com.kodice.rapipercha.administracion.persistencia.EmpleadoVO;
 import ec.com.kodice.rapipercha.administracion.persistencia.ProveedorVO;
+import javax.swing.JFrame;
 
 /**
  * Esta clase contiene atributos y métodos del formulario de Inicio
@@ -14,7 +15,7 @@ import ec.com.kodice.rapipercha.administracion.persistencia.ProveedorVO;
  * @version v1.0
  * @date 2020/12/03 
  */
-public class FrmInicio extends javax.swing.JFrame {
+public class FrmInicio extends JFrame {
     private EmpleadoVO empleadoLogueado= null;
     private ProveedorVO proveedorEmpleadoLogueado = null;
     
@@ -26,15 +27,16 @@ public class FrmInicio extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);        
     }
+    
     public FrmInicio(EmpleadoVO empleadoLogueado, 
             ProveedorVO proveedorEmpleadoLoguedo) {
         initComponents();
+        this.setLocationRelativeTo(null);        
         this.empleadoLogueado = empleadoLogueado;
         this.proveedorEmpleadoLogueado = proveedorEmpleadoLoguedo;
         lblNombreUsuario.setText(empleadoLogueado.getUsuario().getNombre());
         lblPerfil.setText(empleadoLogueado.getUsuario().getPerfil().getNombre());
         lblEmpresa.setText(proveedorEmpleadoLogueado.getNombreComercial());
-        this.setLocationRelativeTo(null);        
     }
 
     /**

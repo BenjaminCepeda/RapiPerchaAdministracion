@@ -22,10 +22,12 @@ import ec.com.kodice.rapipercha.util.UtilPresentacion;
 public class FrmLogin extends javax.swing.JFrame {
         public ProveedorVO proveedorEmpleadoLogueado = null;
         public EmpleadoVO empleadoLogueado = null;
-
+        private String nombreClaseInicio;
+        
     /**
      * Creates new form frmLogin
      */
+
     public FrmLogin() {
         this.setLocationRelativeTo(null);
         initComponents();
@@ -223,16 +225,16 @@ public class FrmLogin extends javax.swing.JFrame {
                         claveIngresada);
                 if (codigoEmpleado>0){
                     empleadoLogueado = empleadoBO.buscar(codigoEmpleado);
-                    proveedorEmpleadoLogueado = proveedorBO.buscar(empleadoLogueado.getProveedorCodigo());                    
+                    proveedorEmpleadoLogueado = 
+                      proveedorBO.buscar(empleadoLogueado.getProveedorCodigo());                    
                 }
             }
             catch ( Exception e) {
                  UtilPresentacion.mostrarMensajeError(this, e.getMessage());
              }
              finally{
-                if (codigoEmpleado>0 && empleadoLogueado != null){
-                    FrmInicio frmInicio = new FrmInicio(empleadoLogueado,
-                        proveedorEmpleadoLogueado);
+                if (codigoEmpleado>0 && empleadoLogueado != null ){
+                    FrmInicio frmInicio = new FrmInicio();
                     frmInicio.setVisible(true);
                     this.setVisible(false);
                     this.dispose();
