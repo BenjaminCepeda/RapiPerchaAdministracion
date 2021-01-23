@@ -90,10 +90,11 @@ public class EmpleadoBO {
             if (listaElementos != null) {
                 for (EmpleadoVO empleadoVO : listaElementos) {
                     dtmListaElementos.addRow(new Object[]{
-                        empleadoVO.getCodigo(), empleadoVO.getCedula(),
-                        empleadoVO.getApellidos(),empleadoVO.getNombres(),
-                        empleadoVO.getUsuario().getNombre(),
-                        empleadoVO.getUsuario().getPerfil().getNombre()});
+                        empleadoVO.getCodigo(),empleadoVO.getProveedorCodigo(),
+                        empleadoVO.getUsuario().getPerfil().getNombre(),
+                        empleadoVO.getCedula(),empleadoVO.getNombres(),
+                        empleadoVO.getApellidos(),empleadoVO.getTelefono(),
+                        empleadoVO.getCorreo()});
                 }
             }
         } catch (Exception e) {

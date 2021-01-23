@@ -34,7 +34,7 @@ public class FrmInicio extends JFrame {
         this.setLocationRelativeTo(null);        
         this.empleadoLogueado = empleadoLogueado;
         this.proveedorEmpleadoLogueado = proveedorEmpleadoLoguedo;
-        lblNombreUsuario.setText(empleadoLogueado.getUsuario().getNombre());
+        lblNombreUsuarario.setText(empleadoLogueado.getUsuario().getNombre());
         lblPerfil.setText(empleadoLogueado.getUsuario().getPerfil().getNombre());
         lblEmpresa.setText(proveedorEmpleadoLogueado.getNombreComercial());
     }
@@ -52,7 +52,7 @@ public class FrmInicio extends JFrame {
         jLabel1 = new javax.swing.JLabel();
         pnlPie = new javax.swing.JPanel();
         lblTituloNombreUsuario = new javax.swing.JLabel();
-        lblNombreUsuario = new javax.swing.JLabel();
+        lblNombreUsuarario = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblTituloPerfil = new javax.swing.JLabel();
         lblPerfil = new javax.swing.JLabel();
@@ -66,6 +66,7 @@ public class FrmInicio extends JFrame {
         mniPerfiles = new javax.swing.JMenuItem();
         mniProveedores = new javax.swing.JMenuItem();
         mniUsuarios = new javax.swing.JMenuItem();
+        mniEmpleador = new javax.swing.JMenuItem();
         mnuTomaFisica = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,7 +103,7 @@ public class FrmInicio extends JFrame {
         lblTituloNombreUsuario.setText("Usuario:");
         lblTituloNombreUsuario.setAlignmentY(0.0F);
 
-        lblNombreUsuario.setText("Usuario Logueado");
+        lblNombreUsuarario.setText("Usuario Logueado");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -136,7 +137,7 @@ public class FrmInicio extends JFrame {
                 .addContainerGap()
                 .addComponent(lblTituloNombreUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNombreUsuarario, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -164,7 +165,7 @@ public class FrmInicio extends JFrame {
                 .addComponent(lblEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTituloEmpresa))
             .addGroup(pnlPieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(lblNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblNombreUsuarario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTituloNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTituloPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,6 +199,15 @@ public class FrmInicio extends JFrame {
         });
         mnuAdministracion.add(mniUsuarios);
 
+        mniEmpleador.setText("Empleado");
+        mniEmpleador.setToolTipText("");
+        mniEmpleador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniEmpleadorActionPerformed(evt);
+            }
+        });
+        mnuAdministracion.add(mniEmpleador);
+
         barPrincipal.add(mnuAdministracion);
 
         mnuTomaFisica.setText("Toma física");
@@ -227,7 +237,9 @@ public class FrmInicio extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniProveedoresActionPerformed
-        // TODO add your handling code here:
+        FrmProveedorAdministracion frmProveedorAdministracion = new FrmProveedorAdministracion();
+        frmProveedorAdministracion.setVisible(true);
+        
     }//GEN-LAST:event_mniProveedoresActionPerformed
 
     private void mniPerfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPerfilesActionPerformed
@@ -241,6 +253,11 @@ public class FrmInicio extends JFrame {
         frmUsuarioAdministracion.setVisible(true);
             
     }//GEN-LAST:event_mniUsuariosActionPerformed
+
+    private void mniEmpleadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEmpleadorActionPerformed
+        FrmEmpleadoAdministracion frmEmpleadoAdministracion = new FrmEmpleadoAdministracion();
+        frmEmpleadoAdministracion.setVisible(true);
+    }//GEN-LAST:event_mniEmpleadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,12 +302,13 @@ public class FrmInicio extends JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblEmpresa;
     private javax.swing.JLabel lblKodice;
-    private javax.swing.JLabel lblNombreUsuario;
+    private javax.swing.JLabel lblNombreUsuarario;
     private javax.swing.JLabel lblPerfil;
     private javax.swing.JLabel lblPoweredBy;
     private javax.swing.JLabel lblTituloEmpresa;
     private javax.swing.JLabel lblTituloNombreUsuario;
     private javax.swing.JLabel lblTituloPerfil;
+    private javax.swing.JMenuItem mniEmpleador;
     private javax.swing.JMenuItem mniPerfiles;
     private javax.swing.JMenuItem mniProveedores;
     private javax.swing.JMenuItem mniUsuarios;

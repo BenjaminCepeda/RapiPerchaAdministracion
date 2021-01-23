@@ -33,6 +33,15 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniUsuariosActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mniEmpleador">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Empleado"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniEmpleadorActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnuTomaFisica">
@@ -153,7 +162,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblTituloNombreUsuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblNombreUsuario" min="-2" pref="101" max="-2" attributes="0"/>
+                  <Component id="lblNombreUsuarario" min="-2" pref="101" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="9" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -185,7 +194,7 @@
                   <Component id="lblTituloEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblNombreUsuario" alignment="3" max="32767" attributes="0"/>
+                  <Component id="lblNombreUsuarario" alignment="3" max="32767" attributes="0"/>
                   <Component id="lblTituloNombreUsuario" alignment="3" max="32767" attributes="0"/>
                   <Component id="lblPerfil" alignment="3" max="32767" attributes="0"/>
                   <Component id="lblTituloPerfil" alignment="3" max="32767" attributes="0"/>
@@ -205,7 +214,7 @@
             <Property name="alignmentY" type="float" value="0.0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblNombreUsuario">
+        <Component class="javax.swing.JLabel" name="lblNombreUsuarario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Usuario Logueado"/>
           </Properties>

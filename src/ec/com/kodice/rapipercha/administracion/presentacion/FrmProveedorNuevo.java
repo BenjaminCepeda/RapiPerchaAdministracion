@@ -135,7 +135,7 @@ public class FrmProveedorNuevo extends javax.swing.JDialog {
                 .addComponent(lblLogoRapipercha)
                 .addGap(202, 202, 202)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 282, Short.MAX_VALUE))
         );
         pnlCabeceraLayout.setVerticalGroup(
             pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,6 +164,11 @@ public class FrmProveedorNuevo extends javax.swing.JDialog {
 
         txtRuc.setMinimumSize(new java.awt.Dimension(7, 22));
         txtRuc.setPreferredSize(new java.awt.Dimension(7, 22));
+        txtRuc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRucKeyTyped(evt);
+            }
+        });
 
         lblRazonSocial.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblRazonSocial.setText("Razón social:");
@@ -182,12 +187,27 @@ public class FrmProveedorNuevo extends javax.swing.JDialog {
 
         txtNombreContacto.setMinimumSize(new java.awt.Dimension(7, 22));
         txtNombreContacto.setPreferredSize(new java.awt.Dimension(7, 22));
+        txtNombreContacto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreContactoActionPerformed(evt);
+            }
+        });
+        txtNombreContacto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreContactoKeyTyped(evt);
+            }
+        });
 
         lblApellidoContacto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblApellidoContacto.setText("Apellido contacto:");
 
         txtApellidoContacto.setMinimumSize(new java.awt.Dimension(7, 22));
         txtApellidoContacto.setPreferredSize(new java.awt.Dimension(7, 22));
+        txtApellidoContacto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoContactoKeyTyped(evt);
+            }
+        });
 
         lblTelefonoContacto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblTelefonoContacto.setText("Teléfono contacto:");
@@ -206,7 +226,7 @@ public class FrmProveedorNuevo extends javax.swing.JDialog {
         pnlDetalleLayout.setHorizontalGroup(
             pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDetalleLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDetalleLayout.createSequentialGroup()
                         .addComponent(lblTelefonoContacto)
@@ -341,8 +361,11 @@ public class FrmProveedorNuevo extends javax.swing.JDialog {
         pnlContenedorLayout.setHorizontalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-            .addComponent(pnlDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlPie, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addGroup(pnlContenedorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlContenedorLayout.setVerticalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,6 +448,44 @@ public class FrmProveedorNuevo extends javax.swing.JDialog {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void txtNombreContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreContactoActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_txtNombreContactoActionPerformed
+
+    private void txtNombreContactoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreContactoKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(Character.isDigit(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane,"ingrese solo letras");
+            
+        }
+        
+    }//GEN-LAST:event_txtNombreContactoKeyTyped
+
+    private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(Character.isLetter(validar)){
+        getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane,"ingrese solo números");
+        }
+    }//GEN-LAST:event_txtRucKeyTyped
+
+    private void txtApellidoContactoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoContactoKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(Character.isDigit(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo letras");
+        }
+    }//GEN-LAST:event_txtApellidoContactoKeyTyped
 
     /**
      * @param args the command line arguments
