@@ -13,5 +13,7 @@ package ec.com.kodice.rapipercha.test;
  * @date 2020/12/11 
  */
 public class Principal {
-
+    public static void main(String[] args) {
+        System.out.println("hola");
+    }
 }
