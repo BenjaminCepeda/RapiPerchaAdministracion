@@ -57,6 +57,12 @@ public class LocalVO {
         this.direccion = direccion;
     }
 
+    public LocalVO(int codigo, String nombre, String direccion) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.direccion = direccion;
+    }
+    
     public LocalVO() {
     }
     
