@@ -5,7 +5,7 @@
  */
 
 package ec.com.kodice.rapipercha.administracion.presentacion;
-import ec.com.kodice.rapipercha.administracion.negocio.CentroExpendioBO;
+import ec.com.kodice.rapipercha.administracion.negocio.CentrodeExpendioBO;
 import ec.com.kodice.rapipercha.administracion.persistencia.CentroExpendioVO;
 import ec.com.kodice.rapipercha.util.UtilPresentacion;
 import javax.swing.JOptionPane;
@@ -45,7 +45,7 @@ public class FrmCentroExpendioNuevo extends javax.swing.JDialog {
     }
     private void cargarDatos(){
         CentroExpendioVO centroexpendioVO = null;
-        CentroExpendioBO centroexpendioBO = new CentroExpendioBO();
+        CentrodeExpendioBO centroexpendioBO = new CentrodeExpendioBO();
         try {
             if (codigoActual!=0){
                 centroexpendioVO=centroexpendioBO.buscar(codigoActual);
@@ -308,7 +308,7 @@ public class FrmCentroExpendioNuevo extends javax.swing.JDialog {
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         CentroExpendioVO centroexpendioVO = null;
-        CentroExpendioBO centroexpendioBO = null;
+        CentrodeExpendioBO centroexpendioBO = null;
         int respuestaOperacion = 0;
         boolean camposValidos;
         camposValidos = 
@@ -321,7 +321,7 @@ public class FrmCentroExpendioNuevo extends javax.swing.JDialog {
                 
                 );                
         if (camposValidos){
-                centroexpendioBO = new CentroExpendioBO();
+                centroexpendioBO = new CentrodeExpendioBO();
                 centroexpendioVO = new CentroExpendioVO(codigoActual, txtRuc.getText(),
                     txtRazonSocial.getText(), txtNombreComercial.getText()
                 );                            

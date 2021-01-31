@@ -5,7 +5,7 @@
  */
 package ec.com.kodice.rapipercha.administracion.negocio;
 
-import ec.com.kodice.rapipercha.administracion.persistencia.CentroExpendioDAO;
+import ec.com.kodice.rapipercha.administracion.persistencia.CentrodeExpendioDAO;
 import ec.com.kodice.rapipercha.administracion.persistencia.CentroExpendioVO;
 import java.util.List;
 import java.util.Vector;
@@ -18,11 +18,11 @@ import javax.swing.table.DefaultTableModel;
  * @version v1.0
  * @date 2020/12/06 
  */
-public class CentroExpendioBO {
-    CentroExpendioDAO centroexpendiodao =null;
+public class CentrodeExpendioBO {
+    CentrodeExpendioDAO centroexpendiodao =null;
 
-    public CentroExpendioBO() {
-        centroexpendiodao = new CentroExpendioDAO();
+    public CentrodeExpendioBO() {
+        centroexpendiodao = new CentrodeExpendioDAO();
     }
     
     public int  crear(CentroExpendioVO centroexpendioVO) throws Exception{
@@ -135,4 +135,26 @@ public class CentroExpendioBO {
         dcmListaElementos.addElement("Toma fisica");
         return (dcmListaElementos);
     }
+       public DefaultComboBoxModel generaModeloDatosComboUnSoloItem(int codigoCentroExpendio) throws Exception {
+        DefaultComboBoxModel  cmbListaElementos = null;
+        CentrodeExpendioDAO centrodeexpendioDAO = new CentrodeExpendioDAO();
+        List<CentroExpendioVO> listaElementos = null;
+        try {
+            listaElementos = centrodeexpendioDAO.buscarCentroExpendioDesdeLocal(codigoCentroExpendio);
+            if (listaElementos != null) {
+                cmbListaElementos = new DefaultComboBoxModel(listaElementos.toArray());
+              /**  for (PerfilVO perfilVO : listaElementos) {
+                    cmbListaElementos.addElement(perfilVO);
+                }
+              */
+            }
+        } 
+        catch(Exception e){
+            throw new Exception(e.getMessage() + 
+                    "\n["+this.getClass().getName()+"]");
+        }
+        return (cmbListaElementos);
+    }
+    
+        
 }

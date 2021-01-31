@@ -6,7 +6,7 @@
 
 package ec.com.kodice.rapipercha.administracion.presentacion;
 
-import ec.com.kodice.rapipercha.administracion.negocio.CentroExpendioBO;
+import ec.com.kodice.rapipercha.administracion.negocio.CentrodeExpendioBO;
 import ec.com.kodice.rapipercha.administracion.negocio.UsuarioBO;
 import ec.com.kodice.rapipercha.util.UtilPresentacion;
 import java.time.Clock;
@@ -29,7 +29,7 @@ public class FrmCentroExpendioAdministracion extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     private void cargarModelo(){
-        CentroExpendioBO centroexpendioBO = new CentroExpendioBO();
+        CentrodeExpendioBO centroexpendioBO = new CentrodeExpendioBO();
         try {
             tblCentroExpendio.setModel(centroexpendioBO.generaModeloDatosTabla(new Object[]{"CODIGO", "RUC","RAZON SOCIAL", "NOMBRE COMERCIAL"}));
         }
@@ -321,7 +321,7 @@ public class FrmCentroExpendioAdministracion extends javax.swing.JFrame {
                     this, "Desea eliminar el registro:\n" + codigoElegido + " - "
                     + descripcionElegido) == JOptionPane.YES_OPTION);
             if (confirmacionBorrado) {
-                CentroExpendioBO centroexpendioBO = new CentroExpendioBO();
+                CentrodeExpendioBO centroexpendioBO = new CentrodeExpendioBO();
                 try {
                     centroexpendioBO.eliminar(Integer.valueOf(codigoElegido));
                 } catch (Exception e) {
