@@ -66,7 +66,7 @@ public class FrmInicio extends JFrame {
         mniPerfiles = new javax.swing.JMenuItem();
         mniProveedores = new javax.swing.JMenuItem();
         mniUsuarios = new javax.swing.JMenuItem();
-        mniEmpleador = new javax.swing.JMenuItem();
+        mnCentrosExpendio = new javax.swing.JMenuItem();
         mnuTomaFisica = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -199,14 +199,13 @@ public class FrmInicio extends JFrame {
         });
         mnuAdministracion.add(mniUsuarios);
 
-        mniEmpleador.setText("Empleado");
-        mniEmpleador.setToolTipText("");
-        mniEmpleador.addActionListener(new java.awt.event.ActionListener() {
+        mnCentrosExpendio.setText("CentrosExpendio");
+        mnCentrosExpendio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniEmpleadorActionPerformed(evt);
+                mnCentrosExpendioActionPerformed(evt);
             }
         });
-        mnuAdministracion.add(mniEmpleador);
+        mnuAdministracion.add(mnCentrosExpendio);
 
         barPrincipal.add(mnuAdministracion);
 
@@ -254,10 +253,12 @@ public class FrmInicio extends JFrame {
             
     }//GEN-LAST:event_mniUsuariosActionPerformed
 
-    private void mniEmpleadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEmpleadorActionPerformed
-        FrmEmpleadoAdministracion frmEmpleadoAdministracion = new FrmEmpleadoAdministracion();
-        frmEmpleadoAdministracion.setVisible(true);
-    }//GEN-LAST:event_mniEmpleadorActionPerformed
+    private void mnCentrosExpendioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCentrosExpendioActionPerformed
+        // TODO add your handling code here:
+        FrmCentroExpendioAdministracion frmcentroexpendio = new FrmCentroExpendioAdministracion();
+        frmcentroexpendio.setVisible(true);
+        
+    }//GEN-LAST:event_mnCentrosExpendioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,7 +309,7 @@ public class FrmInicio extends JFrame {
     private javax.swing.JLabel lblTituloEmpresa;
     private javax.swing.JLabel lblTituloNombreUsuario;
     private javax.swing.JLabel lblTituloPerfil;
-    private javax.swing.JMenuItem mniEmpleador;
+    private javax.swing.JMenuItem mnCentrosExpendio;
     private javax.swing.JMenuItem mniPerfiles;
     private javax.swing.JMenuItem mniProveedores;
     private javax.swing.JMenuItem mniUsuarios;

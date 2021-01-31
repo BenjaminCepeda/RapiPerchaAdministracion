@@ -28,7 +28,15 @@ public class CentroExpendioVO extends EmpresaVO{
         this.codigo = codigo;
         this.ruc = ruc;
         this.nombreComercial = nombreComercial;
-        this.razonSocial = razonSocial;
+        this.razonSocial = RazonSocial;
+        
+    }    
+    
+    public CentroExpendioVO(String ruc, String RazonSocial,
+            String nombreComercial) {
+        this.ruc = ruc;
+        this.nombreComercial = nombreComercial;
+        this.razonSocial = RazonSocial;
         
     }    
 
