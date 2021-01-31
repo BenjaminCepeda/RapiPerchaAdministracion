@@ -7,6 +7,10 @@ package ec.com.kodice.rapipercha.administracion.presentacion;
 
 import ec.com.kodice.rapipercha.administracion.negocio.PerfilBO;
 import ec.com.kodice.rapipercha.administracion.negocio.UsuarioBO;//preguntar si va EmpleadoBO
+import ec.com.kodice.rapipercha.administracion.persistencia.EmpleadoVO;
+import ec.com.kodice.rapipercha.administracion.negocio.EmpleadoBO;
+import ec.com.kodice.rapipercha.administracion.persistencia.ProveedorVO;
+import ec.com.kodice.rapipercha.administracion.negocio.ProveedorBO;
 import ec.com.kodice.rapipercha.administracion.persistencia.PerfilVO;
 import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
 import ec.com.kodice.rapipercha.util.UtilPresentacion;
@@ -20,14 +24,22 @@ import javax.swing.JOptionPane;
 public class FrmEmpleadoNuevo extends javax.swing.JFrame {
 
     private int codigoActual = 0;
-
+    private EmpleadoVO empleadoLogueado= null;
+    private ProveedorVO proveedorEmpleadoLogueado = null;
+    private UsuarioVO usuarioLogueado =null;
+    
+    
     public void setCodigoActual(int codigoActual) {
         this.codigoActual = codigoActual;
     }
 
     /** Creates new form FrmPerfilAdministracion */
-    public FrmEmpleadoNuevo(int codigoActual, boolean soloLectura) {
+    public FrmEmpleadoNuevo(EmpleadoVO empleadoLogueado, 
+            ProveedorVO proveedorEmpleadoLoguedo,int codigoActual, boolean soloLectura) {
         initComponents();
+        this.empleadoLogueado = empleadoLogueado;
+        this.proveedorEmpleadoLogueado = proveedorEmpleadoLoguedo;
+        lblNombreEmpresa.setText(proveedorEmpleadoLoguedo.getNombreComercial());
         this.setLocationRelativeTo(null);
         this.codigoActual = codigoActual;
         if (soloLectura)
@@ -37,40 +49,53 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
     
     public FrmEmpleadoNuevo() {
           initComponents();
-        this.setLocationRelativeTo(null);
-        this.codigoActual = 0;
-        cargarDatos();
+          this.setLocationRelativeTo(null);
+          this.codigoActual = 0;
+          cargarDatos();
     }
     private void seteaControles(boolean soloLectura){
         btnGrabar.setEnabled(!soloLectura);
     }
     
     private void cargarDatos(){
+        EmpleadoVO empleadoVO = null;
+        EmpleadoBO empleadoBO = new EmpleadoBO();
+        ProveedorVO proveedorVO = null;
+        ProveedorBO proveedorBO = new ProveedorBO();
         UsuarioVO usuarioVO = null;
         UsuarioBO usuarioBO = new UsuarioBO();
-        PerfilBO perfilBO = new PerfilBO();
         String nombrePerfil;
-        cmbEstado.setModel(usuarioBO.generaModeloDatosEstados());
+        
         try {
-            cmbPerfil.setModel(perfilBO.generaModeloDatosCombo());
+        cmbProveedor.setModel(proveedorBO.generaModeloDatosCombo());
+        proveedorVO = proveedorBO.buscar(proveedorEmpleadoLogueado.getCodigo());
+        
+        //cmbProveedor.setSelectedItem(proveedorVO.getRazonSocial() +  " (" + proveedorVO.getNombreComercial()+")");
+        cmbProveedor.setSelectedItem(proveedorVO);
+        cmbUsuario.setModel(usuarioBO.generaModeloDatosComboNoAsignados());
+        
             if (codigoActual!=0){
-                usuarioVO=usuarioBO.buscar(codigoActual);
+                empleadoVO=empleadoBO.buscar(codigoActual);
             }
         }
         catch ( Exception e) {
             UtilPresentacion.mostrarMensajeError(this, e.getMessage());
         }
         finally{
-            if (usuarioVO != null){
-                        cmbPerfil.getModel().setSelectedItem(usuarioVO.getPerfil());
-                        txtCodigo.setText(String.valueOf(usuarioVO.getCodigo()));
-                        txtNombre.setText(usuarioVO.getNombre());
-                        txtCedula.setText(usuarioVO.getClave());
-                        txtApelido.setText(usuarioVO.getClave());
-                        cmbEstado.setSelectedItem(usuarioVO.getEstado());
+            if (empleadoVO != null){
+         
+                        txtCodigo.setText(String.valueOf(empleadoVO.getCodigo()));
+                        //txtCodigoProveedor.setText(String.valueOf(proveedorVO.getproveedorCodigo()));
+                        //txtCodigoUsuario.setText(empleadoVO.getUsuario());
+                        txtCedula.setText(empleadoVO.getCedula());
+                        txtNombre.setText(empleadoVO.getNombres());
+                        txtApellido.setText(empleadoVO.getApellidos());
+                        txtTelefono.setText(empleadoVO.getTelefono());
+                        txtCorreo.setText(empleadoVO.getCorreo());
+                        
             }
-            usuarioVO = null;
-            usuarioBO = null;
+            empleadoVO = null;
+            empleadoBO = null;
         }
     }
 
@@ -87,23 +112,25 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
         pnlCabecera = new javax.swing.JPanel();
         lblLogoRapipercha = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
+        lblTitulo1 = new javax.swing.JLabel();
+        lblNombreEmpresa = new javax.swing.JLabel();
         pnlDetalle = new javax.swing.JPanel();
         lblCodigo = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         lblPerfil = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JPasswordField();
-        txtApelido = new javax.swing.JPasswordField();
-        txtCodigoProveedor = new javax.swing.JTextField();
         lblPerfil1 = new javax.swing.JLabel();
-        txtCodigoUsuario = new javax.swing.JTextField();
         lblPerfil2 = new javax.swing.JLabel();
         lblPerfil3 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JPasswordField();
         lblPerfil4 = new javax.swing.JLabel();
         lblPerfil5 = new javax.swing.JLabel();
-        txtTelefono = new javax.swing.JPasswordField();
         lblPerfil6 = new javax.swing.JLabel();
-        txtCorreo = new javax.swing.JPasswordField();
+        txtCedula = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtApellido = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
+        cmbProveedor = new javax.swing.JComboBox<>();
+        cmbUsuario = new javax.swing.JComboBox<>();
         pnlPie = new javax.swing.JPanel();
         btnGrabar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -129,26 +156,45 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("EMPLEADO");
 
+        lblTitulo1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTitulo1.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitulo1.setText("EMPRESA:");
+
+        lblNombreEmpresa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblNombreEmpresa.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombreEmpresa.setText("Nombre de la Empresa");
+
         javax.swing.GroupLayout pnlCabeceraLayout = new javax.swing.GroupLayout(pnlCabecera);
         pnlCabecera.setLayout(pnlCabeceraLayout);
         pnlCabeceraLayout.setHorizontalGroup(
             pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCabeceraLayout.createSequentialGroup()
                 .addComponent(lblLogoRapipercha)
-                .addGap(202, 202, 202)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCabeceraLayout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabeceraLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTitulo1)
+                        .addGap(91, 91, 91)
+                        .addComponent(lblNombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60))))
         );
         pnlCabeceraLayout.setVerticalGroup(
             pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCabeceraLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblLogoRapipercha)
+                .addGroup(pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCabeceraLayout.createSequentialGroup()
+                        .addComponent(lblTitulo)
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNombreEmpresa)
+                            .addComponent(lblTitulo1)))
+                    .addComponent(lblLogoRapipercha))
                 .addContainerGap(20, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabeceraLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTitulo)
-                .addGap(30, 30, 30))
         );
 
         pnlDetalle.setAlignmentX(0.0F);
@@ -164,22 +210,8 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
         lblPerfil.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPerfil.setText("Codigo Proveedor:");
 
-        txtCedula.setMinimumSize(new java.awt.Dimension(7, 22));
-        txtCedula.setPreferredSize(new java.awt.Dimension(7, 22));
-
-        txtApelido.setMinimumSize(new java.awt.Dimension(7, 22));
-        txtApelido.setPreferredSize(new java.awt.Dimension(7, 22));
-
-        txtCodigoProveedor.setEnabled(false);
-        txtCodigoProveedor.setMinimumSize(new java.awt.Dimension(7, 22));
-        txtCodigoProveedor.setPreferredSize(new java.awt.Dimension(7, 22));
-
         lblPerfil1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPerfil1.setText("Codigo Usuario:");
-
-        txtCodigoUsuario.setEnabled(false);
-        txtCodigoUsuario.setMinimumSize(new java.awt.Dimension(7, 22));
-        txtCodigoUsuario.setPreferredSize(new java.awt.Dimension(7, 22));
 
         lblPerfil2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPerfil2.setText("Cedula:");
@@ -187,23 +219,30 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
         lblPerfil3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPerfil3.setText("Nombre:");
 
-        txtNombre.setMinimumSize(new java.awt.Dimension(7, 22));
-        txtNombre.setPreferredSize(new java.awt.Dimension(7, 22));
-
         lblPerfil4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPerfil4.setText("Apellido:");
 
         lblPerfil5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPerfil5.setText("Telefono:");
 
-        txtTelefono.setMinimumSize(new java.awt.Dimension(7, 22));
-        txtTelefono.setPreferredSize(new java.awt.Dimension(7, 22));
-
         lblPerfil6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblPerfil6.setText("Correo:");
 
-        txtCorreo.setMinimumSize(new java.awt.Dimension(7, 22));
-        txtCorreo.setPreferredSize(new java.awt.Dimension(7, 22));
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
+
+        cmbProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbProveedor.setEnabled(false);
+        cmbProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbProveedorActionPerformed(evt);
+            }
+        });
+
+        cmbUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout pnlDetalleLayout = new javax.swing.GroupLayout(pnlDetalle);
         pnlDetalle.setLayout(pnlDetalleLayout);
@@ -226,15 +265,14 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
                             .addComponent(lblPerfil5)
                             .addComponent(lblPerfil6))
                         .addGap(10, 10, 10)
-                        .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodigoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtApelido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtCodigoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCedula)
+                            .addComponent(txtNombre)
+                            .addComponent(txtApellido)
+                            .addComponent(txtTelefono)
+                            .addComponent(txtCorreo)
+                            .addComponent(cmbProveedor, 0, 597, Short.MAX_VALUE)
+                            .addComponent(cmbUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(52, 52, 52))
         );
         pnlDetalleLayout.setVerticalGroup(
@@ -245,34 +283,34 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
                     .addComponent(lblCodigo)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPerfil)
-                    .addComponent(txtCodigoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPerfil1))
-                .addGap(8, 8, 8)
+                    .addComponent(lblPerfil1)
+                    .addComponent(cmbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPerfil2))
+                    .addComponent(lblPerfil2)
+                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPerfil3)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPerfil4)
-                    .addComponent(txtApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPerfil4)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPerfil5)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addGroup(pnlDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPerfil6)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -373,13 +411,76 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
-        
+        UsuarioVO usuarioVO = null;
+        UsuarioBO usuarioBO = null;
+        ProveedorVO proveedorVO = null;
+        ProveedorBO proveedorBO = null;
+        PerfilVO perfilVO = null;
+        PerfilBO perfilBO = null;
+        EmpleadoVO empleadoVO = null;
+        EmpleadoBO empleadoBO =null;
+        int respuestaOperacion = 0;
+        boolean camposValidos;
+        String nombreEstado ="";
+        camposValidos =
+            (!txtCedula.getText().isEmpty() &&
+            !txtCedula.getText().trim().equals("") &&
+            !txtNombre.getText().isEmpty() &&
+            !txtNombre.getText().trim().equals("") &&
+            !txtApellido.getText().isEmpty() &&
+            !txtApellido.getText().trim().equals("")&&
+            !txtTelefono.getText().isEmpty() &&
+            !txtTelefono.getText().trim().equals("") &&
+            !txtCorreo.getText().isEmpty() &&
+            !txtCorreo.getText().trim().equals("") &&
+            cmbProveedor.getSelectedIndex()>=0 &&
+            cmbUsuario.getSelectedIndex()>=0 );
+        if (camposValidos){
+                empleadoBO = new EmpleadoBO();
+                proveedorBO = new ProveedorBO();
+                usuarioVO = (UsuarioVO)cmbUsuario.getSelectedItem();
+                proveedorVO =(ProveedorVO)cmbProveedor.getSelectedItem();
+                empleadoVO = new EmpleadoVO(codigoActual,proveedorVO.getCodigo(),
+                    usuarioVO.getCodigo(), txtCedula.getText(),
+                    txtNombre.getText(), txtApellido.getText(), 
+                    txtTelefono.getText(), txtCorreo.getText());                            
+                try{
+                    if (codigoActual==0){
+                        respuestaOperacion = empleadoBO.crear(empleadoVO);
+                        txtCodigo.setText(String.valueOf(respuestaOperacion));
+                    }else
+                        respuestaOperacion = empleadoBO.actualizar(empleadoVO);
+                    if (respuestaOperacion>0)
+                        JOptionPane.showMessageDialog(null, "Registro guardado con éxito");
+                }
+                catch(Exception e){
+                    UtilPresentacion.mostrarMensajeError(this, e.getMessage());
+                }
+                finally{
+                    empleadoVO = null;
+                    empleadoBO = null;
+                    this.setVisible(false);
+                    this.dispose();
+                }
+        }else {
+            UtilPresentacion.mostrarMensajeValidacionIncorrecta(this, 
+                "Ingrese los datos requeridos en el formulario");
+        }
+   
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    private void cmbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbProveedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -418,10 +519,17 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGrabar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cmbProveedor;
+    private javax.swing.JComboBox<String> cmbUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblLogoKodice;
     private javax.swing.JLabel lblLogoRapipercha;
+    private javax.swing.JLabel lblLogoRapipercha2;
+    private javax.swing.JLabel lblLogoRapipercha3;
+    private javax.swing.JLabel lblNombreEmpresa;
+    private javax.swing.JLabel lblNombreEmpresa1;
+    private javax.swing.JLabel lblNombreEmpresa2;
     private javax.swing.JLabel lblPerfil;
     private javax.swing.JLabel lblPerfil1;
     private javax.swing.JLabel lblPerfil2;
@@ -430,16 +538,21 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
     private javax.swing.JLabel lblPerfil5;
     private javax.swing.JLabel lblPerfil6;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo1;
+    private javax.swing.JLabel lblTitulo3;
+    private javax.swing.JLabel lblTitulo4;
+    private javax.swing.JLabel lblTitulo5;
+    private javax.swing.JLabel lblTitulo6;
     private javax.swing.JPanel pnlCabecera;
+    private javax.swing.JPanel pnlCabecera2;
+    private javax.swing.JPanel pnlCabecera3;
     private javax.swing.JPanel pnlDetalle;
     private javax.swing.JPanel pnlPie;
-    private javax.swing.JPasswordField txtApelido;
-    private javax.swing.JPasswordField txtCedula;
+    private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtCodigoProveedor;
-    private javax.swing.JTextField txtCodigoUsuario;
-    private javax.swing.JPasswordField txtCorreo;
-    private javax.swing.JPasswordField txtNombre;
-    private javax.swing.JPasswordField txtTelefono;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

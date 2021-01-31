@@ -5,6 +5,7 @@
  */
 package ec.com.kodice.rapipercha.administracion.negocio;
 
+import ec.com.kodice.rapipercha.administracion.persistencia.PerfilVO;
 import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioDAO;
 import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
 import java.util.List;
@@ -21,11 +22,11 @@ import javax.swing.table.DefaultTableModel;
 public class UsuarioBO {
 
     UsuarioDAO usuarioDAO = null;
-
+    
     public UsuarioBO() {
         usuarioDAO = new UsuarioDAO();
     }
-
+    
     public int crear(UsuarioVO usuarioVO) throws Exception {
         int codigoGenerado = 0;
         try {
@@ -118,5 +119,26 @@ public class UsuarioBO {
                     + "\n[" + this.getClass().getName() + "]");
         }
         return(codigoEmpleado);
+    }
+    
+    public DefaultComboBoxModel generaModeloDatosComboNoAsignados() throws Exception {
+        
+        DefaultComboBoxModel  cmbListaElementos = null;
+        List<UsuarioVO> listaElementos = null;
+        try {
+            listaElementos = usuarioDAO.buscarUsuariosNoAsignados();
+            if (listaElementos != null) {
+                cmbListaElementos = new DefaultComboBoxModel(listaElementos.toArray());
+               /*for (PerfilVO perfilVO : listaElementos) {
+                    cmbListaElementos.addElement(perfilVO);
+                }*/
+              
+            }
+        } 
+        catch(Exception e){
+            throw new Exception(e.getMessage() + 
+                    "\n["+this.getClass().getName()+"]");
+        }
+        return (cmbListaElementos);
     }
 }

@@ -25,6 +25,7 @@ public class FrmInicio extends JFrame {
      */
     public FrmInicio() {
         initComponents();
+        
         this.setLocationRelativeTo(null);        
     }
     
@@ -255,7 +256,8 @@ public class FrmInicio extends JFrame {
     }//GEN-LAST:event_mniUsuariosActionPerformed
 
     private void mniEmpleadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEmpleadorActionPerformed
-        FrmEmpleadoAdministracion frmEmpleadoAdministracion = new FrmEmpleadoAdministracion();
+        FrmEmpleadoAdministracion frmEmpleadoAdministracion = new FrmEmpleadoAdministracion(
+        this.empleadoLogueado,this.proveedorEmpleadoLogueado);
         frmEmpleadoAdministracion.setVisible(true);
     }//GEN-LAST:event_mniEmpleadorActionPerformed
 

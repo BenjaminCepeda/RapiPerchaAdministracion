@@ -8,6 +8,8 @@ package ec.com.kodice.rapipercha.administracion.presentacion;
 
 import ec.com.kodice.rapipercha.administracion.negocio.PerfilBO;
 import ec.com.kodice.rapipercha.administracion.negocio.EmpleadoBO;
+import ec.com.kodice.rapipercha.administracion.persistencia.EmpleadoVO;
+import ec.com.kodice.rapipercha.administracion.persistencia.ProveedorVO;
 import ec.com.kodice.rapipercha.util.UtilPresentacion;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -18,6 +20,8 @@ import javax.swing.JTable;
  */
 public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
 
+    private EmpleadoVO empleadoLogueado= null;
+    private ProveedorVO proveedorEmpleadoLogueado = null;
     /**
      * Creates new form FrmEmpleadoAdministracion
      */
@@ -27,17 +31,29 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
+    public FrmEmpleadoAdministracion(EmpleadoVO empleadoLogueado, 
+            ProveedorVO proveedorEmpleadoLoguedo) {
+        initComponents();
+        this.empleadoLogueado = empleadoLogueado;
+        this.proveedorEmpleadoLogueado = proveedorEmpleadoLoguedo;
+        lblNombreEmpresa.setText(proveedorEmpleadoLoguedo.getNombreComercial());
+        cargarModelo();
+        this.setLocationRelativeTo(null);
+    }
+    
     private void cargarModelo(){
-        EmpleadoBO EmpleadoBO = new EmpleadoBO();
+        EmpleadoBO empleadoBO = new EmpleadoBO();
         try {
-            tblEmpleados.setModel(EmpleadoBO.generaModeloDatosTabla(new Object[]{"CODIGO", 
-                "PROVEEDORCODIGO","USUARIO", "CEDULA","NOMBRE","APELLIDO","TELEFONO","CORREO"}));
+            tblEmpleados.setModel(empleadoBO.generaModeloDatosTabla(
+            new Object[]{"CODIGO", 
+                "PROVEEDORCODIGO","USUARIO", "CEDULA","NOMBRE","APELLIDO","TELEFONO","CORREO"},
+                    proveedorEmpleadoLogueado.getCodigo()));
         }
         catch ( Exception e) {
             UtilPresentacion.mostrarMensajeError(this, e.getMessage());
         }
         finally{
-            EmpleadoBO = null;   
+            empleadoBO = null;   
             btnConsultar.setEnabled(false);
             btnEditar.setEnabled(false);
             btnBorrar.setEnabled(false);            
@@ -57,6 +73,8 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
         pnlCabecera = new javax.swing.JPanel();
         lblLogoRapipercha = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
+        lblTitulo1 = new javax.swing.JLabel();
+        lblNombreEmpresa = new javax.swing.JLabel();
         pnlDetalle = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmpleados = new javax.swing.JTable();
@@ -83,26 +101,52 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
         lblTitulo.setText("ADMINISTRACIÓN DE EMPLEADOS");
 
+        lblTitulo1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblTitulo1.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitulo1.setText("EMPRESA:");
+
+        lblNombreEmpresa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblNombreEmpresa.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombreEmpresa.setText("Nombre de la Empresa");
+
         javax.swing.GroupLayout pnlCabeceraLayout = new javax.swing.GroupLayout(pnlCabecera);
         pnlCabecera.setLayout(pnlCabeceraLayout);
         pnlCabeceraLayout.setHorizontalGroup(
             pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCabeceraLayout.createSequentialGroup()
                 .addComponent(lblLogoRapipercha)
-                .addGap(129, 129, 129)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCabeceraLayout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlCabeceraLayout.createSequentialGroup()
+                        .addGap(240, 240, 240)
+                        .addComponent(lblNombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabeceraLayout.createSequentialGroup()
+                    .addContainerGap(305, Short.MAX_VALUE)
+                    .addComponent(lblTitulo1)
+                    .addGap(454, 454, 454)))
         );
         pnlCabeceraLayout.setVerticalGroup(
             pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCabeceraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblLogoRapipercha)
+                .addGroup(pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlCabeceraLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblLogoRapipercha))
+                    .addGroup(pnlCabeceraLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(lblTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblNombreEmpresa)))
                 .addContainerGap(20, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabeceraLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTitulo)
-                .addGap(31, 31, 31))
+            .addGroup(pnlCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCabeceraLayout.createSequentialGroup()
+                    .addContainerGap(55, Short.MAX_VALUE)
+                    .addComponent(lblTitulo1)
+                    .addGap(21, 21, 21)))
         );
 
         pnlDetalle.setAlignmentX(0.0F);
@@ -309,7 +353,7 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
             btnEditar.setEnabled(true);
             btnBorrar.setEnabled(true);
             if (evt.getClickCount() == 2 && !codigoElegido.isEmpty() && !codigoElegido.isBlank()) {
-                FrmEmpleadoNuevo frmEmpleadoNuevo = new FrmEmpleadoNuevo(
+                FrmEmpleadoNuevo frmEmpleadoNuevo = new FrmEmpleadoNuevo(empleadoLogueado,proveedorEmpleadoLogueado,
                     Integer.valueOf(codigoElegido),true);
                 frmEmpleadoNuevo.setVisible(true);
                 cargarModelo();
@@ -318,7 +362,7 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
     }//GEN-LAST:event_tblEmpleadosMousePressed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        FrmEmpleadoNuevo frmEmpleadoNuevo = new FrmEmpleadoNuevo();
+        FrmEmpleadoNuevo frmEmpleadoNuevo = new FrmEmpleadoNuevo(empleadoLogueado,proveedorEmpleadoLogueado,0,false);
         frmEmpleadoNuevo.setVisible(true);
         cargarModelo();
     }//GEN-LAST:event_btnNuevoActionPerformed
@@ -331,7 +375,7 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
                 fila, 0).toString();
         }
         if (!(codigoElegido.isEmpty() | codigoElegido.isBlank())) {
-            FrmEmpleadoNuevo frmEmpleadoNuevo = new FrmEmpleadoNuevo(
+            FrmEmpleadoNuevo frmEmpleadoNuevo = new FrmEmpleadoNuevo(empleadoLogueado,proveedorEmpleadoLogueado,
                     Integer.valueOf(codigoElegido), true);
             frmEmpleadoNuevo.setVisible(true);
             cargarModelo();
@@ -346,7 +390,7 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
                 fila, 0).toString();
         }
         if (!(codigoElegido.isEmpty() | codigoElegido.isBlank())) {
-            FrmEmpleadoNuevo frmEmpleadoNuevo = new FrmEmpleadoNuevo(
+            FrmEmpleadoNuevo frmEmpleadoNuevo = new FrmEmpleadoNuevo(empleadoLogueado,proveedorEmpleadoLogueado,
                 Integer.valueOf(codigoElegido), false);
             frmEmpleadoNuevo.setVisible(true);
             cargarModelo();
@@ -432,7 +476,9 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLogoKodice;
     private javax.swing.JLabel lblLogoRapipercha;
+    private javax.swing.JLabel lblNombreEmpresa;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo1;
     private javax.swing.JPanel pnlCabecera;
     private javax.swing.JPanel pnlDetalle;
     private javax.swing.JPanel pnlPie;

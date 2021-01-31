@@ -85,7 +85,7 @@ public class FrmProveedorAdministracion extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("ADMINISTRACIÓN DE PERFILES");
+        lblTitulo.setText("ADMINISTRACIÓN DE PROVEEDOR");
 
         javax.swing.GroupLayout pnlCabeceraLayout = new javax.swing.GroupLayout(pnlCabecera);
         pnlCabecera.setLayout(pnlCabeceraLayout);
@@ -94,7 +94,7 @@ public class FrmProveedorAdministracion extends javax.swing.JFrame {
             .addGroup(pnlCabeceraLayout.createSequentialGroup()
                 .addComponent(lblLogoRapipercha)
                 .addGap(129, 129, 129)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlCabeceraLayout.setVerticalGroup(
