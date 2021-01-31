@@ -82,13 +82,14 @@ public class EmpleadoBO {
         return (filasAfectadas);
     }
 
-    public DefaultTableModel generaModeloDatosTabla(Object[] titulosCabecera) 
+    public DefaultTableModel generaModeloDatosTabla(Object[] titulosCabecera,
+            int codigoProveedor) 
             throws Exception {
         DefaultTableModel dtmListaElementos = new DefaultTableModel();
         List<EmpleadoVO> listaElementos = null;
         dtmListaElementos.setColumnIdentifiers(titulosCabecera);
         try {
-            listaElementos = empleadoDAO.buscarTodos();
+            listaElementos = empleadoDAO.buscarPorProveedor(codigoProveedor);
             if (listaElementos != null) {
                 for (EmpleadoVO empleadoVO : listaElementos) {
                     dtmListaElementos.addRow(new Object[]{

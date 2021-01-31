@@ -6,6 +6,7 @@
 
 package ec.com.kodice.rapipercha.administracion.negocio;
 
+import ec.com.kodice.rapipercha.administracion.persistencia.PerfilVO;
 import ec.com.kodice.rapipercha.administracion.persistencia.ProveedorDAO;
 import ec.com.kodice.rapipercha.administracion.persistencia.ProveedorVO;
 import ec.com.kodice.rapipercha.administracion.persistencia.UsuarioVO;
@@ -59,7 +60,8 @@ public class ProveedorBO {
         }
         return (listaElementos);
     }
-
+    
+    
     public int actualizar(ProveedorVO proveedorVO) throws Exception {
         int filasAfectadas = 0;
         try {
@@ -102,6 +104,26 @@ public class ProveedorBO {
                     + "\n[" + this.getClass().getName() + "]");
         }
         return (dtmListaElementos);
+    }
+    
+    public DefaultComboBoxModel generaModeloDatosCombo() throws Exception {
+        DefaultComboBoxModel  cmbListaElementos = null;
+        List<ProveedorVO> listaElementos = null;
+        try {
+            listaElementos = proveedorDAO.buscarTodos();
+            if (listaElementos != null) {
+                cmbListaElementos = new DefaultComboBoxModel(listaElementos.toArray());
+              /**  for (PerfilVO perfilVO : listaElementos) {
+                    cmbListaElementos.addElement(perfilVO);
+                }
+              */
+            }
+        } 
+        catch(Exception e){
+            throw new Exception(e.getMessage() + 
+                    "\n["+this.getClass().getName()+"]");
+        }
+        return (cmbListaElementos);
     }
 
 }

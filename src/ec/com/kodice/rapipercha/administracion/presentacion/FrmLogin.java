@@ -234,7 +234,7 @@ public class FrmLogin extends javax.swing.JFrame {
              }
              finally{
                 if (codigoEmpleado>0 && empleadoLogueado != null ){
-                    FrmInicio frmInicio = new FrmInicio();
+                    FrmInicio frmInicio = new FrmInicio(empleadoLogueado, proveedorEmpleadoLogueado);
                     frmInicio.setVisible(true);
                     this.setVisible(false);
                     this.dispose();

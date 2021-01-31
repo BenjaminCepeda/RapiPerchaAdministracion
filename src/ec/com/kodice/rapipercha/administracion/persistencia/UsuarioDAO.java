@@ -36,8 +36,8 @@ public class UsuarioDAO {
         try {
             conexion = CustomConnection.getConnection();
             String consulta = "INSERT INTO TUSUARIOS "
-                    + "(per_codigo, usu_nombre, usu_clave, usu_estado)"
-                    + "VALUES (?,?,?,?)";
+                    + "(per_codigo, usu_nombre, usu_clave, usu_estado) "
+                    + "VALUES (?,?,?,?) ";
             sentencia = conexion.prepareStatement(consulta,
                     PreparedStatement.RETURN_GENERATED_KEYS);            
             sentencia.setInt(1, usuarioVO.getPerfil().getCodigo());
@@ -84,7 +84,7 @@ public class UsuarioDAO {
             conexion = CustomConnection.getConnection();
             String consulta = "SELECT usu_codigo, per_codigo,  "
                     + "usu_nombre, usu_clave, usu_estado "
-                    + "FROM TUSUARIOS  WHERE usu_codigo = ?";
+                    + "FROM TUSUARIOS  WHERE usu_codigo = ? ";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, codigo);
             ResultSet resultado = sentencia.executeQuery();
@@ -184,7 +184,7 @@ public class UsuarioDAO {
                     + "usu_nombre = ?, "
                     + "usu_clave = ?, "
                     + "usu_estado = ? "
-                    + "WHERE usu_codigo = ?";
+                    + "WHERE usu_codigo = ? ";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, usuarioVO.getPerfil().getCodigo());
             sentencia.setString(2, usuarioVO.getNombre());
@@ -223,7 +223,7 @@ public class UsuarioDAO {
         try {
             conexion = CustomConnection.getConnection();
             String consulta = "DELETE FROM TUSUARIOS "
-                    + "WHERE usu_codigo = ?";
+                    + "WHERE usu_codigo = ? ";
             sentencia = conexion.prepareStatement(consulta);
             sentencia.setInt(1, codigo);
             filasAfectadas = sentencia.executeUpdate();
@@ -328,4 +328,51 @@ public class UsuarioDAO {
         return (codigoEmpleado);
     }
 
+    public List<UsuarioVO> buscarUsuariosNoAsignados() throws Exception {
+        Connection conexion = null;
+        PreparedStatement sentencia = null;
+        List<UsuarioVO> listaElementos = null;
+        UsuarioVO usuarioVO = null;
+        PerfilVO perfilVO = null;
+        PerfilDAO perfilDAO= new PerfilDAO();
+        try {
+            conexion = CustomConnection.getConnection();
+            String consulta = "SELECT tusuarios.usu_codigo, per_codigo, usu_nombre, "
+                    + "usu_clave, usu_estado "
+                    + "FROM TUSUARIOS "
+                    + " left outer join templeados e "
+                    + "on tusuarios.usu_codigo=e.usu_codigo "
+                    + " where e.usu_codigo is null ";
+            sentencia = conexion.prepareStatement(consulta);
+            ResultSet resultado = sentencia.executeQuery();
+            while (resultado.next()) {
+                if (listaElementos == null) {
+                    listaElementos
+                            = new ArrayList<UsuarioVO>();
+                }
+                usuarioVO = new UsuarioVO(
+                        resultado.getInt("usu_codigo"),
+                        resultado.getString("usu_nombre"),
+                        resultado.getString("usu_clave"),
+                        resultado.getString("usu_estado"));
+                perfilVO = perfilDAO.buscar(resultado.getInt("per_codigo"));
+                usuarioVO.setPerfil(perfilVO);
+                listaElementos.add(usuarioVO);
+            }
+        } 
+        catch(Exception e){
+            conexion.close();
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
+            try {
+                conexion.close();
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "\n[" 
+                        + this.getClass().getName() + "] ");
+            }
+        }        
+        return (listaElementos);
+    }
 }

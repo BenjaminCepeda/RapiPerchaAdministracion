@@ -68,5 +68,8 @@ public class UsuarioVO {
         this.clave = clave;
         this.estado = estado;
     }
-
+@Override
+    public String toString(){
+        return(this.nombre);
+    }
 }

@@ -327,7 +327,7 @@ public class EmpleadoDAO {
 
     }
     
-    
+   
       public List<EmpleadoVO> buscarempleadoporProveedor(int codigoProveedor) throws Exception {
         Connection conexion = null;
         PreparedStatement sentencia = null;
@@ -383,6 +383,60 @@ public class EmpleadoDAO {
     }
     
     
-    
+    public List<EmpleadoVO> buscarPorProveedor(int codigoProveedor) throws Exception {
+        Connection conexion = null;
+        PreparedStatement sentencia = null;
+        List<EmpleadoVO> listaElementos = null;
+        EmpleadoVO empleadoVO = null;
+        UsuarioVO usuarioVO = null;
+        UsuarioDAO usuarioDAO= new UsuarioDAO();
+        try {
+            conexion = CustomConnection.getConnection();
+            String consulta = "SELECT emp_codigo, prov_codigo, usu_codigo, "
+                    + "emp_cedula, emp_nombres, emp_apellidos, emp_telefono, "
+                    + "emp_correo  "
+                    + "FROM TEMPLEADOS  "
+                    + "WHERE prov_codigo = ? ";
+            sentencia = conexion.prepareStatement(consulta);
+            sentencia.setInt(1, codigoProveedor);
+            ResultSet resultado = sentencia.executeQuery();
+            while (resultado.next()) {
+                if (listaElementos == null) {
+                    listaElementos
+                            = new ArrayList<EmpleadoVO>();
+                }
+                empleadoVO = new EmpleadoVO(
+                        resultado.getInt("emp_codigo"),
+                        resultado.getInt("prov_codigo"),
+                        resultado.getInt("usu_codigo"),
+                        resultado.getString("emp_cedula"),
+                        resultado.getString("emp_nombres"),
+                        resultado.getString("emp_apellidos"),
+                        resultado.getString("emp_telefono"),
+                        resultado.getString("emp_correo"));
+                if (empleadoVO.getUsuario()!=null && 
+                        empleadoVO.getUsuario().getCodigo()>0)
+                    usuarioVO = usuarioDAO.buscar(
+                            empleadoVO.getUsuario().getCodigo());
+                empleadoVO.setUsuario(usuarioVO);
+                listaElementos.add(empleadoVO);
+            }
+        } 
+        catch(Exception e){
+            conexion.close();
+            throw new Exception(e.getMessage() + "\n[" + this.getClass().getName()
+                    + "] ");
+        }    
+        finally{
+            try {
+                conexion.close();
+            } catch (SQLException e){
+                throw new Exception(e.getMessage() + "\n[" 
+                        + this.getClass().getName() + "] ");
+            }
+        }        
+        return (listaElementos);
+    }
+
 
 }
