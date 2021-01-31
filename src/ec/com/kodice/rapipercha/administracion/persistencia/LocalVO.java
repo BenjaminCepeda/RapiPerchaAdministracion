@@ -12,7 +12,7 @@ package ec.com.kodice.rapipercha.administracion.persistencia;
  * @version v1.0
  * @date 2021/01/06 
  */
-public class LocalVO {
+public class LocalVO  extends EmpresaVO {
     private int codigo;
     private CentroExpendioVO centroExpendioVO = new CentroExpendioVO();
     private String nombre;
@@ -33,7 +33,8 @@ public class LocalVO {
     public void setCentroExpendioVO(CentroExpendioVO centroExpendioVO) {
         this.centroExpendioVO = centroExpendioVO;
     }
-
+    
+    
     public String getNombre() {
         return nombre;
     }
@@ -56,9 +57,22 @@ public class LocalVO {
         this.nombre = nombre;
         this.direccion = direccion;
     }
+    
+     public LocalVO(int codigo) {
+        this.codigo = codigo;
+        this.centroExpendioVO.setCodigo(centroExpendioVO.getCodigo());
+        this.nombre = nombre;
+        this.direccion = direccion;
+    }
 
     public LocalVO() {
+        
+        
     }
     
+    public String toString (){
+    
+        return (this.codigo + " // Nombre: "+this.nombre+"// Dirección "+this.direccion);
+    }
     
 }

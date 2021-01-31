@@ -8,7 +8,9 @@ package ec.com.kodice.rapipercha.administracion.negocio;
 
 import ec.com.kodice.rapipercha.administracion.persistencia.EmpleadoDAO;
 import ec.com.kodice.rapipercha.administracion.persistencia.EmpleadoVO;
+import ec.com.kodice.rapipercha.administracion.persistencia.PerfilVO;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -102,6 +104,40 @@ public class EmpleadoBO {
                     + "\n[" + this.getClass().getName() + "]");
         }
         return (dtmListaElementos);
+    }
+    
+    public DefaultComboBoxModel generaModeloDatosCombo(int codigoProveedor) throws Exception {
+        DefaultComboBoxModel  cmbListaElementos = null;
+        EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+        List<EmpleadoVO> listaElementos = null;
+        try {
+            listaElementos = empleadoDAO.buscarempleadoporProveedor(codigoProveedor);
+            if (listaElementos != null) {
+                cmbListaElementos = new DefaultComboBoxModel(listaElementos.toArray());
+             }
+        } 
+        catch(Exception e){
+            throw new Exception(e.getMessage() + 
+                    "\n["+this.getClass().getName()+"]");
+        }
+        return (cmbListaElementos);
+    }
+    
+       public DefaultComboBoxModel generaModeloDatosComboUnSoloItem(int codigoProveedor) throws Exception {
+        DefaultComboBoxModel  cmbListaElementos = null;
+        EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+        List<EmpleadoVO> listaElementos = null;
+        try {
+            listaElementos = empleadoDAO.buscarEmpleadoPorCodigo(codigoProveedor);
+            if (listaElementos != null) {
+                cmbListaElementos = new DefaultComboBoxModel(listaElementos.toArray());
+             }
+        } 
+        catch(Exception e){
+            throw new Exception(e.getMessage() + 
+                    "\n["+this.getClass().getName()+"]");
+        }
+        return (cmbListaElementos);
     }
 
 }

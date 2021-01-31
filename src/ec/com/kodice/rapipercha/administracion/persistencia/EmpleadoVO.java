@@ -56,5 +56,13 @@ public class EmpleadoVO extends PersonaVO{
         this.telefono = telefono;
         this.correo = correo;        
     }
+    
+    @Override
+    
+    public String toString (){
+    
+        return (this.codigo+" Nombre: "+this.apellidos+" "+this.nombres+"//  Teléfono: " +this.telefono+"//  Correo: "+this.correo);
+    }
+    
 
 }

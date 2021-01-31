@@ -18,7 +18,7 @@ import javax.swing.JTable;
  */
 public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
 
-    /**
+        /**
      * Creates new form FrmEmpleadoAdministracion
      */
     public FrmEmpleadoAdministracion() {
@@ -26,6 +26,8 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
         cargarModelo();
         this.setLocationRelativeTo(null);
     }
+    
+  
     
     private void cargarModelo(){
         EmpleadoBO EmpleadoBO = new EmpleadoBO();

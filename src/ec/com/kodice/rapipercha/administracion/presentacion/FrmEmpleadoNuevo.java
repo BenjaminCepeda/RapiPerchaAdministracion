@@ -50,9 +50,9 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
         UsuarioBO usuarioBO = new UsuarioBO();
         PerfilBO perfilBO = new PerfilBO();
         String nombrePerfil;
-        cmbEstado.setModel(usuarioBO.generaModeloDatosEstados());
+    //    cmbEstado.setModel(usuarioBO.generaModeloDatosEstados());
         try {
-            cmbPerfil.setModel(perfilBO.generaModeloDatosCombo());
+     //       cmbPerfil.setModel(perfilBO.generaModeloDatosCombo());
             if (codigoActual!=0){
                 usuarioVO=usuarioBO.buscar(codigoActual);
             }
@@ -62,12 +62,12 @@ public class FrmEmpleadoNuevo extends javax.swing.JFrame {
         }
         finally{
             if (usuarioVO != null){
-                        cmbPerfil.getModel().setSelectedItem(usuarioVO.getPerfil());
+             //           cmbPerfil.getModel().setSelectedItem(usuarioVO.getPerfil());
                         txtCodigo.setText(String.valueOf(usuarioVO.getCodigo()));
                         txtNombre.setText(usuarioVO.getNombre());
                         txtCedula.setText(usuarioVO.getClave());
                         txtApelido.setText(usuarioVO.getClave());
-                        cmbEstado.setSelectedItem(usuarioVO.getEstado());
+               //         cmbEstado.setSelectedItem(usuarioVO.getEstado());
             }
             usuarioVO = null;
             usuarioBO = null;

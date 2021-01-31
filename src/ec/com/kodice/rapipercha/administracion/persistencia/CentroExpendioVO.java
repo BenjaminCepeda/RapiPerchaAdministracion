@@ -31,8 +31,15 @@ public class CentroExpendioVO extends EmpresaVO{
         this.razonSocial = razonSocial;
         
     }    
+    
+      public CentroExpendioVO() {
+       
+        
+    }    
 
-    public CentroExpendioVO() {
+   public String toString (){
+    
+        return (this.codigo + " "+this.nombreComercial);
     }
     
 }

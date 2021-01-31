@@ -17,6 +17,9 @@ public class ProductoVO {
     private int proveedorCodigo;
     private String descripcion;
     private String codigoExternoProducto;
+    private float cantidadMinima;
+    private float existencia;
+    
 
     public int getCodigo() {
         return codigo;
@@ -48,13 +51,39 @@ public class ProductoVO {
 
     public void setCodigoExternoProducto(String codigoExternoProducto) {
         this.codigoExternoProducto = codigoExternoProducto;
+       
     }
+    
+    public float getcantidadMinima() {
+        return cantidadMinima;
+    }
+
+    public void setcantidadMinima(float cantidaminima) {
+         this.cantidadMinima = cantidaminima;
+    }
+    
+    public float getExistencia() {
+        return existencia;
+    }
+
+    public void setExistencia(float existencia) {
+         this.existencia = existencia;
+    }
+    
 
     public ProductoVO(int codigo, int proveedorCodigo, String descripcion, String codigoExternoProducto) {
         this.codigo = codigo;
         this.proveedorCodigo = proveedorCodigo;
         this.descripcion = descripcion;
         this.codigoExternoProducto = codigoExternoProducto;
+    }
+    
+      public ProductoVO(int codigoprod, String descripcion, String codAlternoProd , float cantidadMinima, float existencia) {
+        this.codigo = codigoprod;
+        this.descripcion = descripcion;
+        this.codigoExternoProducto = codAlternoProd;
+        this.cantidadMinima=cantidadMinima;
+        this.existencia=existencia;
     }
 
     public ProductoVO() {
