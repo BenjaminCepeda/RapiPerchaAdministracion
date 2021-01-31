@@ -33,13 +33,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniUsuariosActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mniEmpleador">
+            <MenuItem class="javax.swing.JMenuItem" name="mnCentrosExpendio">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Empleado"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="text" type="java.lang.String" value="CentrosExpendio"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniEmpleadorActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnCentrosExpendioActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
