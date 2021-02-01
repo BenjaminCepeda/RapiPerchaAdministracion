@@ -68,6 +68,7 @@ public class FrmInicio extends JFrame {
         mniProveedores = new javax.swing.JMenuItem();
         mniUsuarios = new javax.swing.JMenuItem();
         mnCentrosExpendio = new javax.swing.JMenuItem();
+        mnuEmpleados = new javax.swing.JMenuItem();
         mnuTomaFisica = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -208,6 +209,19 @@ public class FrmInicio extends JFrame {
         });
         mnuAdministracion.add(mnCentrosExpendio);
 
+        mnuEmpleados.setText("Empleados");
+        mnuEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuEmpleadosMouseClicked(evt);
+            }
+        });
+        mnuEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuEmpleadosActionPerformed(evt);
+            }
+        });
+        mnuAdministracion.add(mnuEmpleados);
+
         barPrincipal.add(mnuAdministracion);
 
         mnuTomaFisica.setText("Toma física");
@@ -267,6 +281,16 @@ public class FrmInicio extends JFrame {
         frmEmpleadoAdministracion.setVisible(true);
     }//GEN-LAST:event_mniEmpleadorActionPerformed
 
+    private void mnuEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuEmpleadosMouseClicked
+    }//GEN-LAST:event_mnuEmpleadosMouseClicked
+
+    private void mnuEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuEmpleadosActionPerformed
+        FrmEmpleadoAdministracion frmEmpleadoAdministracion = new FrmEmpleadoAdministracion(
+        this.empleadoLogueado,this.proveedorEmpleadoLogueado);
+        frmEmpleadoAdministracion.setVisible(true);
+
+    }//GEN-LAST:event_mnuEmpleadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -321,6 +345,7 @@ public class FrmInicio extends JFrame {
     private javax.swing.JMenuItem mniProveedores;
     private javax.swing.JMenuItem mniUsuarios;
     private javax.swing.JMenu mnuAdministracion;
+    private javax.swing.JMenuItem mnuEmpleados;
     private javax.swing.JMenu mnuTomaFisica;
     private javax.swing.JPanel pnlPie;
     // End of variables declaration//GEN-END:variables
