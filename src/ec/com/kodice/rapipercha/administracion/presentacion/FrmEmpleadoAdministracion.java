@@ -378,8 +378,9 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
             FrmEmpleadoNuevo frmEmpleadoNuevo = new FrmEmpleadoNuevo(empleadoLogueado,proveedorEmpleadoLogueado,
                     Integer.valueOf(codigoElegido), true);
             frmEmpleadoNuevo.setVisible(true);
-            cargarModelo();
+          
         }
+          cargarModelo();
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -393,8 +394,9 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
             FrmEmpleadoNuevo frmEmpleadoNuevo = new FrmEmpleadoNuevo(empleadoLogueado,proveedorEmpleadoLogueado,
                 Integer.valueOf(codigoElegido), false);
             frmEmpleadoNuevo.setVisible(true);
-            cargarModelo();
+          
         }
+          cargarModelo();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
@@ -405,13 +407,13 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
         if (fila >= 0) {
             codigoElegido = tblEmpleados.getModel().getValueAt(
                 fila, 0).toString();
-            descripcionElegido = tblEmpleados.getModel().getValueAt(fila, 1).
-            toString() + tblEmpleados.getModel().getValueAt(fila, 2).
+            descripcionElegido = tblEmpleados.getModel().getValueAt(fila, 4).
+            toString() + tblEmpleados.getModel().getValueAt(fila, 5).
             toString();
         }
         if (!(codigoElegido.isEmpty() | codigoElegido.isBlank())) {
             confirmacionBorrado = (UtilPresentacion.mostrarMensajeConfirmacion(
-                this, "Desea eliminar el registro:\n" + codigoElegido + " - "
+                this, "Desea eliminar el empleado:\n" + codigoElegido + " - "
                 + descripcionElegido) == JOptionPane.YES_OPTION);
         if (confirmacionBorrado) {
             EmpleadoBO empleadoBO = new EmpleadoBO();
@@ -423,8 +425,9 @@ public class FrmEmpleadoAdministracion extends javax.swing.JFrame {
                 empleadoBO = null;
             }
         }
-        cargarModelo();
+        
         }
+        cargarModelo();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

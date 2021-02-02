@@ -70,6 +70,6 @@ public class UsuarioVO {
     }
 @Override
     public String toString(){
-        return(this.nombre);
+        return(this.codigo +" "+ this.nombre);
     }
 }
