@@ -69,7 +69,6 @@ public class FrmInicio extends JFrame {
         mniUsuarios = new javax.swing.JMenuItem();
         mnCentrosExpendio = new javax.swing.JMenuItem();
         mnuEmpleados = new javax.swing.JMenuItem();
-        mnuTomaFisica = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 700));
@@ -224,9 +223,6 @@ public class FrmInicio extends JFrame {
 
         barPrincipal.add(mnuAdministracion);
 
-        mnuTomaFisica.setText("Toma física");
-        barPrincipal.add(mnuTomaFisica);
-
         setJMenuBar(barPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -346,7 +342,6 @@ public class FrmInicio extends JFrame {
     private javax.swing.JMenuItem mniUsuarios;
     private javax.swing.JMenu mnuAdministracion;
     private javax.swing.JMenuItem mnuEmpleados;
-    private javax.swing.JMenu mnuTomaFisica;
     private javax.swing.JPanel pnlPie;
     // End of variables declaration//GEN-END:variables
 }
